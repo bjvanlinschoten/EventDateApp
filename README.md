@@ -10,12 +10,16 @@ Nowadays, apps like Tinder and Happn are immensely popular. However, the perfect
 * 'Wall' with all users that are at the same event as you
 * You can "Like" users you'd like to meet, or "Not today" users that you don't
 * When you Like someone who Liked you, you have a match and can chat with them and share location
-* Settings: 
-** Select gender of users you want to see.
+* Settings: Select gender of users you want to see. 
+
+# Sketches
+![Idea](docs/SelectEvent.png)
+![Idea](docs/MeetPeople.png)
 
 # Data sets/APIs
 * Parse.com will be used for the server
-* The Facebook iOS SDK will be used for the user's profile pictures and events
+* The Facebook iOS SDK will be used for the user's profile
+* Facebook's Graph API will be used to retrieve the user's event data
 
 # Potential problems
 I expect the most problems in implementing the server with the app (for example something like the chat, letting your profile show up on other user's wall, etc), as I've never done anything with that before. I'm also going to implement the app in Swift, with which I have no experience. So have a lot of learning to do in these two aspects!
