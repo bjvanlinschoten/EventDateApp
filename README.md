@@ -2,7 +2,7 @@
 iOS app similar to Tinder, to meet people in the same event where you currently are
 
 # Description
-Nowadays, apps like Tinder and Happn are immensely popular. However, the perfect place to meet people still isn't on your couch swiping people left and right, but on parties/festivals/other events! That is were this app comes in. When you are at an event, you log in with your Facebook account and you select the event you're at. Then you see all people that use the app and are on that event too. When you like someone who also likes you, you can chat and share your location to meet up IRL just moments after you got matched! 
+Nowadays, apps like Tinder and Happn are immensely popular. However, the perfect place to meet people still isn't on your couch swiping people left and right, but on parties/festivals/other events! That is were this app comes in. When you are at an event, you log in with your Facebook account and you select the event you're at. Then you see all people that use the app and are on that event too. When you "Like" someone who also "Likes" you, you can chat and share your location to meet up IRL just moments after you got matched! 
 
 # Features
 * Log in using Facebook
@@ -10,7 +10,8 @@ Nowadays, apps like Tinder and Happn are immensely popular. However, the perfect
 * 'Wall' with all users that are at the same event as you
 * You can "Like" users you'd like to meet, or "Not today" users that you don't
 * When you Like someone who Liked you, you have a match and can chat with them and share location
-* Settings: Select gender of users you want to see.
+* Settings: 
+** Select gender of users you want to see.
 
 # Data sets/APIs
 * Parse.com will be used for the server
