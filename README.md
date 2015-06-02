@@ -12,9 +12,9 @@ Nowadays, apps like Tinder and Happn are immensely popular. However, the perfect
 * When you Like someone who Liked you, you have a match and can chat with them and share location
 * Settings: Select gender of users you want to see. 
 
-# Sketches
+# Screenshots
 ![Idea](docs/SelectEvent.png)
-![Idea](docs/MeetPeople.png)
+![Idea](docs/MeetPeople.jpg)
 
 # Data sets/APIs
 * Parse.com will be used for the server
