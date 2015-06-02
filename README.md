@@ -13,9 +13,9 @@ Nowadays, apps like Tinder and Happn are immensely popular. However, the perfect
 * Settings: Select gender of users you want to see. 
 
 # Screenshots
-![Idea](docs/SelectEvent.png)
-![Idea](docs/MeetPeople.jpg)
+<img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/SelectEvent.jpg" width="250">
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/MeetPeople.jpg" width="250">
+
 
 # Data sets/APIs
 * Parse.com will be used for the server
