@@ -13,6 +13,9 @@
 		EBD625821B1E4D9200FBC064 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBD625811B1E4D9200FBC064 /* Images.xcassets */; };
 		EBD625851B1E4D9200FBC064 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD625831B1E4D9200FBC064 /* LaunchScreen.xib */; };
 		EBD625911B1E4D9200FBC064 /* EventDateAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD625901B1E4D9200FBC064 /* EventDateAppTests.swift */; };
+		EBD6259D1B1E512000FBC064 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD6259A1B1E512000FBC064 /* FBSDKCoreKit.framework */; };
+		EBD6259E1B1E512000FBC064 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD6259B1B1E512000FBC064 /* FBSDKLoginKit.framework */; };
+		EBD6259F1B1E512000FBC064 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD6259C1B1E512000FBC064 /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,10 @@
 		EBD6258A1B1E4D9200FBC064 /* EventDateAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventDateAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD6258F1B1E4D9200FBC064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBD625901B1E4D9200FBC064 /* EventDateAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDateAppTests.swift; sourceTree = "<group>"; };
+		EBD6259A1B1E512000FBC064 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		EBD6259B1B1E512000FBC064 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		EBD6259C1B1E512000FBC064 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		EBD625A11B1E592A00FBC064 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +50,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBD6259E1B1E512000FBC064 /* FBSDKLoginKit.framework in Frameworks */,
+				EBD6259D1B1E512000FBC064 /* FBSDKCoreKit.framework in Frameworks */,
+				EBD6259F1B1E512000FBC064 /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +72,7 @@
 				EBD625771B1E4D9100FBC064 /* EventDateApp */,
 				EBD6258D1B1E4D9200FBC064 /* EventDateAppTests */,
 				EBD625761B1E4D9100FBC064 /* Products */,
+				EBD625A01B1E512B00FBC064 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,6 +91,7 @@
 				EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */,
 				EBD6257C1B1E4D9100FBC064 /* ViewController.swift */,
 				EBD6257E1B1E4D9200FBC064 /* Main.storyboard */,
+				EBD625A11B1E592A00FBC064 /* Bridge-Header.h */,
 				EBD625811B1E4D9200FBC064 /* Images.xcassets */,
 				EBD625831B1E4D9200FBC064 /* LaunchScreen.xib */,
 				EBD625781B1E4D9100FBC064 /* Supporting Files */,
@@ -110,6 +122,16 @@
 				EBD6258F1B1E4D9200FBC064 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EBD625A01B1E512B00FBC064 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EBD6259A1B1E512000FBC064 /* FBSDKCoreKit.framework */,
+				EBD6259B1B1E512000FBC064 /* FBSDKLoginKit.framework */,
+				EBD6259C1B1E512000FBC064 /* FBSDKShareKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,9 +358,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/bjvanlinschoten/Documents/FacebookSDK,
+				);
 				INFOPLIST_FILE = EventDateApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EventDateApp/Bridge-Header.h";
 			};
 			name = Debug;
 		};
@@ -346,9 +373,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/bjvanlinschoten/Documents/FacebookSDK,
+				);
 				INFOPLIST_FILE = EventDateApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EventDateApp/Bridge-Header.h";
 			};
 			name = Release;
 		};
