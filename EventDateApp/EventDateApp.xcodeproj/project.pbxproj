@@ -15,7 +15,7 @@
 		EBD625911B1E4D9200FBC064 /* EventDateAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD625901B1E4D9200FBC064 /* EventDateAppTests.swift */; };
 		EBD6259D1B1E512000FBC064 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD6259A1B1E512000FBC064 /* FBSDKCoreKit.framework */; };
 		EBD6259E1B1E512000FBC064 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD6259B1B1E512000FBC064 /* FBSDKLoginKit.framework */; };
-		EBD6259F1B1E512000FBC064 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD6259C1B1E512000FBC064 /* FBSDKShareKit.framework */; };
+		EBD625A31B1EF5AE00FBC064 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD625A21B1EF5AE00FBC064 /* Bolts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +41,8 @@
 		EBD625901B1E4D9200FBC064 /* EventDateAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDateAppTests.swift; sourceTree = "<group>"; };
 		EBD6259A1B1E512000FBC064 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		EBD6259B1B1E512000FBC064 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		EBD6259C1B1E512000FBC064 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		EBD625A11B1E592A00FBC064 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
+		EBD625A21B1EF5AE00FBC064 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,9 +50,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBD625A31B1EF5AE00FBC064 /* Bolts.framework in Frameworks */,
 				EBD6259E1B1E512000FBC064 /* FBSDKLoginKit.framework in Frameworks */,
 				EBD6259D1B1E512000FBC064 /* FBSDKCoreKit.framework in Frameworks */,
-				EBD6259F1B1E512000FBC064 /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,9 +127,9 @@
 		EBD625A01B1E512B00FBC064 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBD625A21B1EF5AE00FBC064 /* Bolts.framework */,
 				EBD6259A1B1E512000FBC064 /* FBSDKCoreKit.framework */,
 				EBD6259B1B1E512000FBC064 /* FBSDKLoginKit.framework */,
-				EBD6259C1B1E512000FBC064 /* FBSDKShareKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -437,6 +437,7 @@
 				EBD625961B1E4D9200FBC064 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EBD625971B1E4D9200FBC064 /* Build configuration list for PBXNativeTarget "EventDateAppTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +446,7 @@
 				EBD625991B1E4D9200FBC064 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
