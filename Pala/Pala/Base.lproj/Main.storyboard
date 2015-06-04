@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Pala" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" userLabel="Login View Controller" customClass="ViewController" customModule="Pala" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -16,17 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eo0-cb-g0R">
-                                <rect key="frame" x="104" y="285" width="143" height="30"/>
-                                <state key="normal" title="Login with Facebook">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="fbLoginClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7sf-Z6-jAV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2V-Gx-tGf">
-                                <rect key="frame" x="135" y="369" width="49" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2V-Gx-tGf">
+                                <rect key="frame" x="276" y="473" width="49" height="30"/>
                                 <state key="normal" title="Logout">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -34,12 +25,72 @@
                                     <action selector="fbLogoutClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="t8D-z7-JPX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eo0-cb-g0R">
+                                <rect key="frame" x="229" y="435" width="143" height="30"/>
+                                <state key="normal" title="Login with Facebook">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="141" y="331" width="143" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="fbLoginClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7sf-Z6-jAV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="a2V-Gx-tGf" firstAttribute="top" secondItem="Eo0-cb-g0R" secondAttribute="bottom" constant="8" id="OcE-EV-8YW"/>
+                            <constraint firstAttribute="centerX" secondItem="a2V-Gx-tGf" secondAttribute="centerX" id="Sl7-Sy-iFa"/>
+                            <constraint firstAttribute="centerX" secondItem="Eo0-cb-g0R" secondAttribute="centerX" id="TmL-JG-QKW"/>
+                            <constraint firstAttribute="centerY" secondItem="Eo0-cb-g0R" secondAttribute="centerY" constant="-150" id="ZRM-OR-npB"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <segue destination="pfC-R1-rES" kind="show" identifier="LoginToEventsSegue" id="DN8-U4-Iog"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="268" y="308"/>
+        </scene>
+        <!--Events View Controller-->
+        <scene sceneID="Q9n-ry-hRL">
+            <objects>
+                <viewController id="pfC-R1-rES" userLabel="Events View Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="87N-8G-9HJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="uNc-n5-ThG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Axu-sZ-lPl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged in as:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpx-nl-ATJ">
+                                <rect key="frame" x="248" y="290" width="104" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boris van Linschoten" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkp-uc-qm7">
+                                <rect key="frame" x="220" y="319" width="161" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="hkp-uc-qm7" secondAttribute="centerX" id="5ZN-P3-PSF"/>
+                            <constraint firstAttribute="centerY" secondItem="xpx-nl-ATJ" secondAttribute="centerY" id="HvY-Rn-hmr"/>
+                            <constraint firstAttribute="centerX" secondItem="xpx-nl-ATJ" secondAttribute="centerX" id="McR-Un-9gm"/>
+                            <constraint firstItem="hkp-uc-qm7" firstAttribute="top" secondItem="xpx-nl-ATJ" secondAttribute="bottom" constant="8" id="l2J-Gf-gkp"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6hI-sj-PAv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="920" y="308"/>
         </scene>
     </scenes>
 </document>
