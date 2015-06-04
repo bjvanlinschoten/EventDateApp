@@ -63,7 +63,7 @@
 ## Mockups and how it works
  1. Here the user logs in using his Facebook account. When the user logs in for the first time, he is asked for permission to use his public profile and events. After the login is completed, a new Parse user is created.
 
-<img align=center src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/LoginScreen.jpg" width="250">
+<img align="center" src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/LoginScreen.jpg" width="250">
 
  2. This view is populated with the user's attending FB events (on the current day). After the user selects the event, all users at that event are retrieved from the Parse database. 
 
