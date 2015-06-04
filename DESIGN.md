@@ -6,8 +6,10 @@
 
 # View Controllers
 * LoginViewController
+
 View where the user logs in using facebook
 * EventsViewController
+
 View where the user selects the event he is visiting out of his attending FB event
 * WallViewController
 View where the user sees all Pala users on the same event as the user. He can select a user to see more information.
