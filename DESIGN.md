@@ -1,6 +1,6 @@
 # SDKs
-*Parse SDK
-*Facebook SDK
+* Parse SDK
+* Facebook SDK
 
 # Classes
 
@@ -18,12 +18,21 @@ View where the user can adjust settings such as his profile, age range and gende
 
 # Mockups
 1
+
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/LoginScreen.jpg" width="250">
+
 2
+
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/EventSelect.jpg" width="250">
+
 3
+
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/WallScreen.jpg" width="250">
+
 4
+
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/ChatScreen.jpg" width="250">
+
 5
+
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/InChatScreen.jpg" width="250">
