@@ -17,8 +17,13 @@ View where the user sees all his matches (=chat), and can select a match to chat
 View where the user can adjust settings such as his profile, age range and gender of the users on the wall
 
 # Mockups
+1
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/LoginScreen.jpg" width="250">
+2
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/EventSelect.jpg" width="250">
+3
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/WallScreen.jpg" width="250">
+4
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/ChatScreen.jpg" width="250">
+5
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/InChatScreen.jpg" width="250">
