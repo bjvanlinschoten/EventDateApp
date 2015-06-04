@@ -61,19 +61,18 @@
 * SettingsViewController
 	View where the user can adjust settings such as his profile, age range and gender of the users on the wall
 
-## Mockups
-1
-
+## Mockups and how it works
+1. Here the user logs in using his Facebook account. When the user logs in for the first time, he is asked for permission to use his public profile and events. After the login is completed, a new Parse user is created
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/LoginScreen.jpg" width="250">
-2
 
+2. This view is populated with the user's attending FB events (on the current day). After the user selects the event, all users at that event are retrieved from the Parse database. 
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/EventSelect.jpg" width="250">
-3
 
+3. The wall is populated with all users at the selected event, except the users already 'Liked' or 'Disliked'. Here a user can click on the displayed users to see their profile, and like and dislike users.
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/WallScreen.jpg" width="250">
-4
 
+4. A menu will slide in from the right of the screen, displaying all the matches (and thus chats) the user has. Here the user can select a match to go to the chat with that person.
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/ChatScreen.jpg" width="250">
-5
 
+5. The chat menu. Here the two matched users can chat and share location so they can soon meet up!
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/InChatScreen.jpg" width="250">
