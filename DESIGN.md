@@ -3,7 +3,7 @@
 ## SDKs
 * Parse SDK
 * Facebook SDK
-* (SDK for the chat functionality)
+* Parse Push for the chat and for notifying users when they have a new match 
 
 
 ## Classes
@@ -33,8 +33,7 @@
 		- InitChatWithOtherUser
 		- SendMessage
 		- ShareLocation
-		- EndChat: deletes chat and match
-		
+		- EndChat: deletes chat and match	
 * Wall
 	* Properties
 		- UsersAtEvent
@@ -46,7 +45,7 @@
 		
 
 ## View Controllers
-- LoginViewController
+- LoginViewController  
 	View where the user logs in using facebook
 
 - EventsViewController  
