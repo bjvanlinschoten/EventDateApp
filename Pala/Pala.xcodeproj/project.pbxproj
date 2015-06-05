@@ -25,12 +25,14 @@
 		EBB7936D1B20C19B004F0821 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB793601B20C19B004F0821 /* SystemConfiguration.framework */; };
 		EBB793701B20C1D2004F0821 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB7936E1B20C1D2004F0821 /* Parse.framework */; };
 		EBB793711B20C1D2004F0821 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB7936F1B20C1D2004F0821 /* ParseFacebookUtilsV4.framework */; };
+		EBB793891B2203FC004F0821 /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB793881B2203FC004F0821 /* SlideMenuController.swift */; };
+		EBB7938B1B2237AE004F0821 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB7938A1B2237AE004F0821 /* User.swift */; };
 		EBD6257B1B1E4D9100FBC064 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */; };
-		EBD6257D1B1E4D9100FBC064 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6257C1B1E4D9100FBC064 /* ViewController.swift */; };
+		EBD6257D1B1E4D9100FBC064 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */; };
 		EBD625801B1E4D9200FBC064 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBD6257E1B1E4D9200FBC064 /* Main.storyboard */; };
 		EBD625821B1E4D9200FBC064 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBD625811B1E4D9200FBC064 /* Images.xcassets */; };
 		EBD625851B1E4D9200FBC064 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD625831B1E4D9200FBC064 /* LaunchScreen.xib */; };
-		EBD625911B1E4D9200FBC064 /* EventDateAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD625901B1E4D9200FBC064 /* EventDateAppTests.swift */; };
+		EBD625911B1E4D9200FBC064 /* PalaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD625901B1E4D9200FBC064 /* PalaTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,16 +64,18 @@
 		EBB793601B20C19B004F0821 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EBB7936E1B20C1D2004F0821 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../parse-library-1.7.4/Parse.framework"; sourceTree = "<group>"; };
 		EBB7936F1B20C1D2004F0821 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = "../../../parse-library-1.7.4/ParseFacebookUtilsV4.framework"; sourceTree = "<group>"; };
+		EBB793881B2203FC004F0821 /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = SOURCE_ROOT; };
+		EBB7938A1B2237AE004F0821 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EBD625751B1E4D9100FBC064 /* Pala.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pala.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD625791B1E4D9100FBC064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EBD6257C1B1E4D9100FBC064 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EBD6257F1B1E4D9200FBC064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EBD625811B1E4D9200FBC064 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EBD625841B1E4D9200FBC064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EBD6258A1B1E4D9200FBC064 /* PalaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PalaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD6258F1B1E4D9200FBC064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBD625901B1E4D9200FBC064 /* EventDateAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDateAppTests.swift; sourceTree = "<group>"; };
+		EBD625901B1E4D9200FBC064 /* PalaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalaTests.swift; sourceTree = "<group>"; };
 		EBD625A11B1E592A00FBC064 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,8 +138,10 @@
 			isa = PBXGroup;
 			children = (
 				EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */,
-				EBD6257C1B1E4D9100FBC064 /* ViewController.swift */,
+				EBB793881B2203FC004F0821 /* SlideMenuController.swift */,
+				EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */,
 				EBD6257E1B1E4D9200FBC064 /* Main.storyboard */,
+				EBB7938A1B2237AE004F0821 /* User.swift */,
 				EBD625A11B1E592A00FBC064 /* Bridge-Header.h */,
 				EBD625811B1E4D9200FBC064 /* Images.xcassets */,
 				EBD625831B1E4D9200FBC064 /* LaunchScreen.xib */,
@@ -155,7 +161,7 @@
 		EBD6258D1B1E4D9200FBC064 /* PalaTests */ = {
 			isa = PBXGroup;
 			children = (
-				EBD625901B1E4D9200FBC064 /* EventDateAppTests.swift */,
+				EBD625901B1E4D9200FBC064 /* PalaTests.swift */,
 				EBD6258E1B1E4D9200FBC064 /* Supporting Files */,
 			);
 			path = PalaTests;
@@ -294,7 +300,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBD6257D1B1E4D9100FBC064 /* ViewController.swift in Sources */,
+				EBB7938B1B2237AE004F0821 /* User.swift in Sources */,
+				EBD6257D1B1E4D9100FBC064 /* LoginViewController.swift in Sources */,
+				EBB793891B2203FC004F0821 /* SlideMenuController.swift in Sources */,
 				EBD6257B1B1E4D9100FBC064 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,7 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBD625911B1E4D9200FBC064 /* EventDateAppTests.swift in Sources */,
+				EBD625911B1E4D9200FBC064 /* PalaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,10 +470,9 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = EventDateAppTests/Info.plist;
+				INFOPLIST_FILE = PalaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EventDateApp.app/EventDateApp";
 			};
 			name = Debug;
 		};
@@ -477,10 +484,9 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = EventDateAppTests/Info.plist;
+				INFOPLIST_FILE = PalaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EventDateApp.app/EventDateApp";
 			};
 			name = Release;
 		};

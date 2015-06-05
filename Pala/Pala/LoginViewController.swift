@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class ViewController: UIViewController  {
+class LoginViewController: UIViewController  {
     let permissions = ["public_profile", "user_events"]
     
     override func viewDidLoad() {
@@ -17,7 +17,6 @@ class ViewController: UIViewController  {
         // Do any additional setup after loading the view, typically from a nib.
         if PFUser.currentUser() != nil {
             println("User Logged In")
-            self.performSegueWithIdentifier("LoginToEventsSegue", sender: self)
         } else {
             println("User Not Logged In")
         }
@@ -43,6 +42,8 @@ class ViewController: UIViewController  {
                 {
                     println("User logged in through Facebook!")
                 }
+                let user: User = User(parseUser: user)
+                user.populateUserWithFBData()
                 self.performSegueWithIdentifier("LoginToEventsSegue", sender: self)
             }
             else

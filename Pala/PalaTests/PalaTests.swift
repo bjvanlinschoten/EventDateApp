@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 
-class EventDateAppTests: XCTestCase {
+class PalaTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
