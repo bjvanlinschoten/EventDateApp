@@ -27,6 +27,7 @@
 		EBB793711B20C1D2004F0821 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB7936F1B20C1D2004F0821 /* ParseFacebookUtilsV4.framework */; };
 		EBB793891B2203FC004F0821 /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB793881B2203FC004F0821 /* SlideMenuController.swift */; };
 		EBB7938B1B2237AE004F0821 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB7938A1B2237AE004F0821 /* User.swift */; };
+		EBB7938D1B2488FF004F0821 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB7938C1B2488FF004F0821 /* EventsViewController.swift */; };
 		EBD6257B1B1E4D9100FBC064 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */; };
 		EBD6257D1B1E4D9100FBC064 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */; };
 		EBD625801B1E4D9200FBC064 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBD6257E1B1E4D9200FBC064 /* Main.storyboard */; };
@@ -66,6 +67,7 @@
 		EBB7936F1B20C1D2004F0821 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = "../../../parse-library-1.7.4/ParseFacebookUtilsV4.framework"; sourceTree = "<group>"; };
 		EBB793881B2203FC004F0821 /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = SOURCE_ROOT; };
 		EBB7938A1B2237AE004F0821 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		EBB7938C1B2488FF004F0821 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		EBD625751B1E4D9100FBC064 /* Pala.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pala.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD625791B1E4D9100FBC064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			children = (
 				EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */,
 				EBB793881B2203FC004F0821 /* SlideMenuController.swift */,
+				EBB7938C1B2488FF004F0821 /* EventsViewController.swift */,
 				EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */,
 				EBD6257E1B1E4D9200FBC064 /* Main.storyboard */,
 				EBB7938A1B2237AE004F0821 /* User.swift */,
@@ -304,6 +307,7 @@
 				EBD6257D1B1E4D9100FBC064 /* LoginViewController.swift in Sources */,
 				EBB793891B2203FC004F0821 /* SlideMenuController.swift in Sources */,
 				EBD6257B1B1E4D9100FBC064 /* AppDelegate.swift in Sources */,
+				EBB7938D1B2488FF004F0821 /* EventsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

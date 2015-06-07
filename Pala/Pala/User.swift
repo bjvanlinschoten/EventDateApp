@@ -10,18 +10,36 @@ import UIKit
 
 class User: NSObject {
     
-    let parseUser : PFUser
+    let parseUser: PFUser
+    var facebookId: NSString
+    var events: NSMutableArray?
     
     init (parseUser: PFUser) {
         self.parseUser = parseUser
+        self.facebookId = ""
+        super.init()
     }
     
-    func populateUserWithFBData() {
-        let request: FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-        request.startWithCompletionHandler{(connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
-            let resultdict = result as! NSDictionary
-            println("Result Dict: \(resultdict)")
-        self.parseUser.setObject(resultdict.valueForKey("gender")!, forKey: "gender")
+    func saveUserToParse() {
+        self.parseUser.saveInBackgroundWithBlock{(success: Bool, error: NSError?) -> Void in
+            if (success) {
+            }
+            else {
+                println(error)
+            }
+        }
+    }
+    
+    func getUserAge() -> NSInteger? {
+        if let birthdayString =  self.parseUser.valueForKey("birthday") as? String {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy"
+            let birthday = dateFormatter.dateFromString(birthdayString)
+            var calendar: NSCalendar = NSCalendar.currentCalendar()
+            let ageComponents = calendar.components(NSCalendarUnit.CalendarUnitYear, fromDate: birthday!, toDate: NSDate(), options: nil)
+            return ageComponents.year
+        } else {
+            return nil
         }
     }
 }
