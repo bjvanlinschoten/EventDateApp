@@ -44,7 +44,7 @@ class LoginViewController: UIViewController  {
                 } else {
                     println("User logged in through Facebook!")
                 }
-                self.populateUserWithFBData(user)
+                self.getDataForUser(user)
             }
             else {
                 println("Uh oh. The user cancelled the Facebook login.")
@@ -58,39 +58,22 @@ class LoginViewController: UIViewController  {
         self.logoutButton?.hidden = true
     }
     
-    func populateUserWithFBData(user: PFUser) {
+    func getDataForUser(user: PFUser) {
         
         self.activityIndicator?.hidden = false
         self.activityIndicator?.startAnimating()
         self.logoutButton?.hidden = true
         self.currentUser = User(parseUser: user)
         
-        let profileRequest: FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-        profileRequest.startWithCompletionHandler{(connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
-            if let resultDict = result as? NSDictionary {
-                self.currentUser!.facebookId = resultDict.valueForKey("id") as! NSString
-                self.currentUser!.parseUser.setValue(self.currentUser!.facebookId, forKey: "facebookId")
-                self.currentUser!.parseUser.setValue(resultDict.valueForKey("first_name"), forKey: "name")
-                self.currentUser!.parseUser.setValue(resultDict.valueForKey("gender"), forKey:"gender")
-                self.currentUser!.parseUser.setValue(resultDict.valueForKey("birthday"), forKey: "birthday")
-                self.currentUser!.saveUserToParse()
-            }
-        }
+        self.currentUser?.populateUserWithFBData() {(completion:Void) in
         
-        let eventsRequest: FBSDKGraphRequest = FBSDKGraphRequest(graphPath:"/me/events" , parameters: nil, HTTPMethod: "GET")
-        eventsRequest.startWithCompletionHandler{(connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
-            if let result = result as? NSDictionary {
-                if let events = result.valueForKey("data") as? NSMutableArray {
-                    self.currentUser!.events = events as NSMutableArray
-                }
-            }
-            self.activityIndicator?.stopAnimating()
-            self.activityIndicator?.hidden = true
-            self.logoutButton?.hidden = false
-            self.nextView()
+        self.activityIndicator?.stopAnimating()
+        self.activityIndicator?.hidden = true
+        self.logoutButton?.hidden = false
+        self.nextView()
         }
     }
-
+    
     func nextView() {
         self.performSegueWithIdentifier("loginToEvents", sender: self)
     }
