@@ -10,67 +10,64 @@ import UIKit
 import Parse
 
 class LoginViewController: UIViewController  {
-    let permissions = ["public_profile", "user_events", "user_birthday"]
     var currentUser: User?
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
     @IBOutlet weak var loginButton: UIButton?
-    @IBOutlet weak var logoutButton: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.navigationController?.navigationBarHidden = true
         self.activityIndicator?.hidden = true
         
         if let user = PFUser.currentUser() {
+            println("User Logged In")
             self.loginButton?.hidden = true
+            self.activityIndicator?.hidden = false
+            self.activityIndicator?.startAnimating()
             self.currentUser = User(parseUser: user)
+            self.currentUser?.getUserEvents() {(completion:Void) in
+                self.nextView()
+            }
         } else {
+            self.loginButton?.hidden = false
             println("User Not Logged In")
         }
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     @IBAction func fbLoginClick(sender: AnyObject) {
-        self.loginButton?.hidden = true
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions) {
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "user_events", "user_birthday"]) {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
+                self.loginButton?.hidden = true
+                self.activityIndicator?.hidden = false
+                self.activityIndicator?.startAnimating()
+                self.currentUser = User(parseUser: user)
                 if user.isNew {
                     println("User signed up and logged in through Facebook!")
+                    self.currentUser?.populateNewUserWithFBData() {(completion:Void) in
+                        self.currentUser?.getUserEvents() {(completion:Void) in
+                            self.nextView()
+                        }
+                    }
                 } else {
                     println("User logged in through Facebook!")
+                    self.currentUser?.getUserEvents() {(completion:Void) in
+                        self.nextView()
+                    }
                 }
-                self.getDataForUser(user)
             }
             else {
                 println("Uh oh. The user cancelled the Facebook login.")
             }
-        }
-    }
-    
-    @IBAction func fbLogoutClick(sender: AnyObject) {
-        PFUser.logOut()
-        self.loginButton?.hidden = false
-        self.logoutButton?.hidden = true
-    }
-    
-    func getDataForUser(user: PFUser) {
-        
-        self.activityIndicator?.hidden = false
-        self.activityIndicator?.startAnimating()
-        self.logoutButton?.hidden = true
-        self.currentUser = User(parseUser: user)
-        
-        self.currentUser?.populateUserWithFBData() {(completion:Void) in
-        
-        self.activityIndicator?.stopAnimating()
-        self.activityIndicator?.hidden = true
-        self.logoutButton?.hidden = false
-        self.nextView()
         }
     }
     
@@ -80,10 +77,16 @@ class LoginViewController: UIViewController  {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "loginToEvents" {
-            let nvc = segue.destinationViewController as! UINavigationController
-            let vc = nvc.topViewController as! EventsViewController
+            let vc = segue.destinationViewController as! EventsViewController
             vc.currentUser = self.currentUser
         }
+    }
+    
+    func prepareForLogout() {
+        self.navigationController?.navigationBarHidden = true
+        self.loginButton?.hidden = false
+        self.activityIndicator?.hidden = true
+        self.activityIndicator?.stopAnimating()
     }
 }
 

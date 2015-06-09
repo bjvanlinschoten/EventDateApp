@@ -14,5 +14,6 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <Bolts/Bolts.h>
+#import "UIImageView+WebCache.h"
 
 #endif
