@@ -13,7 +13,8 @@ let reuseIdentifier = "Cell"
 class WallCollectionViewController: UICollectionViewController {
 
     var currentUser: User?
-
+    var wallUserArray: NSArray?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +25,22 @@ class WallCollectionViewController: UICollectionViewController {
         self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+        if let userEvent = self.currentUser?.parseUser.valueForKey("currentEvent") as? NSString {
+            var query = PFUser.query()
+            query?.whereKey("currentEvent", equalTo: userEvent)
+            query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+                if error == nil{
+                    if let objects = objects as? [PFObject] {
+                        for object in objects {
+                            println(object.objectId)
+                        }
+                    }
+                } else {
+                    // Log details of the failure
+                    println("Error: \(error!) \(error!.userInfo!)")
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

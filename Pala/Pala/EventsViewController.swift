@@ -9,7 +9,7 @@
 import UIKit
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     var currentUser: User?
     @IBOutlet var eventsTableView: UITableView!
     @IBOutlet var profilePicture: UIImageView!
@@ -19,7 +19,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.eventsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        self.navigationController?.navigationBarHidden = false
         
         if let id = self.currentUser?.parseUser.valueForKey("facebookId") as? NSString {
             let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(id)/picture?type=large")
@@ -31,6 +30,11 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = false
+        self.navigationItem.hidesBackButton = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,8 +76,11 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func logout() {
-        self.currentUser?.logout()
-        self.navigationController?.popViewControllerAnimated(true)
+        if let loginView = navigationController?.viewControllers[0] as? LoginViewController {
+            self.currentUser?.logout()
+            loginView.prepareForLogout()
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
 
 }

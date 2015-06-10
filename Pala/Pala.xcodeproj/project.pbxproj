@@ -157,11 +157,10 @@
 			isa = PBXGroup;
 			children = (
 				EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */,
-				EBB793881B2203FC004F0821 /* SlideMenuController.swift */,
-				EBB7938C1B2488FF004F0821 /* EventsViewController.swift */,
 				EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */,
-				EBD6257E1B1E4D9200FBC064 /* Main.storyboard */,
+				EBB7938C1B2488FF004F0821 /* EventsViewController.swift */,
 				EB39FD0C1B276CEC00AB036C /* WallCollectionViewController.swift */,
+				EBD6257E1B1E4D9200FBC064 /* Main.storyboard */,
 				EBB7938A1B2237AE004F0821 /* User.swift */,
 				EBD625A11B1E592A00FBC064 /* Bridge-Header.h */,
 				EBD625811B1E4D9200FBC064 /* Images.xcassets */,
@@ -174,6 +173,7 @@
 		EBD625781B1E4D9100FBC064 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EBB793881B2203FC004F0821 /* SlideMenuController.swift */,
 				EBD625791B1E4D9100FBC064 /* Info.plist */,
 			);
 			name = "Supporting Files";

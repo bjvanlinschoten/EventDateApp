@@ -9,6 +9,10 @@
 import UIKit
 import Parse
 
+protocol LoginViewControllerDelegate {
+    func prepareForLogout()
+}
+
 class LoginViewController: UIViewController  {
     var currentUser: User?
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
@@ -44,12 +48,12 @@ class LoginViewController: UIViewController  {
     
     
     @IBAction func fbLoginClick(sender: AnyObject) {
+        self.loginButton?.hidden = true
+        self.activityIndicator?.hidden = false
+        self.activityIndicator?.startAnimating()
         PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "user_events", "user_birthday"]) {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
-                self.loginButton?.hidden = true
-                self.activityIndicator?.hidden = false
-                self.activityIndicator?.startAnimating()
                 self.currentUser = User(parseUser: user)
                 if user.isNew {
                     println("User signed up and logged in through Facebook!")
@@ -66,6 +70,9 @@ class LoginViewController: UIViewController  {
                 }
             }
             else {
+                self.loginButton?.hidden = false
+                self.activityIndicator?.stopAnimating()
+                self.activityIndicator?.hidden = true
                 println("Uh oh. The user cancelled the Facebook login.")
             }
         }
