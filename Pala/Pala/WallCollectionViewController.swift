@@ -22,7 +22,6 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
         // Do any additional setup after loading the view.
         self.wall.currentUser = self.currentUser
         println(self.wallUserArray)
@@ -91,6 +90,7 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
             self.currentUser?.addUserToDislikedUsers(dislikedUserFbId)
         }
         self.collectionView?.reloadData()
+            
     }
 
 

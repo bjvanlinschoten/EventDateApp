@@ -68,8 +68,22 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.currentUser?.saveUserToParse()
         self.wall = Wall()
         self.wall?.currentUser = self.currentUser
-        self.wall?.getUsersAtEvent{ (userArray: [PFUser]) -> Void in
-            self.wallUserArray = userArray
+        self.wall?.getUsersAtEvent { (userArray: [PFUser]) -> Void in
+            if let likedUsers = self.currentUser?.parseUser.valueForKey("likedUsers") as? NSArray, dislikedUsers = self.currentUser?.parseUser.valueForKey("dislikedUsers") as? NSArray {
+                self.wallUserArray = []
+                for index in 0...(userArray.count - 1) {
+                    let user = userArray[index] as PFUser
+                    let userFbId = user.valueForKey("facebookId") as! NSString
+                    if likedUsers.containsObject(userFbId) {
+                        println("Liked already")
+                    }
+                    if !likedUsers.containsObject(userFbId) && !dislikedUsers.containsObject(userFbId) {
+                        self.wallUserArray?.append(user)
+                    }
+                }
+            } else {
+                self.wallUserArray = userArray as [PFUser]
+            }
             self.performSegueWithIdentifier("eventsToWall", sender: self)
         }
     }
