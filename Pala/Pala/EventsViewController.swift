@@ -9,8 +9,10 @@
 import UIKit
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+    var wallUserArray: [PFUser]?
+    var wall: Wall?
     var currentUser: User?
+    
     @IBOutlet var eventsTableView: UITableView!
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var nameLabel: UILabel!
@@ -21,7 +23,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.eventsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         if let id = self.currentUser?.parseUser.valueForKey("facebookId") as? NSString {
-            let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(id)/picture?type=large")
+            let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(id)/picture?width=600&height=600")
             self.profilePicture.sd_setImageWithURL(picURL)
             self.profilePicture.layer.cornerRadius = self.profilePicture.frame.width / 2
             if let age = self.currentUser?.getUserAge() as NSInteger! {
@@ -64,7 +66,12 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let currentEvent = self.currentUser?.events?[indexPath.row] as! NSDictionary
         self.currentUser?.parseUser.setValue(currentEvent.valueForKey("id"), forKey: "currentEvent")
         self.currentUser?.saveUserToParse()
-        self.performSegueWithIdentifier("eventsToWall", sender: self)
+        self.wall = Wall()
+        self.wall?.currentUser = self.currentUser
+        self.wall?.getUsersAtEvent{ (userArray: [PFUser]) -> Void in
+            self.wallUserArray = userArray
+            self.performSegueWithIdentifier("eventsToWall", sender: self)
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -72,6 +79,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let nvc = segue.destinationViewController as! UITabBarController
             let vc = nvc.viewControllers?.first as! WallCollectionViewController
             vc.currentUser = self.currentUser
+            vc.wallUserArray = self.wallUserArray
         }
     }
     

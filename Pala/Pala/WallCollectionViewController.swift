@@ -8,12 +8,13 @@
 
 import UIKit
 
-let reuseIdentifier = "Cell"
+let reuseIdentifier = "wallCell"
 
-class WallCollectionViewController: UICollectionViewController {
-
+class WallCollectionViewController: UICollectionViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    var wallUserArray: [PFUser]?
     var currentUser: User?
-    var wallUserArray: NSArray?
+    let wall: Wall = Wall()
+    let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,25 +23,9 @@ class WallCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
         // Do any additional setup after loading the view.
-        if let userEvent = self.currentUser?.parseUser.valueForKey("currentEvent") as? NSString {
-            var query = PFUser.query()
-            query?.whereKey("currentEvent", equalTo: userEvent)
-            query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-                if error == nil{
-                    if let objects = objects as? [PFObject] {
-                        for object in objects {
-                            println(object.objectId)
-                        }
-                    }
-                } else {
-                    // Log details of the failure
-                    println("Error: \(error!) \(error!.userInfo!)")
-                }
-            }
-        }
+        self.wall.currentUser = self.currentUser
+        println(self.wallUserArray)
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,36 +33,66 @@ class WallCollectionViewController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        //#warning Incomplete method implementation -- Return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //#warning Incomplete method implementation -- Return the number of items in the section
-        return 0
+        if let array = self.wallUserArray {
+            return array.count
+        } else {
+            return 0
+        }
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
-    
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! WallCollectionViewCell
+        
         // Configure the cell
-    
+        let user = wallUserArray![indexPath.row] as PFUser
+        if let userFbId = user.valueForKey("facebookId") as? NSString {
+            let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(userFbId)/picture?width=600&height=600")
+            
+            cell.imageView.frame = CGRectMake(10,10,150,240)
+            cell.imageView.sd_setImageWithURL(picURL)
+            cell.nameLabel.text = user.valueForKey("name") as? String
+        }
         return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: 170, height: 300)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    
+    @IBAction func likeUser(sender: UIButton){
+        let cell = sender.superview! as! WallCollectionViewCell
+        let indexPath = self.collectionView!.indexPathForCell(cell)
+        let likedUser = wallUserArray![indexPath!.row] as PFUser
+        self.wallUserArray?.removeAtIndex(indexPath!.row)
+        if let likedUserFbId = likedUser.valueForKey("facebookId") as? NSString {
+            self.currentUser?.addUserToLikedUsers(likedUserFbId)
+        }
+        self.collectionView?.reloadData()
+    }
+    
+    @IBAction func dislikeUser(sender: UIButton){
+        let cell = sender.superview! as! WallCollectionViewCell
+        let indexPath = self.collectionView!.indexPathForCell(cell)
+        let dislikedUser = wallUserArray![indexPath!.row] as PFUser
+        self.wallUserArray?.removeAtIndex(indexPath!.row)
+        if let dislikedUserFbId = dislikedUser.valueForKey("facebookId") as? NSString {
+            self.currentUser?.addUserToDislikedUsers(dislikedUserFbId)
+        }
+        self.collectionView?.reloadData()
+    }
+
 
     // MARK: UICollectionViewDelegate
 

@@ -69,9 +69,20 @@ class User: NSObject {
 
     }
     
+    func addUserToLikedUsers(facebookId: NSString) {
+        self.parseUser.addUniqueObject(facebookId, forKey: "likedUsers")
+        self.saveUserToParse()
+    }
+    
+    func addUserToDislikedUsers(facebookId: NSString) {
+        self.parseUser.addUniqueObject(facebookId, forKey: "dislikedUsers")
+        self.saveUserToParse()
+    }
+    
     func logout() {
         let logMeOut: FBSDKLoginManager = FBSDKLoginManager()
         logMeOut.logOut()
         PFUser.logOut()
     }
+    
 }
