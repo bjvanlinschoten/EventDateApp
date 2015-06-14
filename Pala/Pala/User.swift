@@ -20,16 +20,6 @@ class User: NSObject {
         super.init()
     }
     
-    func saveUserToParse() {
-        self.parseUser.saveInBackgroundWithBlock{(success: Bool, error: NSError?) -> Void in
-            if (success) {
-            }
-            else {
-                println(error)
-            }
-        }
-    }
-    
     func getUserAge() -> NSInteger {
         if let birthdayString =  self.parseUser.valueForKey("birthday") as? String {
             let dateFormatter = NSDateFormatter()
@@ -50,7 +40,13 @@ class User: NSObject {
                 self.parseUser.setValue(resultDict.valueForKey("first_name"), forKey: "name")
                 self.parseUser.setValue(resultDict.valueForKey("gender"), forKey:"gender")
                 self.parseUser.setValue(resultDict.valueForKey("birthday"), forKey: "birthday")
-                self.saveUserToParse()
+                self.parseUser.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                    if (success) {
+                        // The object has been saved.
+                    } else {
+                        // There was a problem, check error.description
+                    }
+                }
                 completion()
             }
         }
@@ -69,17 +65,20 @@ class User: NSObject {
 
     }
     
-    func addUserToLikedUsers(facebookId: NSString) {
-        self.parseUser.addUniqueObject(facebookId, forKey: "likedUsers")
-        self.saveUserToParse()
-    }
-    
-    func addUserToDislikedUsers(facebookId: NSString) {
-        self.parseUser.addUniqueObject(facebookId, forKey: "dislikedUsers")
-        self.saveUserToParse()
+    func clearLikedDislikedUsers() {
+        self.parseUser.removeObjectForKey("likedUsers")
+        self.parseUser.removeObjectForKey("dislikedUsers")
+        self.parseUser.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+            if (success) {
+                // The object has been saved.
+            } else {
+                // There was a problem, check error.description
+            }
+        }
     }
     
     func logout() {
+        self.clearLikedDislikedUsers()
         let logMeOut: FBSDKLoginManager = FBSDKLoginManager()
         logMeOut.logOut()
         PFUser.logOut()

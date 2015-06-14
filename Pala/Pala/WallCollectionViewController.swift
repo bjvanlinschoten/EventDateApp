@@ -24,7 +24,6 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
 
         // Do any additional setup after loading the view.
         self.wall.currentUser = self.currentUser
-        println(self.wallUserArray)
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,11 +73,15 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
         let cell = sender.superview! as! WallCollectionViewCell
         let indexPath = self.collectionView!.indexPathForCell(cell)
         let likedUser = wallUserArray![indexPath!.row] as PFUser
-        self.wallUserArray?.removeAtIndex(indexPath!.row)
-        if let likedUserFbId = likedUser.valueForKey("facebookId") as? NSString {
-            self.currentUser?.addUserToLikedUsers(likedUserFbId)
+        self.wall.likeUser(likedUser.objectId!) {(result: Bool) -> Void in
+            if result == true {
+                println("MATCH!")
+            } else {
+                println("No match :(")
+            }
+            self.wallUserArray?.removeAtIndex(indexPath!.row)
+            self.collectionView?.reloadData()
         }
-        self.collectionView?.reloadData()
     }
     
     @IBAction func dislikeUser(sender: UIButton){
