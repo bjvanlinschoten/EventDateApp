@@ -4,7 +4,7 @@
 * Parse SDK
 * Facebook SDK
 * Parse Push for the chat and for notifying users when they have a new match 
-
+* Parse Cloud + PubNub for the chat
 
 ## Classes
 * User (from Parse SDK)
