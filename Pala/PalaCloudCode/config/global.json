@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.4.2"
+  },
+  "applications": {
+    "Pala": {
+      "applicationId": "p6rBrBXuiTkbkB3S247eXHBpLismFku4KpL7h1v1",
+      "masterKey": "JbUnDcPIQRd0JlrACdLqsGfueYd4y83B8EvfCQ8F"
+    },
+    "_default": {
+      "link": "Pala"
+    }
+  }
+}

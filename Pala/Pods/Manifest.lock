@@ -1,0 +1,15 @@
+PODS:
+  - PubNub (3.7.10.8)
+  - SDWebImage (3.7.2):
+    - SDWebImage/Core (= 3.7.2)
+  - SDWebImage/Core (3.7.2)
+
+DEPENDENCIES:
+  - PubNub
+  - SDWebImage
+
+SPEC CHECKSUMS:
+  PubNub: 055424dfc6aaa404f7bdf1297c886a1a009511de
+  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+
+COCOAPODS: 0.37.2

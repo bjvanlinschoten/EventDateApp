@@ -8,6 +8,7 @@
         <scene sceneID="Wet-hf-2Yr">
             <objects>
                 <tabBarController id="TVc-C9-dxm" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="lwC-ve-SnE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -54,7 +55,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6z-UA-a0e">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                                 <rect key="frame" x="0.0" y="262" width="170" height="30"/>
@@ -126,13 +127,13 @@
         <!--Chats Table View Controller-->
         <scene sceneID="d3y-3a-5ck">
             <objects>
-                <tableViewController id="C2d-8c-iYs" userLabel="Chats Table View Controller" sceneMemberID="viewController">
+                <tableViewController id="C2d-8c-iYs" userLabel="Chats Table View Controller" customClass="ChatsTableViewController" customModule="Pala" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NSS-7m-w2C">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vmB-d6-v4Z">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="chatCell" id="vmB-d6-v4Z">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vmB-d6-v4Z" id="c6L-eZ-lJt">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -140,15 +141,37 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="C2d-8c-iYs" id="d3w-At-6Zn"/>
-                            <outlet property="delegate" destination="C2d-8c-iYs" id="a9H-6s-EAt"/>
+                            <outlet property="dataSource" destination="C2d-8c-iYs" id="joJ-kW-1qA"/>
+                            <outlet property="delegate" destination="C2d-8c-iYs" id="0kU-az-idp"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Chats" id="lxd-jj-oSs"/>
+                    <connections>
+                        <segue destination="yCM-Fv-jgD" kind="show" identifier="matchesToChat" id="GoN-w9-w5q"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IeC-jx-JW6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2298" y="750"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="Xrf-kd-ZuD">
+            <objects>
+                <viewController id="yCM-Fv-jgD" customClass="ChatViewController" customModule="Pala" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ScL-iH-EY6"/>
+                        <viewControllerLayoutGuide type="bottom" id="YlV-zb-sMc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TST-Dz-HgS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a5g-gT-a6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2993" y="750"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="WC8-0q-7g0">
@@ -221,7 +244,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U1H-2x-KPV">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cA8-Tl-dWj">
