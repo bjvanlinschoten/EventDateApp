@@ -89,11 +89,8 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
         let indexPath = self.collectionView!.indexPathForCell(cell)
         let dislikedUser = wallUserArray![indexPath!.row] as PFUser
         self.wallUserArray?.removeAtIndex(indexPath!.row)
-        if let dislikedUserFbId = dislikedUser.valueForKey("facebookId") as? NSString {
-            self.currentUser?.addUserToDislikedUsers(dislikedUserFbId)
-        }
+        self.wall.dislikeUser(dislikedUser.objectId!)
         self.collectionView?.reloadData()
-            
     }
 
 
