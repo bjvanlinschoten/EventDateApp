@@ -68,7 +68,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.currentUser?.parseUser.saveInBackground()
         self.wall = Wall()
         self.wall?.currentUser = self.currentUser
-        self.wall?.getUsersAtEvent { (userArray: [PFUser]) -> Void in
+        self.wall?.getUsersToShow { (userArray: [PFUser]) -> Void in
             self.wallUserArray = userArray as [PFUser]
             self.performSegueWithIdentifier("eventsToWall", sender: self)
         }
@@ -77,9 +77,11 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "eventsToWall" {
             let nvc = segue.destinationViewController as! UITabBarController
-            let vc = nvc.viewControllers?.first as! WallCollectionViewController
-            vc.currentUser = self.currentUser
-            vc.wallUserArray = self.wallUserArray
+            let wvc = nvc.viewControllers?.first as! WallCollectionViewController
+            let cvc = nvc.viewControllers?[1] as! ChatsTableViewController
+            wvc.currentUser = self.currentUser
+            cvc.currentUser = self.currentUser
+            wvc.wallUserArray = self.wallUserArray
         }
     }
     
