@@ -8,18 +8,28 @@
 
 import UIKit
 
-class ChatsTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class ChatsTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, LGChatControllerDelegate, PNDelegate {
 
     var currentUser: User?
+    var otherUserChannel: PNChannel!
+    var chatController: LGChatController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        PubNub.setDelegate(self)
+        
+        var pnConfiguration: PNConfiguration!
+        pnConfiguration = PNConfiguration(publishKey: "pub-c-17afe8c1-9836-4e02-8ca8-629ae092c506", subscribeKey: "sub-c-54a03d8c-12a7-11e5-825b-02ee2ddab7fe", secretKey: "sec-c-YTk5ZmJlNGUtMWIyZi00NmU5LWEwOWYtMTc1MGE2ODA4MTNj")
+        
+        PubNub.setConfiguration(pnConfiguration)
+        PNLogger.loggerEnabled(false)
+        let userChannel: PNChannel = PNChannel.channelWithName(self.currentUser?.parseUser.objectId) as! PNChannel
+        PubNub.connect()
+        PubNub.subscribeOn([userChannel])
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,54 +71,47 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
         return cell
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("matchesToChat", sender: self)
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.chatController = LGChatController()
+        self.chatController.messages = []
+        let matches = self.currentUser!.parseUser.valueForKey("matches") as! NSArray
+        let otherUserObjectId = matches.objectAtIndex(indexPath.row) as! String
+        let currentUserObjectId = self.currentUser!.parseUser.objectId! as String
+        otherUserChannel = PNChannel.channelWithName(otherUserObjectId) as! PNChannel
+        self.chatController.title = tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.text
+        self.chatController.delegate = self
+        self.navigationController?.pushViewController(self.chatController, animated: true)
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
+    
+    // MARK: LGChatControllerDelegate
+    
+    func chatController(chatController: LGChatController, didAddNewMessage message: LGChatMessage) {
+        if message.sentBy == .User {
+            PubNub.sendMessage(message.content, toChannel: self.otherUserChannel)
+        }
+    }
+    
+    func shouldChatController(chatController: LGChatController, addMessage message: LGChatMessage) -> Bool {
+        /*
+        Use this space to prevent sending a message, or to alter a message.  For example, you might want to hold a message until its successfully uploaded to a server.
+        */
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    // MARK: PubNubDelegate
+    
+    func pubnubClient(client: PubNub!, didReceiveMessage message: PNMessage!) {
+        println("received: \(message)")
+        let message = LGChatMessage(content: "MessageReceived", sentBy: .Opponent, timeStamp: nil)
+        self.chatController.addNewMessage(message)
     }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    func pubnubClient(client: PubNub!, didSendMessage message: PNMessage!) {
+        println("sent: \(message)")
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
+    
+    func pubnubClient(client: PubNub!, didFailMessageSend message: PNMessage!, withError error: PNError!) {
+        println(error)
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         // Set-up Parse/FB
         Parse.setApplicationId("p6rBrBXuiTkbkB3S247eXHBpLismFku4KpL7h1v1", clientKey: "AdAbwID3eViabd3AME6xQv8IASrKN8vkeEGXcrsk")
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        PubNub.setDelegate(self)
         
         if application.respondsToSelector("registerUserNotificationSettings:") {
             let types: UIUserNotificationType = (.Alert | .Badge | .Sound)
