@@ -64,6 +64,7 @@ class LoginViewController: UIViewController  {
                     }
                 } else {
                     println("User logged in through Facebook!")
+                    self.currentUser!.personObject = Person(objectId: user.objectId!, facebookId: self.currentUser?.parseUser.valueForKey("facebookId") as! String, name: self.currentUser?.parseUser.valueForKey("name") as! String, birthday: self.currentUser?.parseUser.valueForKey("birthday") as! String)
                     self.currentUser?.getUserEvents() {(completion:Void) in
                         self.nextView()
                     }

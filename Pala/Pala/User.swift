@@ -11,8 +11,10 @@ import UIKit
 class User: NSObject {
     
     let parseUser: PFUser
+    var matches: [Person]?
     var facebookId: NSString
     var events: NSMutableArray?
+    var personObject: Person?
     
     init (parseUser: PFUser) {
         self.parseUser = parseUser
@@ -47,6 +49,7 @@ class User: NSObject {
                         // There was a problem, check error.description
                     }
                 }
+                self.personObject = Person(objectId: self.parseUser.objectId!, facebookId: resultDict.valueForKey("id") as! String, name: resultDict.valueForKey("first_name") as! String, birthday: resultDict.valueForKey("birthday") as! String)
                 completion()
             }
         }
@@ -68,6 +71,7 @@ class User: NSObject {
     func clearLikedDislikedUsers() {
         self.parseUser.removeObjectForKey("likedUsers")
         self.parseUser.removeObjectForKey("dislikedUsers")
+        self.parseUser.removeObjectForKey("matches")
         self.parseUser.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if (success) {
                 // The object has been saved.

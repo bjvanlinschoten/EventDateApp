@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ChatsTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, LGChatControllerDelegate, PNDelegate {
+class ChatsTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
 
     var currentUser: User?
     var otherUserChannel: PNChannel!
-    var chatController: LGChatController!
+    var chatController: ChatViewController!
+    var matches: [Person]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,36 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
         PubNub.subscribeOn([userChannel])
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.matches = []
+        if let matches = self.currentUser!.parseUser.valueForKey("matches") as? NSArray {
+            var query = PFUser.query()
+            query?.whereKey("objectId", containedIn: matches as [AnyObject])
+            query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+            
+                if let array = objects as? [PFUser] {
+                    for item in array {
+                        let person = Person(objectId: item.objectId!, facebookId: item.valueForKey("facebookId") as! String, name: item.valueForKey("name") as! String, birthday: item.valueForKey("birthday") as! String)
+                        self.matches?.append(person)
+                    }
+                }
+                
+                self.tableView.reloadData()
+                
+            }
+            
+//            for person in matches {
+//                var query = PFUser.query()
+//                query?.getObjectInBackgroundWithId(otherUserObjectId, block: {(user: PFObject?, error: NSError?) -> Void in
+//                    if let user = user as? PFUser {
+//                        let cellText = user.valueForKey("name") as! NSString
+//                        cell.textLabel?.text = cellText as String
+//                    }
+//                })
+//            }
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -46,8 +77,8 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        if let matches = self.currentUser?.parseUser.valueForKey("matches") as? NSArray {
-            return matches.count
+        if self.matches != nil {
+            return self.matches!.count
         } else {
             return 0
         }
@@ -57,47 +88,33 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("chatCell", forIndexPath: indexPath) as! UITableViewCell
 
-        if let matches = self.currentUser!.parseUser.valueForKey("matches") as? NSArray {
-            let otherUserObjectId = matches.objectAtIndex(indexPath.row) as! String
-            
-            var query = PFUser.query()
-            query?.getObjectInBackgroundWithId(otherUserObjectId, block: {(user: PFObject?, error: NSError?) -> Void in
-                if let user = user as? PFUser {
-                    let cellText = user.valueForKey("name") as! NSString
-                    cell.textLabel?.text = cellText as String
-                }
-            })
-        }
+        let person = matches![indexPath.row] as Person
+        let cellText = person.name as String
+        cell.textLabel?.text = cellText
+        
+//        if let matches = self.currentUser!.parseUser.valueForKey("matches") as? NSArray {
+//            let otherUserObjectId = matches.objectAtIndex(indexPath.row) as! String
+//            
+//            var query = PFUser.query()
+//            query?.getObjectInBackgroundWithId(otherUserObjectId, block: {(user: PFObject?, error: NSError?) -> Void in
+//                if let user = user as? PFUser {
+//                    let cellText = user.valueForKey("name") as! NSString
+//                    cell.textLabel?.text = cellText as String
+//                }
+//            })
+//        }
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.chatController = LGChatController()
-        self.chatController.messages = []
-        let matches = self.currentUser!.parseUser.valueForKey("matches") as! NSArray
-        let otherUserObjectId = matches.objectAtIndex(indexPath.row) as! String
-        let currentUserObjectId = self.currentUser!.parseUser.objectId! as String
-        otherUserChannel = PNChannel.channelWithName(otherUserObjectId) as! PNChannel
-        self.chatController.title = tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.text
-        self.chatController.delegate = self
+        self.chatController = ChatViewController()
+        self.chatController.otherUser = self.matches![indexPath.row] as Person
+        self.chatController.currentUser = self.currentUser
+        
         self.navigationController?.pushViewController(self.chatController, animated: true)
     }
     
     
-    // MARK: LGChatControllerDelegate
-    
-    func chatController(chatController: LGChatController, didAddNewMessage message: LGChatMessage) {
-        if message.sentBy == .User {
-            PubNub.sendMessage(message.content, toChannel: self.otherUserChannel)
-        }
-    }
-    
-    func shouldChatController(chatController: LGChatController, addMessage message: LGChatMessage) -> Bool {
-        /*
-        Use this space to prevent sending a message, or to alter a message.  For example, you might want to hold a message until its successfully uploaded to a server.
-        */
-        return true
-    }
     
     // MARK: PubNubDelegate
     

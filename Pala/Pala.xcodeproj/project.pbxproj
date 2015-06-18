@@ -11,6 +11,8 @@
 		EB39FD0D1B276CEC00AB036C /* WallCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39FD0C1B276CEC00AB036C /* WallCollectionViewController.swift */; };
 		EB39FD0F1B2992D200AB036C /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39FD0E1B2992D200AB036C /* Wall.swift */; };
 		EB39FD111B2AD17200AB036C /* WallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39FD101B2AD17200AB036C /* WallCollectionViewCell.swift */; };
+		EB6521561B32C244000CB29B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6521551B32C244000CB29B /* ChatViewController.swift */; };
+		EB6521581B32C622000CB29B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6521571B32C622000CB29B /* Person.swift */; };
 		EB8EAEE11B2F1FDD00BAFFAD /* ChatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8EAEE01B2F1FDD00BAFFAD /* ChatsTableViewController.swift */; };
 		EB8EAEE91B2F737D00BAFFAD /* LGSimpleChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8EAEE81B2F737D00BAFFAD /* LGSimpleChat.swift */; };
 		EBB793511B20C156004F0821 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB7934E1B20C156004F0821 /* Bolts.framework */; };
@@ -58,6 +60,8 @@
 		EB39FD0C1B276CEC00AB036C /* WallCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallCollectionViewController.swift; sourceTree = "<group>"; };
 		EB39FD0E1B2992D200AB036C /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		EB39FD101B2AD17200AB036C /* WallCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallCollectionViewCell.swift; sourceTree = "<group>"; };
+		EB6521551B32C244000CB29B /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		EB6521571B32C622000CB29B /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		EB8EAEE01B2F1FDD00BAFFAD /* ChatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsTableViewController.swift; sourceTree = "<group>"; };
 		EB8EAEE81B2F737D00BAFFAD /* LGSimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSimpleChat.swift; sourceTree = "<group>"; };
 		EBB7934E1B20C156004F0821 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
@@ -172,8 +176,10 @@
 				EB39FD0C1B276CEC00AB036C /* WallCollectionViewController.swift */,
 				EB39FD101B2AD17200AB036C /* WallCollectionViewCell.swift */,
 				EB8EAEE01B2F1FDD00BAFFAD /* ChatsTableViewController.swift */,
+				EB6521551B32C244000CB29B /* ChatViewController.swift */,
 				EB39FD0E1B2992D200AB036C /* Wall.swift */,
 				EBB7938A1B2237AE004F0821 /* User.swift */,
+				EB6521571B32C622000CB29B /* Person.swift */,
 				EBD625811B1E4D9200FBC064 /* Images.xcassets */,
 				EBD625831B1E4D9200FBC064 /* LaunchScreen.xib */,
 				EBD625781B1E4D9100FBC064 /* Supporting Files */,
@@ -372,9 +378,11 @@
 			files = (
 				EBB7938B1B2237AE004F0821 /* User.swift in Sources */,
 				EBD6257D1B1E4D9100FBC064 /* LoginViewController.swift in Sources */,
+				EB6521561B32C244000CB29B /* ChatViewController.swift in Sources */,
 				EB39FD0F1B2992D200AB036C /* Wall.swift in Sources */,
 				EB39FD0D1B276CEC00AB036C /* WallCollectionViewController.swift in Sources */,
 				EB8EAEE91B2F737D00BAFFAD /* LGSimpleChat.swift in Sources */,
+				EB6521581B32C622000CB29B /* Person.swift in Sources */,
 				EBB793891B2203FC004F0821 /* SlideMenuController.swift in Sources */,
 				EBD6257B1B1E4D9100FBC064 /* AppDelegate.swift in Sources */,
 				EB39FD111B2AD17200AB036C /* WallCollectionViewCell.swift in Sources */,

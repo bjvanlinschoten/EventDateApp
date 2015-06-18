@@ -11,7 +11,7 @@ import UIKit
 let reuseIdentifier = "wallCell"
 
 class WallCollectionViewController: UICollectionViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    var wallUserArray: [PFUser]?
+    var wallUserArray: [Person]?
     var currentUser: User?
     let wall: Wall = Wall()
     let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
@@ -50,14 +50,11 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! WallCollectionViewCell
         
         // Configure the cell
-        let user = wallUserArray![indexPath.row] as PFUser
-        if let userFbId = user.valueForKey("facebookId") as? NSString {
-            let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(userFbId)/picture?width=600&height=600")
-            
-            cell.imageView.frame = CGRectMake(10,10,150,240)
-            cell.imageView.sd_setImageWithURL(picURL)
-            cell.nameLabel.text = user.valueForKey("name") as? String
-        }
+        let person = wallUserArray![indexPath.row] as Person
+        let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(person.facebookId)/picture?width=600&height=600")
+        cell.imageView.frame = CGRectMake(10,10,150,240)
+        cell.imageView.sd_setImageWithURL(picURL)
+        cell.nameLabel.text = "\(person.name) ( \(person.getPersonAge()))"
         return cell
     }
     
@@ -72,8 +69,8 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
     @IBAction func likeUser(sender: UIButton){
         let cell = sender.superview! as! WallCollectionViewCell
         let indexPath = self.collectionView!.indexPathForCell(cell)
-        let likedUser = wallUserArray![indexPath!.row] as PFUser
-        self.wall.likeUser(likedUser.objectId!) {(result: Bool) -> Void in
+        let likedUser = wallUserArray![indexPath!.row] as Person
+        self.wall.likeUser(likedUser) {(result: Bool) -> Void in
             if result == true {
                 println("MATCH!")
             } else {
@@ -87,9 +84,9 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
     @IBAction func dislikeUser(sender: UIButton){
         let cell = sender.superview! as! WallCollectionViewCell
         let indexPath = self.collectionView!.indexPathForCell(cell)
-        let dislikedUser = wallUserArray![indexPath!.row] as PFUser
+        let dislikedUser = wallUserArray![indexPath!.row] as Person
         self.wallUserArray?.removeAtIndex(indexPath!.row)
-        self.wall.dislikeUser(dislikedUser.objectId!)
+        self.wall.dislikeUser(dislikedUser.objectId)
         self.collectionView?.reloadData()
     }
 

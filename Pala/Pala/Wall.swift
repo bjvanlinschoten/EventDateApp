@@ -12,7 +12,7 @@ class Wall: NSObject {
    
     var currentUser: User?
     
-    func getUsersToShow(completion: ((wallUserArray: [PFUser]) -> Void)!) {
+    func getUsersToShow(completion: ((wallUserArray: [Person]) -> Void)!) {
         if let userEvent = self.currentUser?.parseUser.valueForKey("currentEvent") as? NSString {
             
             let currentUserObjectId = self.currentUser?.parseUser.objectId!
@@ -45,24 +45,29 @@ class Wall: NSObject {
             query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
                 if error == nil {
                     if let array = objects as? [PFUser] {
-                        completion(wallUserArray: array)
+                        var wallUsersArray: [Person] = []
+                        for person in array {
+                            let person = Person(objectId: person.objectId!, facebookId: person.valueForKey("facebookId") as! String, name: person.valueForKey("name") as! String, birthday: person.valueForKey("birthday") as! String)
+                            wallUsersArray.append(person)
+                        }
+                        completion(wallUserArray: wallUsersArray)
                     }
                 }
             }
         }
     }
     
-    func likeUser (otherUserObjectId: String, liked: ((result: Bool) -> Void)!) {
+    func likeUser (otherPerson: Person, liked: ((result: Bool) -> Void)!) {
         
         var query = PFUser.query()
         
-        query?.getObjectInBackgroundWithId(otherUserObjectId) {(object: PFObject?, error: NSError?) -> Void in
+        query?.getObjectInBackgroundWithId(otherPerson.objectId) {(object: PFObject?, error: NSError?) -> Void in
             if let otherUser = object as? PFUser {
                 if let otherUserLikedUsers = otherUser.valueForKey("likedUsers") as? NSArray, currentUserObjectId = self.currentUser?.parseUser.objectId {
                     if otherUserLikedUsers.containsObject(currentUserObjectId) {
                         liked(result: true)
-                        self.currentUser?.parseUser.addUniqueObject(otherUserObjectId, forKey: "matches")
-                        PFCloud.callFunctionInBackground("match", withParameters: ["otherUserId": otherUserObjectId, "currentUserId": currentUserObjectId]) {(response: AnyObject?, error: NSError?) -> Void in
+                        self.currentUser?.parseUser.addUniqueObject(otherPerson.objectId, forKey: "matches")
+                        PFCloud.callFunctionInBackground("match", withParameters: ["otherUserId": otherPerson.objectId, "currentUserId": currentUserObjectId]) {(response: AnyObject?, error: NSError?) -> Void in
                             if error == nil {
                                 
                             } else {
@@ -70,11 +75,11 @@ class Wall: NSObject {
                             }
                         }
                     } else {
-                        self.currentUser?.parseUser.addUniqueObject(otherUserObjectId, forKey: "likedUsers")
+                        self.currentUser?.parseUser.addUniqueObject(otherUser.objectId!, forKey: "likedUsers")
                         liked(result: false)
                     }
                 } else {
-                    self.currentUser?.parseUser.addUniqueObject(otherUserObjectId, forKey: "likedUsers")
+                    self.currentUser?.parseUser.addUniqueObject(otherUser.objectId!, forKey: "likedUsers")
                     liked(result: false)
                 }
                 self.currentUser?.parseUser.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in

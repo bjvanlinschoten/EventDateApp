@@ -1,20 +1,29 @@
 //
-//  ViewController.swift
+//  ChatViewController.swift
 //  Pala
 //
-//  Created by Boris van Linschoten on 15-06-15.
+//  Created by Boris van Linschoten on 18-06-15.
 //  Copyright (c) 2015 bjvanlinschoten. All rights reserved.
 //
 
 import UIKit
 
-class ChatViewController: UIViewController, LGChatControllerDelegate {
+class ChatViewController: LGChatController, LGChatControllerDelegate {
+    
+    var currentUser: User?
+    var otherUser: Person?
+    var otherUserChannel: PNChannel?
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-        self.launchChatController()
+        self.otherUserChannel = PNChannel.channelWithName(self.otherUser!.objectId) as? PNChannel
+        self.title = self.otherUser!.name
+        self.messages = []
+        self.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,26 +31,13 @@ class ChatViewController: UIViewController, LGChatControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
-        
-    }
-    
-    // MARK: Launch Chat Controller
-    
-    func launchChatController() {
-        let chatController = LGChatController()
-        chatController.opponentImage = UIImage(named: "User")
-        chatController.title = "Simple Chat"
-        let helloWorld = LGChatMessage(content: "Hello World!", sentBy: .User)
-        chatController.messages = [helloWorld]
-        chatController.delegate = self
-        self.navigationController?.pushViewController(chatController, animated: true)
-    }
     
     // MARK: LGChatControllerDelegate
     
     func chatController(chatController: LGChatController, didAddNewMessage message: LGChatMessage) {
-        println("Did Add Message: \(message.content)")
+        if message.sentBy == .User {
+            PubNub.sendMessage(message.content, toChannel: self.otherUserChannel)
+        }
     }
     
     func shouldChatController(chatController: LGChatController, addMessage message: LGChatMessage) -> Bool {
@@ -50,7 +46,7 @@ class ChatViewController: UIViewController, LGChatControllerDelegate {
         */
         return true
     }
-    
+
     /*
     // MARK: - Navigation
 

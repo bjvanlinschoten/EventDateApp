@@ -9,7 +9,7 @@
 import UIKit
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var wallUserArray: [PFUser]?
+    var wallUserArray: [Person]?
     var wall: Wall?
     var currentUser: User?
     
@@ -68,8 +68,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.currentUser?.parseUser.saveInBackground()
         self.wall = Wall()
         self.wall?.currentUser = self.currentUser
-        self.wall?.getUsersToShow { (userArray: [PFUser]) -> Void in
-            self.wallUserArray = userArray as [PFUser]
+        self.wall?.getUsersToShow { (userArray: [Person]) -> Void in
+            self.wallUserArray = userArray as [Person]
             self.performSegueWithIdentifier("eventsToWall", sender: self)
         }
     }
