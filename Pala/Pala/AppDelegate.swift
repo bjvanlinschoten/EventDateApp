@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         Parse.setApplicationId("p6rBrBXuiTkbkB3S247eXHBpLismFku4KpL7h1v1", clientKey: "AdAbwID3eViabd3AME6xQv8IASrKN8vkeEGXcrsk")
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
+        PubNub.setDelegate(self)
+        
         if application.respondsToSelector("registerUserNotificationSettings:") {
             let types: UIUserNotificationType = (.Alert | .Badge | .Sound)
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
@@ -79,6 +81,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         println("didReceiveRemoteNotification")
         PFPush.handlePush(userInfo)
+    }
+    
+    // MARK: PubNubDelegate
+    
+    func pubnubClient(client: PubNub!, didReceiveMessage message: PNMessage!) {
+        println("received: \(message)")
+//        let message = LGChatMessage(content: "MessageReceived", sentBy: .Opponent, timeStamp: nil)
+//        self.chatController.addNewMessage(message)
+    }
+    
+    func pubnubClient(client: PubNub!, didSendMessage message: PNMessage!) {
+        println("sent: \(message)")
+    }
+    
+    func pubnubClient(client: PubNub!, didFailMessageSend message: PNMessage!, withError error: PNError!) {
+        println(error)
     }
 
 }

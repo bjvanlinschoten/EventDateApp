@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatViewController: LGChatController, LGChatControllerDelegate {
+class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
     
     var currentUser: User?
     var otherUser: Person?

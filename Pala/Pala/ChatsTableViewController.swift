@@ -12,7 +12,7 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
 
     var currentUser: User?
     var otherUserChannel: PNChannel!
-    var chatController: ChatViewController!
+    var chatController: PrivateChatViewController!
     var matches: [Person]?
     
     override func viewDidLoad() {
@@ -20,7 +20,6 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        PubNub.setDelegate(self)
         
         var pnConfiguration: PNConfiguration!
         pnConfiguration = PNConfiguration(publishKey: "pub-c-17afe8c1-9836-4e02-8ca8-629ae092c506", subscribeKey: "sub-c-54a03d8c-12a7-11e5-825b-02ee2ddab7fe", secretKey: "sec-c-YTk5ZmJlNGUtMWIyZi00NmU5LWEwOWYtMTc1MGE2ODA4MTNj")
@@ -107,7 +106,7 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.chatController = ChatViewController()
+        self.chatController = PrivateChatViewController()
         self.chatController.otherUser = self.matches![indexPath.row] as Person
         self.chatController.currentUser = self.currentUser
         
@@ -115,20 +114,4 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
     }
     
     
-    
-    // MARK: PubNubDelegate
-    
-    func pubnubClient(client: PubNub!, didReceiveMessage message: PNMessage!) {
-        println("received: \(message)")
-        let message = LGChatMessage(content: "MessageReceived", sentBy: .Opponent, timeStamp: nil)
-        self.chatController.addNewMessage(message)
-    }
-
-    func pubnubClient(client: PubNub!, didSendMessage message: PNMessage!) {
-        println("sent: \(message)")
-    }
-    
-    func pubnubClient(client: PubNub!, didFailMessageSend message: PNMessage!, withError error: PNError!) {
-        println(error)
-    }
 }
