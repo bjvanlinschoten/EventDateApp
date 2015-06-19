@@ -26,6 +26,7 @@ class LoginViewController: UIViewController  {
         
         if let user = PFUser.currentUser() {
             println("User Logged In")
+            
             self.loginButton?.hidden = true
             self.activityIndicator?.hidden = false
             self.activityIndicator?.startAnimating()
@@ -33,6 +34,11 @@ class LoginViewController: UIViewController  {
             self.currentUser?.getUserEvents() {(completion:Void) in
                 self.nextView()
             }
+            
+            // Set-up and load chat
+            self.setUpPNChannel(user.objectId!)
+            self.loadUnseenMessages()
+
         } else {
             self.loginButton?.hidden = false
             println("User Not Logged In")
@@ -44,8 +50,7 @@ class LoginViewController: UIViewController  {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+   
     
     @IBAction func fbLoginClick(sender: AnyObject) {
         self.loginButton?.hidden = true
@@ -55,6 +60,11 @@ class LoginViewController: UIViewController  {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
                 self.currentUser = User(parseUser: user)
+                
+                // Set-up channel for chat
+                self.setUpPNChannel(user.objectId!)
+                self.loadUnseenMessages()
+                
                 if user.isNew {
                     println("User signed up and logged in through Facebook!")
                     self.currentUser?.populateNewUserWithFBData() {(completion:Void) in
@@ -77,6 +87,18 @@ class LoginViewController: UIViewController  {
                 println("Uh oh. The user cancelled the Facebook login.")
             }
         }
+    }
+    
+    func loadUnseenMessages() {
+        let chat = Chat()
+        chat.currentUser = self.currentUser
+        chat.loadUnseenMessagesFromServer()
+    }
+    
+    func setUpPNChannel(userId: String) {
+        let userChannel: PNChannel = PNChannel.channelWithName(userId) as! PNChannel
+        PubNub.connect()
+        PubNub.subscribeOn([userChannel])
     }
     
     func nextView() {

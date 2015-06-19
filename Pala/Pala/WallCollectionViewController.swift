@@ -54,7 +54,7 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
         let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(person.facebookId)/picture?width=600&height=600")
         cell.imageView.frame = CGRectMake(10,10,150,240)
         cell.imageView.sd_setImageWithURL(picURL)
-        cell.nameLabel.text = "\(person.name) ( \(person.getPersonAge()))"
+        cell.nameLabel.text = "\(person.name) (\(person.getPersonAge()))"
         return cell
     }
     

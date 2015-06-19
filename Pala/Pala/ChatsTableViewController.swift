@@ -21,15 +21,6 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        var pnConfiguration: PNConfiguration!
-        pnConfiguration = PNConfiguration(publishKey: "pub-c-17afe8c1-9836-4e02-8ca8-629ae092c506", subscribeKey: "sub-c-54a03d8c-12a7-11e5-825b-02ee2ddab7fe", secretKey: "sec-c-YTk5ZmJlNGUtMWIyZi00NmU5LWEwOWYtMTc1MGE2ODA4MTNj")
-        
-        PubNub.setConfiguration(pnConfiguration)
-        PNLogger.loggerEnabled(false)
-        let userChannel: PNChannel = PNChannel.channelWithName(self.currentUser?.parseUser.objectId) as! PNChannel
-        PubNub.connect()
-        PubNub.subscribeOn([userChannel])
-        
     }
     
     override func viewWillAppear(animated: Bool) {

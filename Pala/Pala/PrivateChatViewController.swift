@@ -13,15 +13,37 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
     var currentUser: User?
     var otherUser: Person?
     var otherUserChannel: PNChannel?
-
+    var chat: Chat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         // Do any additional setup after loading the view.
+        
+        // Channel of other user
         self.otherUserChannel = PNChannel.channelWithName(self.otherUser!.objectId) as? PNChannel
+        
+        // Init chat object
+        self.chat = Chat()
+        self.chat.currentUser = self.currentUser
+        self.chat.otherUser = self.otherUser
+        self.chat.otherUserChannel = self.otherUserChannel
+        
+        self.messages = self.chat.getOldMessages()
+        
+        // Set other user profile picture
+        let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(otherUser!.facebookId)/picture?width=100&height=100")
+        let downloader = SDWebImageManager()
+        downloader.downloadImageWithURL(picURL, options: nil, progress: nil) { (image: UIImage!, error: NSError!, cacheType: SDImageCacheType, finished: Bool, url: NSURL!) -> Void in
+            if ((image) != nil) {
+                self.opponentImage = image
+            }
+        }
+        
+        // Listen for new messages
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addMessageWithNotification:", name: otherUser!.objectId, object: nil)
+        
         self.title = self.otherUser!.name
-        self.messages = []
         self.delegate = self
         
     }
@@ -31,13 +53,20 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillDisappear(animated: Bool) {
+//        self.chat.saveMessages(self.messages)
+    }
+    
+    func addMessageWithNotification(notification: NSNotification) {
+        let message = notification.userInfo!["message"] as! LGChatMessage
+        self.addNewMessage(message)
+    }
+    
     
     // MARK: LGChatControllerDelegate
     
     func chatController(chatController: LGChatController, didAddNewMessage message: LGChatMessage) {
-        if message.sentBy == .User {
-            PubNub.sendMessage(message.content, toChannel: self.otherUserChannel)
-        }
+        self.chat.sendMessage(message)
     }
     
     func shouldChatController(chatController: LGChatController, addMessage message: LGChatMessage) -> Bool {
@@ -46,15 +75,7 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
         */
         return true
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
 
 }

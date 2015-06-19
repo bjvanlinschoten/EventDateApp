@@ -18,6 +18,13 @@ import UIKit
 
 class LGChatMessage : NSObject {
     
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.content, forKey: "contentKey")
+        aCoder.encodeObject(self.sentBy.rawValue, forKey: "sentByKey")
+        aCoder.encodeObject(self.timeStamp, forKey: "timeStampKey")
+    }
+    
     enum SentBy : String {
         case User = "LGChatMessageSentByUser"
         case Opponent = "LGChatMessageSentByOpponent"
@@ -55,6 +62,12 @@ class LGChatMessage : NSObject {
     var sentBy: SentBy
     var content: String
     var timeStamp: NSTimeInterval?
+    
+    required init(coder aDecoder: NSCoder) {
+        self.sentBy = SentBy(rawValue: aDecoder.decodeObjectForKey("sentByKey") as! String)!
+        self.content = aDecoder.decodeObjectForKey("contentKey") as! String
+        self.timeStamp = aDecoder.decodeObjectForKey("timeStampKey") as? NSTimeInterval
+    }
     
     required init (content: String, sentBy: SentBy, timeStamp: NSTimeInterval? = nil){
         self.sentBy = sentBy
