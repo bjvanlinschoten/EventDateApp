@@ -61,8 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     // MARK: PubNubDelegate
     
     func pubnubClient(client: PubNub!, didReceiveMessage message: PNMessage!) {
-        println(NSDate())
-        println(message)
         let msgDict = message.message as! NSDictionary
         let msg = LGChatMessage(content: msgDict["message"] as! String, sentBy: .Opponent)
         let otherUserId = msgDict["senderId"] as! String
@@ -88,7 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         println("didRegisterForRemoteNotificationsWithDeviceToken")
     
         let currentInstallation = PFInstallation.currentInstallation()
-    
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackgroundWithBlock { (succeeded, e) -> Void in
     
@@ -101,7 +98,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         println("didReceiveRemoteNotification")
-        PFPush.handlePush(userInfo)
+//        PFPush.handlePush(userInfo)
+        let state: UIApplicationState = application.applicationState
+        if state == UIApplicationState.Active {
+            let aps = userInfo["aps"] as! NSDictionary
+            let message = aps["alert"] as! String
+            AGPushNoteView.showWithNotificationMessage(message)
+        } else {
+            PFPush.handlePush(userInfo)
+        }
     }
     
 }

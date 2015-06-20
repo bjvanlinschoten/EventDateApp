@@ -43,6 +43,9 @@
 		EBD625821B1E4D9200FBC064 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBD625811B1E4D9200FBC064 /* Images.xcassets */; };
 		EBD625851B1E4D9200FBC064 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD625831B1E4D9200FBC064 /* LaunchScreen.xib */; };
 		EBD625911B1E4D9200FBC064 /* PalaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD625901B1E4D9200FBC064 /* PalaTests.swift */; };
+		EBE1FDB41B35A37E00A5E606 /* AGPushNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE1FDB21B35A37E00A5E606 /* AGPushNoteView.m */; };
+		EBE1FDB91B35AD2B00A5E606 /* AGPushNoteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE1FDB81B35AD2B00A5E606 /* AGPushNoteView.xib */; };
+		EBE1FDBB1B35B4E100A5E606 /* DeleteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBE1FDBA1B35B4E100A5E606 /* DeleteIcon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +101,10 @@
 		EBD6258F1B1E4D9200FBC064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBD625901B1E4D9200FBC064 /* PalaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalaTests.swift; sourceTree = "<group>"; };
 		EBD625A11B1E592A00FBC064 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
+		EBE1FDB11B35A37E00A5E606 /* AGPushNoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPushNoteView.h; sourceTree = "<group>"; };
+		EBE1FDB21B35A37E00A5E606 /* AGPushNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPushNoteView.m; sourceTree = "<group>"; };
+		EBE1FDB81B35AD2B00A5E606 /* AGPushNoteView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGPushNoteView.xib; sourceTree = "<group>"; };
+		EBE1FDBA1B35B4E100A5E606 /* DeleteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeleteIcon.png; sourceTree = "<group>"; };
 		F97897F17D7F1028DF244EDC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +201,10 @@
 			isa = PBXGroup;
 			children = (
 				EB8EAEE81B2F737D00BAFFAD /* LGSimpleChat.swift */,
+				EBE1FDB11B35A37E00A5E606 /* AGPushNoteView.h */,
+				EBE1FDB21B35A37E00A5E606 /* AGPushNoteView.m */,
+				EBE1FDB81B35AD2B00A5E606 /* AGPushNoteView.xib */,
+				EBE1FDBA1B35B4E100A5E606 /* DeleteIcon.png */,
 				EBB793881B2203FC004F0821 /* SlideMenuController.swift */,
 				EBD625791B1E4D9100FBC064 /* Info.plist */,
 			);
@@ -326,7 +337,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE1FDB91B35AD2B00A5E606 /* AGPushNoteView.xib in Resources */,
 				EBD625801B1E4D9200FBC064 /* Main.storyboard in Resources */,
+				EBE1FDBB1B35B4E100A5E606 /* DeleteIcon.png in Resources */,
 				EBD625851B1E4D9200FBC064 /* LaunchScreen.xib in Resources */,
 				EBD625821B1E4D9200FBC064 /* Images.xcassets in Resources */,
 			);
@@ -385,6 +398,7 @@
 				EB6521561B32C244000CB29B /* PrivateChatViewController.swift in Sources */,
 				EB39FD0F1B2992D200AB036C /* Wall.swift in Sources */,
 				EB39FD0D1B276CEC00AB036C /* WallCollectionViewController.swift in Sources */,
+				EBE1FDB41B35A37E00A5E606 /* AGPushNoteView.m in Sources */,
 				EB8EAEE91B2F737D00BAFFAD /* LGSimpleChat.swift in Sources */,
 				EB6521581B32C622000CB29B /* Person.swift in Sources */,
 				EBB793891B2203FC004F0821 /* SlideMenuController.swift in Sources */,

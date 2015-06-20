@@ -32,16 +32,49 @@ Parse.Cloud.define('match', function(request, response) {
 		data: {
 			aps: {
 				alert: "New match!"
-				sound: "default"
 			}
 		}
 	}, {
 		success: function (){
-			response.success("Hello world!");
+			response.success("Cloud response success: match");
 		},
 		error: function (error) {
 			response.error(error);
 		}
 	});
+});
+
+Parse.Cloud.define('chatPush', function(request, response) {
+	
+	var otherUserId = String(request.params.otherUserId)
+	var currentUserName = String(request.params.currentUserName)
+	var messageContent = String(request.params.messageContent)
+	
+ 	var temp = currentUserName.concat(": ")
+ 	var message = temp.concat(messageContent)
+	
+	var query = new Parse.Query(Parse.User);
+	query.equalTo('objectId', otherUserId);
+	
+	var pushQuery = new Parse.Query(Parse.Installation);
+	pushQuery.matchesQuery('user', query);
+	
+	Parse.Push.send({
+		where: pushQuery,
+		data: {
+			aps: {
+				alert: message
+			}
+		}
+	}, {
+		success: function (){
+			response.success("Cloud response success: ChatPush");
+		},
+		error: function (error) {
+			response.error(error);
+		}
+	});
+	
+	
 });
 

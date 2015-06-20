@@ -35,8 +35,6 @@ class Chat: NSObject {
         if let lastSaveDate = defaults.objectForKey("lastSaveDate") as? NSDate {
             let date = PNDate(date: lastSaveDate)
             PubNub.requestHistoryForChannel(currentUserChannel, from: date, to: PNDate(date: NSDate()), limit: 100, includingTimeToken: true) { (array: [AnyObject]!, channel: PNChannel!, startDate: PNDate!, endDate: PNDate!, error: NSError!) -> Void in
-                println("PNStartDate: \(startDate)")
-                println("PNEndDate: \(endDate)")
                 if let array = array as? [PNMessage] {
                     for msg in array {
                         let msgDict = msg.message as! NSDictionary
@@ -89,9 +87,19 @@ class Chat: NSObject {
     
     func sendMessage(message: LGChatMessage) {
         if message.sentBy == .User {
-            PubNub.sendMessage(["message": message.content, "senderId": currentUser!.parseUser.objectId!], toChannel: self.otherUserChannel, storeInHistory: true)            
+            
+            // Send message through PubNub
+            PubNub.sendMessage(["message": message.content, "senderId": currentUser!.parseUser.objectId!], toChannel: self.otherUserChannel, storeInHistory: true)
+            
+            // Send push to other user
+            PFCloud.callFunctionInBackground("chatPush", withParameters: ["otherUserId" : self.otherUser!.objectId as String, "currentUserName" : self.currentUser?.parseUser["name"] as! String, "messageContent" : message.content]) { (response: AnyObject? , error: NSError?) -> Void in
+                if error == nil {
+                    
+                } else {
+                    println(error)
+                }
+            }
         }
-        
     }
     
     func saveMessageToUserDefaults(msg: LGChatMessage, otherUserId: String){

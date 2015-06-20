@@ -108,7 +108,7 @@ class LoginViewController: UIViewController  {
         installation["user"] = self.currentUser?.parseUser
         installation.saveEventually { (success: Bool, error: NSError?) -> Void in
             if success == true {
-                println("installation saved")
+                
             } else {
                 println(error)
             }
