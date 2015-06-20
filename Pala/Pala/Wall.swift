@@ -12,49 +12,49 @@ class Wall: NSObject {
    
     var currentUser: User?
     
-    func getUsersToShow(completion: ((wallUserArray: [Person]) -> Void)!) {
-        if let userEvent = self.currentUser?.parseUser.valueForKey("currentEvent") as? NSString {
+    func getUsersToShow(selectedEventId: String, completion: ((wallUserArray: [Person]) -> Void)!) {
+        
             
-            let currentUserObjectId = self.currentUser?.parseUser.objectId!
-            
-            let userGender = self.currentUser?.parseUser.valueForKey("gender") as! NSString
-            var gender: String
-            if userGender == "male" {
-                gender = "female"
-            } else {
-                gender = "male"
-            }
-            
-            
-            var query = PFUser.query()
-            query?.whereKey("gender", equalTo: gender)
-            query?.whereKey("currentEvent", equalTo: userEvent)
-            query?.whereKey("matches", notEqualTo: currentUserObjectId!)
-            
-            let likedUsers = self.currentUser?.parseUser.valueForKey("likedUsers") as? NSMutableArray
-            let dislikedUsers = self.currentUser?.parseUser.valueForKey("dislikedUsers") as? NSArray
-            if likedUsers != nil && dislikedUsers != nil {
-                likedUsers!.addObjectsFromArray(dislikedUsers! as [AnyObject])
-                query?.whereKey("objectId", notContainedIn: likedUsers! as [AnyObject])
-            } else if likedUsers != nil {
-                query?.whereKey("objectId", notContainedIn: likedUsers! as [AnyObject])
-            } else if dislikedUsers != nil {
-                query?.whereKey("objectId", notContainedIn: dislikedUsers! as [AnyObject])
-            }
-            
-            query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-                if error == nil {
-                    if let array = objects as? [PFUser] {
-                        var wallUsersArray: [Person] = []
-                        for person in array {
-                            let person = Person(objectId: person.objectId!, facebookId: person.valueForKey("facebookId") as! String, name: person.valueForKey("name") as! String, birthday: person.valueForKey("birthday") as! String)
-                            wallUsersArray.append(person)
-                        }
-                        completion(wallUserArray: wallUsersArray)
+        let currentUserObjectId = self.currentUser?.parseUser.objectId!
+        
+        let userGender = self.currentUser?.parseUser.valueForKey("gender") as! NSString
+        var gender: String
+        if userGender == "male" {
+            gender = "female"
+        } else {
+            gender = "male"
+        }
+        
+        
+        var query = PFUser.query()
+        query?.whereKey("gender", equalTo: gender)
+        query?.whereKey("events", equalTo: selectedEventId)
+        query?.whereKey("matches", notEqualTo: currentUserObjectId!)
+        
+        let likedUsers = self.currentUser?.parseUser.valueForKey("likedUsers") as? NSMutableArray
+        let dislikedUsers = self.currentUser?.parseUser.valueForKey("dislikedUsers") as? NSArray
+        if likedUsers != nil && dislikedUsers != nil {
+            likedUsers!.addObjectsFromArray(dislikedUsers! as [AnyObject])
+            query?.whereKey("objectId", notContainedIn: likedUsers! as [AnyObject])
+        } else if likedUsers != nil {
+            query?.whereKey("objectId", notContainedIn: likedUsers! as [AnyObject])
+        } else if dislikedUsers != nil {
+            query?.whereKey("objectId", notContainedIn: dislikedUsers! as [AnyObject])
+        }
+        
+        query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                if let array = objects as? [PFUser] {
+                    var wallUsersArray: [Person] = []
+                    for person in array {
+                        let person = Person(objectId: person.objectId!, facebookId: person.valueForKey("facebookId") as! String, name: person.valueForKey("name") as! String, birthday: person.valueForKey("birthday") as! String)
+                        wallUsersArray.append(person)
                     }
+                    completion(wallUserArray: wallUsersArray)
                 }
             }
         }
+        
     }
     
     func likeUser (otherPerson: Person, liked: ((result: Bool) -> Void)!) {

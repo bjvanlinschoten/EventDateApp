@@ -60,6 +60,13 @@ class User: NSObject {
         eventsRequest.startWithCompletionHandler{(connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
             if let result = result as? NSDictionary {
                 if let events = result.valueForKey("data") as? NSMutableArray {
+                    var eventIdArray: NSMutableArray = []
+                    for event in events {
+                        let event = event as! NSDictionary
+                        eventIdArray.addObject(event["id"] as! String)
+                        self.parseUser.saveInBackground()
+                    }
+                    self.parseUser.addUniqueObjectsFromArray(eventIdArray as [AnyObject], forKey: "events")
                     self.events = events as NSMutableArray
                 }
             }

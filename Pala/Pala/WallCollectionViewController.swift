@@ -19,6 +19,7 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = false
+        self.navigationController?.view.backgroundColor = UIColor.whiteColor()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -31,6 +32,7 @@ class WallCollectionViewController: UICollectionViewController, UICollectionView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     // MARK: UICollectionViewDataSource
 

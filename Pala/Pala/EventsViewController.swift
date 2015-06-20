@@ -35,6 +35,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.navigationController?.view.backgroundColor = UIColor.whiteColor()
         self.navigationController?.navigationBarHidden = true
         self.navigationItem.hidesBackButton = true
     }
@@ -63,16 +64,18 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let currentEvent = self.currentUser?.events?[indexPath.row] as! NSDictionary
-        self.currentUser?.parseUser.setValue(currentEvent.valueForKey("id"), forKey: "currentEvent")
-        self.currentUser?.parseUser.saveInBackground()
+//        let currentEvent = self.currentUser?.events?[indexPath.row] as! NSDictionary
+//        self.currentUser?.parseUser.setValue(currentEvent.valueForKey("id"), forKey: "currentEvent")
+//        self.currentUser?.parseUser.saveInBackground()
         self.wall = Wall()
         self.wall?.currentUser = self.currentUser
-        self.wall?.getUsersToShow { (userArray: [Person]) -> Void in
+        let selectedEvent = self.currentUser?.events?[indexPath.row] as! NSDictionary
+        let selectedEventId = selectedEvent["id"] as! String
+        self.wall?.getUsersToShow(selectedEventId) { (userArray: [Person]) -> Void in
             self.wallUserArray = userArray as [Person]
-            self.currentUser?.parseUser.fetchInBackgroundWithBlock({ (object: PFObject?, error: NSError?) -> Void in
+            self.currentUser?.parseUser.fetchInBackgroundWithBlock() { (object: PFObject?, error: NSError?) -> Void in
                 self.performSegueWithIdentifier("eventsToWall", sender: self)
-            })
+            }
         }
     }
     
