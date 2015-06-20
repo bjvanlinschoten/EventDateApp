@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6F4C36D3590098A88E457845 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A18F547673DE6480EE5190F /* libPods.a */; };
+		EB2FF2C71B35CDED006CD093 /* LNNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE1FDDB1B35CC9E00A5E606 /* LNNotificationsUI.framework */; };
+		EB2FF2C81B35CDED006CD093 /* LNNotificationsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EBE1FDDB1B35CC9E00A5E606 /* LNNotificationsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB39FD0D1B276CEC00AB036C /* WallCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39FD0C1B276CEC00AB036C /* WallCollectionViewController.swift */; };
 		EB39FD0F1B2992D200AB036C /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39FD0E1B2992D200AB036C /* Wall.swift */; };
 		EB39FD111B2AD17200AB036C /* WallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB39FD101B2AD17200AB036C /* WallCollectionViewCell.swift */; };
@@ -43,12 +45,19 @@
 		EBD625821B1E4D9200FBC064 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBD625811B1E4D9200FBC064 /* Images.xcassets */; };
 		EBD625851B1E4D9200FBC064 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBD625831B1E4D9200FBC064 /* LaunchScreen.xib */; };
 		EBD625911B1E4D9200FBC064 /* PalaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD625901B1E4D9200FBC064 /* PalaTests.swift */; };
-		EBE1FDB41B35A37E00A5E606 /* AGPushNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE1FDB21B35A37E00A5E606 /* AGPushNoteView.m */; };
-		EBE1FDB91B35AD2B00A5E606 /* AGPushNoteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE1FDB81B35AD2B00A5E606 /* AGPushNoteView.xib */; };
 		EBE1FDBB1B35B4E100A5E606 /* DeleteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBE1FDBA1B35B4E100A5E606 /* DeleteIcon.png */; };
+		EBE1FDDC1B35CCAA00A5E606 /* LNNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE1FDDB1B35CC9E00A5E606 /* LNNotificationsUI.framework */; };
+		EBE1FDDE1B35CCCB00A5E606 /* LNNotificationsUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBE1FDDD1B35CCCB00A5E606 /* LNNotificationsUIAssets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EB2FF2C91B35CDED006CD093 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBE1FDD61B35CC9E00A5E606 /* LNNotificationsUI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 39FC4F8219B8EFB400E45E37;
+			remoteInfo = LNNotificationsUI;
+		};
 		EBD6258B1B1E4D9200FBC064 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EBD6256D1B1E4D9100FBC064 /* Project object */;
@@ -56,7 +65,28 @@
 			remoteGlobalIDString = EBD625741B1E4D9100FBC064;
 			remoteInfo = EventDateApp;
 		};
+		EBE1FDDA1B35CC9E00A5E606 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EBE1FDD61B35CC9E00A5E606 /* LNNotificationsUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 39FC4F8319B8EFB400E45E37;
+			remoteInfo = LNNotificationsUI;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EBE1FDC41B35C7E800A5E606 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EB2FF2C81B35CDED006CD093 /* LNNotificationsUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		67FD7284B7F6AF88E8DACE3A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,10 +131,10 @@
 		EBD6258F1B1E4D9200FBC064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBD625901B1E4D9200FBC064 /* PalaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalaTests.swift; sourceTree = "<group>"; };
 		EBD625A11B1E592A00FBC064 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
-		EBE1FDB11B35A37E00A5E606 /* AGPushNoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPushNoteView.h; sourceTree = "<group>"; };
-		EBE1FDB21B35A37E00A5E606 /* AGPushNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPushNoteView.m; sourceTree = "<group>"; };
-		EBE1FDB81B35AD2B00A5E606 /* AGPushNoteView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AGPushNoteView.xib; sourceTree = "<group>"; };
 		EBE1FDBA1B35B4E100A5E606 /* DeleteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeleteIcon.png; sourceTree = "<group>"; };
+		EBE1FDBE1B35C52200A5E606 /* LNNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LNNotificationsUI.framework; path = "../../../LNNotificationsUI-master/LNNotificationsUI/build/Debug-iphoneos/LNNotificationsUI.framework"; sourceTree = "<group>"; };
+		EBE1FDD61B35CC9E00A5E606 /* LNNotificationsUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LNNotificationsUI.xcodeproj; path = "../../../LNNotificationsUI-master/LNNotificationsUI/LNNotificationsUI.xcodeproj"; sourceTree = "<group>"; };
+		EBE1FDDD1B35CCCB00A5E606 /* LNNotificationsUIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LNNotificationsUIAssets.xcassets; sourceTree = "<group>"; };
 		F97897F17D7F1028DF244EDC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,8 +143,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE1FDDC1B35CCAA00A5E606 /* LNNotificationsUI.framework in Frameworks */,
 				EBB793611B20C19B004F0821 /* Accounts.framework in Frameworks */,
 				EBB793621B20C19B004F0821 /* AudioToolbox.framework in Frameworks */,
+				EB2FF2C71B35CDED006CD093 /* LNNotificationsUI.framework in Frameworks */,
 				EBB793631B20C19B004F0821 /* CFNetwork.framework in Frameworks */,
 				EBB793641B20C19B004F0821 /* CoreGraphics.framework in Frameworks */,
 				EBB793651B20C19B004F0821 /* CoreLocation.framework in Frameworks */,
@@ -157,6 +189,8 @@
 		EBD6256C1B1E4D9100FBC064 = {
 			isa = PBXGroup;
 			children = (
+				EBE1FDDD1B35CCCB00A5E606 /* LNNotificationsUIAssets.xcassets */,
+				EBE1FDD61B35CC9E00A5E606 /* LNNotificationsUI.xcodeproj */,
 				EBD625771B1E4D9100FBC064 /* Pala */,
 				EBD6258D1B1E4D9200FBC064 /* PalaTests */,
 				EBD625761B1E4D9100FBC064 /* Products */,
@@ -201,9 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				EB8EAEE81B2F737D00BAFFAD /* LGSimpleChat.swift */,
-				EBE1FDB11B35A37E00A5E606 /* AGPushNoteView.h */,
-				EBE1FDB21B35A37E00A5E606 /* AGPushNoteView.m */,
-				EBE1FDB81B35AD2B00A5E606 /* AGPushNoteView.xib */,
 				EBE1FDBA1B35B4E100A5E606 /* DeleteIcon.png */,
 				EBB793881B2203FC004F0821 /* SlideMenuController.swift */,
 				EBD625791B1E4D9100FBC064 /* Info.plist */,
@@ -231,6 +262,7 @@
 		EBD625A01B1E512B00FBC064 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBE1FDBE1B35C52200A5E606 /* LNNotificationsUI.framework */,
 				EBB7936E1B20C1D2004F0821 /* Parse.framework */,
 				EBB7936F1B20C1D2004F0821 /* ParseFacebookUtilsV4.framework */,
 				EBB793541B20C19B004F0821 /* Accounts.framework */,
@@ -254,6 +286,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EBE1FDD71B35CC9E00A5E606 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EBE1FDDB1B35CC9E00A5E606 /* LNNotificationsUI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -266,10 +306,12 @@
 				EBD625721B1E4D9100FBC064 /* Frameworks */,
 				EBD625731B1E4D9100FBC064 /* Resources */,
 				0C2F50EB3FA7319354889472 /* Copy Pods Resources */,
+				EBE1FDC41B35C7E800A5E606 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EB2FF2CA1B35CDED006CD093 /* PBXTargetDependency */,
 			);
 			name = Pala;
 			productName = EventDateApp;
@@ -324,6 +366,12 @@
 			mainGroup = EBD6256C1B1E4D9100FBC064;
 			productRefGroup = EBD625761B1E4D9100FBC064 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EBE1FDD71B35CC9E00A5E606 /* Products */;
+					ProjectRef = EBE1FDD61B35CC9E00A5E606 /* LNNotificationsUI.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				EBD625741B1E4D9100FBC064 /* Pala */,
@@ -332,12 +380,22 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		EBE1FDDB1B35CC9E00A5E606 /* LNNotificationsUI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LNNotificationsUI.framework;
+			remoteRef = EBE1FDDA1B35CC9E00A5E606 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		EBD625731B1E4D9100FBC064 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBE1FDB91B35AD2B00A5E606 /* AGPushNoteView.xib in Resources */,
+				EBE1FDDE1B35CCCB00A5E606 /* LNNotificationsUIAssets.xcassets in Resources */,
 				EBD625801B1E4D9200FBC064 /* Main.storyboard in Resources */,
 				EBE1FDBB1B35B4E100A5E606 /* DeleteIcon.png in Resources */,
 				EBD625851B1E4D9200FBC064 /* LaunchScreen.xib in Resources */,
@@ -398,7 +456,6 @@
 				EB6521561B32C244000CB29B /* PrivateChatViewController.swift in Sources */,
 				EB39FD0F1B2992D200AB036C /* Wall.swift in Sources */,
 				EB39FD0D1B276CEC00AB036C /* WallCollectionViewController.swift in Sources */,
-				EBE1FDB41B35A37E00A5E606 /* AGPushNoteView.m in Sources */,
 				EB8EAEE91B2F737D00BAFFAD /* LGSimpleChat.swift in Sources */,
 				EB6521581B32C622000CB29B /* Person.swift in Sources */,
 				EBB793891B2203FC004F0821 /* SlideMenuController.swift in Sources */,
@@ -420,6 +477,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EB2FF2CA1B35CDED006CD093 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LNNotificationsUI;
+			targetProxy = EB2FF2C91B35CDED006CD093 /* PBXContainerItemProxy */;
+		};
 		EBD6258C1B1E4D9200FBC064 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EBD625741B1E4D9100FBC064 /* Pala */;
@@ -535,8 +597,10 @@
 					/Users/bjvanlinschoten/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
 					"/Users/bjvanlinschoten/Downloads/parse-library-1.7.4",
+					"/Users/bjvanlinschoten/Downloads/LNNotificationsUI-master/LNNotificationsUI/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Pala/Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Pala/Bridge-Header.h";
@@ -555,8 +619,10 @@
 					/Users/bjvanlinschoten/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
 					"/Users/bjvanlinschoten/Downloads/parse-library-1.7.4",
+					"/Users/bjvanlinschoten/Downloads/LNNotificationsUI-master/LNNotificationsUI/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Pala/Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Pala/Bridge-Header.h";

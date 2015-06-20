@@ -34,7 +34,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
         self.navigationItem.hidesBackButton = true
     }

@@ -16,6 +16,6 @@
 #import <Bolts/Bolts.h>
 #import "UIImageView+WebCache.h"
 #import "PNImports.h"
-#import "AGPushNoteView.h"
+#import <LNNotificationsUI/LNNotificationsUI.h>
 
 #endif

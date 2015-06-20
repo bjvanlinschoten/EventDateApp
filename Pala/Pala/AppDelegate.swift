@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         PubNub.setConfiguration(pnConfiguration)
         PNLogger.loggerEnabled(false)
         
+        // Setup push
         if application.respondsToSelector("registerUserNotificationSettings:") {
             let types: UIUserNotificationType = (.Alert | .Badge | .Sound)
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
@@ -39,6 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         } else {
             application.registerForRemoteNotificationTypes(.Alert | .Badge | .Sound)
         }
+        
+        // Setup notification UI
+        LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("pala_app_identifier", name: "Pala", icon: UIImage(named: "DeleteIcon.png"), defaultSettings: LNNotificationDefaultAppSettings)
         
 //        // TESTING: Clear NSUserDefaults
 //        let appDomain = NSBundle.mainBundle().bundleIdentifier as String!
@@ -98,12 +102,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         println("didReceiveRemoteNotification")
-//        PFPush.handlePush(userInfo)
         let state: UIApplicationState = application.applicationState
+//        PFPush.handlePush(userInfo)
         if state == UIApplicationState.Active {
             let aps = userInfo["aps"] as! NSDictionary
             let message = aps["alert"] as! String
-            AGPushNoteView.showWithNotificationMessage(message)
+            let notification: LNNotification = LNNotification(message: message)
+            LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "pala_app_identifier")
         } else {
             PFPush.handlePush(userInfo)
         }
