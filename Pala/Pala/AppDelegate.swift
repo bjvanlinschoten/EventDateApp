@@ -40,9 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
             application.registerForRemoteNotificationTypes(.Alert | .Badge | .Sound)
         }
         
-        // TESTING: Clear NSUserDefaults
-        let appDomain = NSBundle.mainBundle().bundleIdentifier as String!
-        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
+//        // TESTING: Clear NSUserDefaults
+//        let appDomain = NSBundle.mainBundle().bundleIdentifier as String!
+//        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
         
         return true
     }
@@ -61,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     // MARK: PubNubDelegate
     
     func pubnubClient(client: PubNub!, didReceiveMessage message: PNMessage!) {
+        println(NSDate())
+        println(message)
         let msgDict = message.message as! NSDictionary
         let msg = LGChatMessage(content: msgDict["message"] as! String, sentBy: .Opponent)
         let otherUserId = msgDict["senderId"] as! String

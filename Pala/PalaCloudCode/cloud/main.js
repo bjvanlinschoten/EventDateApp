@@ -19,31 +19,29 @@ Parse.Cloud.define('match', function(request, response) {
 	}, function(error) {
 		response.error(error)
 	});
+	
+	// Push notification to user
+	var query = new Parse.Query(Parse.User);
+	query.equalTo('objectId', otherUserId);
+	
+	var pushQuery = new Parse.Query(Parse.Installation);
+	pushQuery.matchesQuery('user', query);
+	
+	Parse.Push.send({
+		where: pushQuery,
+		data: {
+			aps: {
+				alert: "New match!"
+				sound: "default"
+			}
+		}
+	}, {
+		success: function (){
+			response.success("Hello world!");
+		},
+		error: function (error) {
+			response.error(error);
+		}
+	});
 });
 
-// Parse.Cloud.define('getUsersToShow', function(request, response) {
-// 	
-// 	var event = request.params.event;
-// 	var currentUser = Parse.User.current();
-// 	
-// 	if currentUser.get('gender') == 'male' {
-// 		var gender = 'female'
-// 	} else {
-// 		var gender = currentUser.get('gender');
-// 	}
-// 	
-// 	
-// 	var genderQuery = new Parse.Query(Parse.User);
-// 	genderQuery.equalTo('gender', gender);
-// 	
-// 	var eventQuery = new Parse.Query(Parse.User);
-// 	eventQuery.equalTo('event', event)
-// 	
-// 	var mainQuery = Parse.Query.or(genderQuery, eventQuery)
-// 	
-// 	mainQuery.find({
-// 		success: function(usersAtEvent) {
-// 			
-// 		} 
-// 	});
-// }

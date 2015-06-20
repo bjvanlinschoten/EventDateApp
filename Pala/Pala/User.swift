@@ -82,7 +82,7 @@ class User: NSObject {
     }
     
     func logout() {
-        self.clearLikedDislikedUsers()
+//        self.clearLikedDislikedUsers()
         let logMeOut: FBSDKLoginManager = FBSDKLoginManager()
         logMeOut.logOut()
         PFUser.logOut()

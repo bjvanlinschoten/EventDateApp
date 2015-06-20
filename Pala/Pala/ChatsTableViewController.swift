@@ -21,15 +21,12 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
         self.matches = []
         if let matches = self.currentUser!.parseUser.valueForKey("matches") as? NSArray {
             var query = PFUser.query()
             query?.whereKey("objectId", containedIn: matches as [AnyObject])
             query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-            
+                
                 if let array = objects as? [PFUser] {
                     for item in array {
                         let person = Person(objectId: item.objectId!, facebookId: item.valueForKey("facebookId") as! String, name: item.valueForKey("name") as! String, birthday: item.valueForKey("birthday") as! String)
@@ -40,18 +37,9 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
                 self.tableView.reloadData()
                 
             }
-            
-//            for person in matches {
-//                var query = PFUser.query()
-//                query?.getObjectInBackgroundWithId(otherUserObjectId, block: {(user: PFObject?, error: NSError?) -> Void in
-//                    if let user = user as? PFUser {
-//                        let cellText = user.valueForKey("name") as! NSString
-//                        cell.textLabel?.text = cellText as String
-//                    }
-//                })
-//            }
         }
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

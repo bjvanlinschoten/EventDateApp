@@ -70,7 +70,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.wall?.currentUser = self.currentUser
         self.wall?.getUsersToShow { (userArray: [Person]) -> Void in
             self.wallUserArray = userArray as [Person]
-            self.performSegueWithIdentifier("eventsToWall", sender: self)
+            self.currentUser?.parseUser.fetchInBackgroundWithBlock({ (object: PFObject?, error: NSError?) -> Void in
+                self.performSegueWithIdentifier("eventsToWall", sender: self)
+            })
         }
     }
     

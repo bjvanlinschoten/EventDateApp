@@ -30,6 +30,16 @@ class LoginViewController: UIViewController  {
             self.loginButton?.hidden = true
             self.activityIndicator?.hidden = false
             self.activityIndicator?.startAnimating()
+            
+            if !PFFacebookUtils.isLinkedWithUser(user) {
+                PFFacebookUtils.linkUserInBackground(user, withReadPermissions: nil) { (succeeded: Bool, error: NSError?) -> Void in
+                    if succeeded {
+                        println("Woohoo, the user is linked with Facebook!")
+                    }
+                }
+            }
+            self.currentUser?.parseUser.fetchInBackground()
+            
             self.currentUser = User(parseUser: user)
             self.currentUser?.getUserEvents() {(completion:Void) in
                 self.nextView()
@@ -37,6 +47,7 @@ class LoginViewController: UIViewController  {
             
             // Set-up and load chat
             self.setUpPNChannel(user.objectId!)
+            self.setUpUserForPushMessages()
             self.loadUnseenMessages()
 
         } else {
@@ -63,10 +74,12 @@ class LoginViewController: UIViewController  {
                 
                 // Set-up channel for chat
                 self.setUpPNChannel(user.objectId!)
+                self.setUpUserForPushMessages()
                 self.loadUnseenMessages()
                 
                 if user.isNew {
                     println("User signed up and logged in through Facebook!")
+                    self.setUpUserForPushMessages()
                     self.currentUser?.populateNewUserWithFBData() {(completion:Void) in
                         self.currentUser?.getUserEvents() {(completion:Void) in
                             self.nextView()
@@ -74,6 +87,7 @@ class LoginViewController: UIViewController  {
                     }
                 } else {
                     println("User logged in through Facebook!")
+                    self.currentUser?.parseUser.fetchInBackground()
                     self.currentUser!.personObject = Person(objectId: user.objectId!, facebookId: self.currentUser?.parseUser.valueForKey("facebookId") as! String, name: self.currentUser?.parseUser.valueForKey("name") as! String, birthday: self.currentUser?.parseUser.valueForKey("birthday") as! String)
                     self.currentUser?.getUserEvents() {(completion:Void) in
                         self.nextView()
@@ -85,6 +99,18 @@ class LoginViewController: UIViewController  {
                 self.activityIndicator?.stopAnimating()
                 self.activityIndicator?.hidden = true
                 println("Uh oh. The user cancelled the Facebook login.")
+            }
+        }
+    }
+    
+    func setUpUserForPushMessages(){
+        let installation: PFInstallation = PFInstallation.currentInstallation()
+        installation["user"] = self.currentUser?.parseUser
+        installation.saveEventually { (success: Bool, error: NSError?) -> Void in
+            if success == true {
+                println("installation saved")
+            } else {
+                println(error)
             }
         }
     }
