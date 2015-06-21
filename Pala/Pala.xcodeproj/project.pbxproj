@@ -39,6 +39,8 @@
 		EBB793891B2203FC004F0821 /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB793881B2203FC004F0821 /* SlideMenuController.swift */; };
 		EBB7938B1B2237AE004F0821 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB7938A1B2237AE004F0821 /* User.swift */; };
 		EBB7938D1B2488FF004F0821 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB7938C1B2488FF004F0821 /* EventsViewController.swift */; };
+		EBCE210D1B36DCE300407E85 /* CalendarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE210C1B36DCE300407E85 /* CalendarIcon.png */; };
+		EBCE210F1B36DD5F00407E85 /* ChatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE210E1B36DD5F00407E85 /* ChatIcon.png */; };
 		EBD6257B1B1E4D9100FBC064 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */; };
 		EBD6257D1B1E4D9100FBC064 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */; };
 		EBD625801B1E4D9200FBC064 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBD6257E1B1E4D9200FBC064 /* Main.storyboard */; };
@@ -120,6 +122,8 @@
 		EBB793881B2203FC004F0821 /* SlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = SOURCE_ROOT; };
 		EBB7938A1B2237AE004F0821 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EBB7938C1B2488FF004F0821 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		EBCE210C1B36DCE300407E85 /* CalendarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarIcon.png; sourceTree = "<group>"; };
+		EBCE210E1B36DD5F00407E85 /* ChatIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChatIcon.png; sourceTree = "<group>"; };
 		EBD625751B1E4D9100FBC064 /* Pala.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pala.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD625791B1E4D9100FBC064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 			isa = PBXGroup;
 			children = (
 				EB8EAEE81B2F737D00BAFFAD /* LGSimpleChat.swift */,
+				EBCE210E1B36DD5F00407E85 /* ChatIcon.png */,
+				EBCE210C1B36DCE300407E85 /* CalendarIcon.png */,
 				EBE1FDBA1B35B4E100A5E606 /* DeleteIcon.png */,
 				EBB793881B2203FC004F0821 /* SlideMenuController.swift */,
 				EBD625791B1E4D9100FBC064 /* Info.plist */,
@@ -397,8 +403,10 @@
 			files = (
 				EBE1FDDE1B35CCCB00A5E606 /* LNNotificationsUIAssets.xcassets in Resources */,
 				EBD625801B1E4D9200FBC064 /* Main.storyboard in Resources */,
+				EBCE210D1B36DCE300407E85 /* CalendarIcon.png in Resources */,
 				EBE1FDBB1B35B4E100A5E606 /* DeleteIcon.png in Resources */,
 				EBD625851B1E4D9200FBC064 /* LaunchScreen.xib in Resources */,
+				EBCE210F1B36DD5F00407E85 /* ChatIcon.png in Resources */,
 				EBD625821B1E4D9200FBC064 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

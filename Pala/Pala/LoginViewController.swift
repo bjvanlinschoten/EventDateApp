@@ -128,15 +128,33 @@ class LoginViewController: UIViewController  {
     }
     
     func nextView() {
-        self.performSegueWithIdentifier("loginToEvents", sender: self)
+        
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let wvc = storyboard.instantiateViewControllerWithIdentifier("WallViewController") as! WallCollectionViewController
+        let evc = storyboard.instantiateViewControllerWithIdentifier("EventsViewController") as! EventsViewController
+        let cvc = storyboard.instantiateViewControllerWithIdentifier("ChatsViewController") as! ChatsTableViewController
+        wvc.currentUser = self.currentUser
+        evc.currentUser = self.currentUser
+        cvc.currentUser = self.currentUser
+        
+        let nvc: UINavigationController = UINavigationController(rootViewController: wvc)
+        
+        evc.wallViewController = wvc
+        
+        let slideMenuController = SlideMenuController(mainViewController: nvc, leftMenuViewController: evc, rightMenuViewController: cvc)
+        self.presentViewController(slideMenuController, animated: false) { () -> Void in
+            println("success")
+        }
+        
+//        self.performSegueWithIdentifier("loginToEvents", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "loginToEvents" {
-            let vc = segue.destinationViewController as! EventsViewController
-            vc.currentUser = self.currentUser
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "loginToEvents" {
+//            let vc = segue.destinationViewController as! EventsViewController
+//            vc.currentUser = self.currentUser
+//        }
+//    }
     
     func prepareForLogout() {
         self.navigationController?.navigationBarHidden = true

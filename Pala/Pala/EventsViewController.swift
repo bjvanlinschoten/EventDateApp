@@ -12,6 +12,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var wallUserArray: [Person]?
     var wall: Wall?
     var currentUser: User?
+    var wallViewController: WallCollectionViewController?
     
     @IBOutlet var eventsTableView: UITableView!
     @IBOutlet var profilePicture: UIImageView!
@@ -36,8 +37,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.view.backgroundColor = UIColor.whiteColor()
-        self.navigationController?.navigationBarHidden = true
-        self.navigationItem.hidesBackButton = true
+//        self.navigationController?.navigationBarHidden = true
+//        self.navigationItem.hidesBackButton = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,10 +72,13 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.wall?.currentUser = self.currentUser
         let selectedEvent = self.currentUser?.events?[indexPath.row] as! NSDictionary
         let selectedEventId = selectedEvent["id"] as! String
-        self.wall?.getUsersToShow(selectedEventId) { (userArray: [Person]) -> Void in
-            self.wallUserArray = userArray as [Person]
-            self.currentUser?.parseUser.fetchInBackgroundWithBlock() { (object: PFObject?, error: NSError?) -> Void in
-                self.performSegueWithIdentifier("eventsToWall", sender: self)
+        self.currentUser?.parseUser.fetchInBackgroundWithBlock() { (object: PFObject?, error: NSError?) -> Void in
+            self.wall?.getUsersToShow(selectedEventId) { (userArray: [Person]) -> Void in
+                self.wallUserArray = userArray as [Person]
+                self.wallViewController?.wallUserArray = self.wallUserArray
+                self.wallViewController?.wallCollection.reloadData()
+                self.closeLeft()
+//                self.performSegueWithIdentifier("eventsToWall", sender: self)
             }
         }
     }
