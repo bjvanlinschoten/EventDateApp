@@ -32,7 +32,6 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         self.automaticallyAdjustsScrollViewInsets = false
         self.wallCollection.hidden = true
         self.selectEventLabel.hidden = false
-        self.slideMenuController()?.openRight()
         self.wall.currentUser = self.currentUser
     }
 

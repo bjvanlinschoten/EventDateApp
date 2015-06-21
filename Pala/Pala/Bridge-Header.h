@@ -17,5 +17,6 @@
 #import "UIImageView+WebCache.h"
 #import "PNImports.h"
 #import <LNNotificationsUI/LNNotificationsUI.h>
+#import "MBProgressHUD.h"
 
 #endif

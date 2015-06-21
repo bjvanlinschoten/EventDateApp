@@ -42,6 +42,7 @@
 		EBCE210D1B36DCE300407E85 /* CalendarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE210C1B36DCE300407E85 /* CalendarIcon.png */; };
 		EBCE210F1B36DD5F00407E85 /* ChatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE210E1B36DD5F00407E85 /* ChatIcon.png */; };
 		EBCE21121B36F1C200407E85 /* PalaIconStart.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE21111B36F1C200407E85 /* PalaIconStart.png */; };
+		EBCE21141B3710E500407E85 /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCE21131B3710E500407E85 /* EventCollectionViewCell.swift */; };
 		EBD6257B1B1E4D9100FBC064 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */; };
 		EBD6257D1B1E4D9100FBC064 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */; };
 		EBD625801B1E4D9200FBC064 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBD6257E1B1E4D9200FBC064 /* Main.storyboard */; };
@@ -126,6 +127,7 @@
 		EBCE210C1B36DCE300407E85 /* CalendarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarIcon.png; sourceTree = "<group>"; };
 		EBCE210E1B36DD5F00407E85 /* ChatIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChatIcon.png; sourceTree = "<group>"; };
 		EBCE21111B36F1C200407E85 /* PalaIconStart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PalaIconStart.png; sourceTree = "<group>"; };
+		EBCE21131B3710E500407E85 /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		EBD625751B1E4D9100FBC064 /* Pala.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pala.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD625791B1E4D9100FBC064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */,
 				EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */,
 				EBB7938C1B2488FF004F0821 /* EventsViewController.swift */,
+				EBCE21131B3710E500407E85 /* EventCollectionViewCell.swift */,
 				EB39FD0C1B276CEC00AB036C /* WallCollectionViewController.swift */,
 				EB39FD101B2AD17200AB036C /* WallCollectionViewCell.swift */,
 				EB8EAEE01B2F1FDD00BAFFAD /* ChatsTableViewController.swift */,
@@ -463,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB8FD61B1B3426B80092E883 /* Chat.swift in Sources */,
+				EBCE21141B3710E500407E85 /* EventCollectionViewCell.swift in Sources */,
 				EBB7938B1B2237AE004F0821 /* User.swift in Sources */,
 				EBD6257D1B1E4D9100FBC064 /* LoginViewController.swift in Sources */,
 				EB6521561B32C244000CB29B /* PrivateChatViewController.swift in Sources */,

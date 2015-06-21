@@ -1,14 +1,17 @@
 PODS:
+  - MBProgressHUD (0.9.1)
   - PubNub (3.7.10.8)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
 
 DEPENDENCIES:
+  - MBProgressHUD (~> 0.9.1)
   - PubNub
   - SDWebImage
 
 SPEC CHECKSUMS:
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   PubNub: 055424dfc6aaa404f7bdf1297c886a1a009511de
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
 
