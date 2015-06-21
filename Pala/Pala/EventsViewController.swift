@@ -23,6 +23,8 @@ class EventsViewController: UIViewController, UICollectionViewDataSource, UIColl
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         if let id = self.currentUser?.parseUser.valueForKey("facebookId") as? NSString {
             let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(id)/picture?width=600&height=600")
             self.profilePicture.sd_setImageWithURL(picURL)
