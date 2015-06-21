@@ -8,16 +8,16 @@ import Foundation
 import UIKit
 
 struct SlideMenuOptions {
-    static var leftViewWidth: CGFloat = 270.0
+    static var leftViewWidth: CGFloat = 240.0
     static var leftBezelWidth: CGFloat = 16.0
-    static var contentViewScale: CGFloat = 0.96
-    static var contentViewOpacity: CGFloat = 0.5
+    static var contentViewScale: CGFloat = 0.9
+    static var contentViewOpacity: CGFloat = 0.6
     static var shadowOpacity: CGFloat = 0.0
     static var shadowRadius: CGFloat = 0.0
     static var shadowOffset: CGSize = CGSizeMake(0,0)
     static var panFromBezel: Bool = true
     static var animationDuration: CGFloat = 0.4
-    static var rightViewWidth: CGFloat = 270.0
+    static var rightViewWidth: CGFloat = 240.0
     static var rightBezelWidth: CGFloat = 16.0
     static var rightPanFromBezel: Bool = true
     static var hideStatusBar: Bool = true

@@ -11,9 +11,9 @@ import UIKit
 class ChatsTableViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
 
     var currentUser: User?
-    var otherUserChannel: PNChannel!
     var chatController: PrivateChatViewController!
     var matches: [Person]?
+    var wallViewController: WallCollectionViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,9 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.slideMenuController()!.navigationController?.navigationBarHidden = true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,17 +73,6 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
         let cellText = person.name as String
         cell.textLabel?.text = cellText
         
-//        if let matches = self.currentUser!.parseUser.valueForKey("matches") as? NSArray {
-//            let otherUserObjectId = matches.objectAtIndex(indexPath.row) as! String
-//            
-//            var query = PFUser.query()
-//            query?.getObjectInBackgroundWithId(otherUserObjectId, block: {(user: PFObject?, error: NSError?) -> Void in
-//                if let user = user as? PFUser {
-//                    let cellText = user.valueForKey("name") as! NSString
-//                    cell.textLabel?.text = cellText as String
-//                }
-//            })
-//        }
         return cell
     }
     
@@ -88,8 +80,7 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
         self.chatController = PrivateChatViewController()
         self.chatController.otherUser = self.matches![indexPath.row] as Person
         self.chatController.currentUser = self.currentUser
-        
-        self.navigationController?.pushViewController(self.chatController, animated: true)
+        self.slideMenuController()?.navigationController?.pushViewController(self.chatController, animated: true)
     }
     
     

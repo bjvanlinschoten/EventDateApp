@@ -15,30 +15,25 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
     var currentUser: User?
     let wall: Wall = Wall()
     let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    var selectedEvents: [String]?
+    var selectedUser: Person?
     
     @IBOutlet var wallCollection: UICollectionView!
+    @IBOutlet var selectEventLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.navigationBarHidden = false
-//        self.navigationController?.view.backgroundColor = UIColor.whiteColor()
+        
+        // Do any additional setup after loading the view.
         self.wallCollection.delegate = self
         self.wallCollection.dataSource = self
         self.addLeftBarButtonWithImage(UIImage(named: "CalendarIcon.png")!)
         self.addRightBarButtonWithImage(UIImage(named: "ChatIcon.png")!)
-
-        self.slideMenuController()?.openLeft()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Do any additional setup after loading the view.
+        self.automaticallyAdjustsScrollViewInsets = false
+        self.wallCollection.hidden = true
+        self.selectEventLabel.hidden = false
+        self.slideMenuController()?.openRight()
         self.wall.currentUser = self.currentUser
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        self.addLeftBarButtonWithImage(UIImage(named: "DeleteIcon.png")!)
-        self.wallCollection.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,36 +103,5 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         self.wallCollection.reloadData()
     }
 
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
 
 }

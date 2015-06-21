@@ -37,8 +37,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.view.backgroundColor = UIColor.whiteColor()
-//        self.navigationController?.navigationBarHidden = true
-//        self.navigationItem.hidesBackButton = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,9 +63,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let currentEvent = self.currentUser?.events?[indexPath.row] as! NSDictionary
-//        self.currentUser?.parseUser.setValue(currentEvent.valueForKey("id"), forKey: "currentEvent")
-//        self.currentUser?.parseUser.saveInBackground()
         self.wall = Wall()
         self.wall?.currentUser = self.currentUser
         let selectedEvent = self.currentUser?.events?[indexPath.row] as! NSDictionary
@@ -77,8 +72,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.wallUserArray = userArray as [Person]
                 self.wallViewController?.wallUserArray = self.wallUserArray
                 self.wallViewController?.wallCollection.reloadData()
+                self.wallViewController?.wallCollection.hidden = false
+                self.wallViewController?.selectEventLabel.hidden = true
                 self.closeLeft()
-//                self.performSegueWithIdentifier("eventsToWall", sender: self)
             }
         }
     }
@@ -93,14 +89,5 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             wvc.wallUserArray = self.wallUserArray
         }
     }
-    
-    @IBAction func logout() {
-        if let loginView = navigationController?.viewControllers[0] as? LoginViewController {
-            self.currentUser?.logout()
-            loginView.prepareForLogout()
-            self.navigationController?.popViewControllerAnimated(true)
-        }
-    }
-
 
 }

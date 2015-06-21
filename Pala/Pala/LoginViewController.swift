@@ -140,9 +140,13 @@ class LoginViewController: UIViewController  {
         let nvc: UINavigationController = UINavigationController(rootViewController: wvc)
         
         evc.wallViewController = wvc
+        cvc.wallViewController = wvc
         
         let slideMenuController = SlideMenuController(mainViewController: nvc, leftMenuViewController: evc, rightMenuViewController: cvc)
-        self.presentViewController(slideMenuController, animated: false) { () -> Void in
+        let slideNvc: UINavigationController = UINavigationController(rootViewController: slideMenuController)
+        slideNvc.navigationBarHidden = true
+        
+        self.presentViewController(slideNvc, animated: false) { () -> Void in
             println("success")
         }
         
@@ -155,6 +159,11 @@ class LoginViewController: UIViewController  {
 //            vc.currentUser = self.currentUser
 //        }
 //    }
+    
+    @IBAction func logOut(segue:UIStoryboardSegue) {
+        self.currentUser?.logout()
+        prepareForLogout()
+    }
     
     func prepareForLogout() {
         self.navigationController?.navigationBarHidden = true

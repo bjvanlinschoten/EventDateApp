@@ -28,6 +28,7 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
         self.chat.currentUser = self.currentUser
         self.chat.otherUser = self.otherUser
         self.chat.otherUserChannel = self.otherUserChannel
+        self.navigationController?.navigationBarHidden = false
         
         self.messages = self.chat.getOldMessages()
         

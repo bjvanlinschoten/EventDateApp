@@ -107,6 +107,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         if state == UIApplicationState.Active {
             let aps = userInfo["aps"] as! NSDictionary
             let message = aps["alert"] as! String
+            if message == "New match!" {
+                PFUser.currentUser()?.fetchInBackground()
+            }
             let notification: LNNotification = LNNotification(message: message)
             LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "pala_app_identifier")
         } else {
