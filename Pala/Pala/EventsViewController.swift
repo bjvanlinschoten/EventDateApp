@@ -14,7 +14,7 @@ class EventsViewController: UIViewController, UICollectionViewDataSource, UIColl
     var wall: Wall?
     var currentUser: User?
     var wallViewController: WallCollectionViewController?
-    let sectionInsets = UIEdgeInsets(top: 10.0, left: 15.0, bottom: 10.0, right: 15.0)
+//    let sectionInsets = UIEdgeInsets(top: 10.0, left: 15.0, bottom: 10.0, right: 15.0)
     
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var nameLabel: UILabel!
@@ -68,7 +68,8 @@ class EventsViewController: UIViewController, UICollectionViewDataSource, UIColl
         let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(eventId)/picture?width=600&height=600")
 //        cell.imageView.frame = CGRectMake(10,10,150,230)
         cell.imageView.sd_setImageWithURL(picURL)
-        cell.imageView.layer.cornerRadius = 10
+        cell.imageView.layer.masksToBounds = false
+        cell.imageView.layer.cornerRadius = 4
         cell.eventLabel.text = event["name"] as? String
         return cell
     }
@@ -103,14 +104,14 @@ class EventsViewController: UIViewController, UICollectionViewDataSource, UIColl
 //        cell.imageView.alpha = 1
 //    }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 240, height: 60)
-    }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        return CGSize(width: 240, height: 60)
+//    }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return sectionInsets
-    }
-    
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+//        return sectionInsets
+//    }
+//    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "eventsToWall" {
