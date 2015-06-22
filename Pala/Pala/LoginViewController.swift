@@ -145,6 +145,8 @@ class LoginViewController: UIViewController  {
         let slideMenuController = SlideMenuController(mainViewController: nvc, leftMenuViewController: evc, rightMenuViewController: cvc)
         let slideNvc: UINavigationController = UINavigationController(rootViewController: slideMenuController)
         slideNvc.navigationBarHidden = true
+        slideNvc.automaticallyAdjustsScrollViewInsets = false
+        nvc.automaticallyAdjustsScrollViewInsets = false
         
         self.presentViewController(slideNvc, animated: false) { () -> Void in
             println("success")

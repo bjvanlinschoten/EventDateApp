@@ -14,7 +14,7 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
     var wallUserArray: [Person]?
     var currentUser: User?
     let wall: Wall = Wall()
-    let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
     var selectedEvents: [String]?
     var selectedUser: Person?
     
@@ -27,8 +27,11 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         // Do any additional setup after loading the view.
         self.wallCollection.delegate = self
         self.wallCollection.dataSource = self
-        self.addLeftBarButtonWithImage(UIImage(named: "CalendarIcon.png")!)
-        self.addRightBarButtonWithImage(UIImage(named: "ChatIcon.png")!)
+        self.addLeftBarButtonWithImage(UIImage(named: "Pagoda.png")!)
+        self.addRightBarButtonWithImage(UIImage(named: "Match.png")!)
+        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FF7400", alpha: 1)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        
         self.automaticallyAdjustsScrollViewInsets = false
         self.wallCollection.hidden = true
         self.selectEventLabel.hidden = false
@@ -67,11 +70,15 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         cell.imageView.frame = CGRectMake(10,10,150,230)
         cell.imageView.sd_setImageWithURL(picURL)
         cell.nameLabel.text = "\(person.name) (\(person.getPersonAge()))"
+        cell.layer.masksToBounds = false
+        cell.layer.shadowOpacity = 0.3
+        cell.layer.shadowRadius = 1.0
+        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 170, height: 280)
+        return CGSize(width: 160, height: 280)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {

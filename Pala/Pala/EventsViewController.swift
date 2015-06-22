@@ -9,12 +9,11 @@
 import UIKit
 
 
-class EventsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class EventsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var wallUserArray: [Person]?
     var wall: Wall?
     var currentUser: User?
     var wallViewController: WallCollectionViewController?
-//    let sectionInsets = UIEdgeInsets(top: 10.0, left: 15.0, bottom: 10.0, right: 15.0)
     
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var nameLabel: UILabel!
@@ -46,11 +45,11 @@ class EventsViewController: UIViewController, UICollectionViewDataSource, UIColl
         // Dispose of any resources that can be recreated.
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let user = self.currentUser {
             if let events = user.events {
                 return events.count
@@ -59,26 +58,26 @@ class EventsViewController: UIViewController, UICollectionViewDataSource, UIColl
         return 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("eventCell", forIndexPath: indexPath) as! EventCollectionViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath) as! EventsTableViewCell
         
         // Configure the cell
         let event = self.currentUser!.events?[indexPath.row] as! NSDictionary
         let eventId = event["id"] as! String
         let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(eventId)/picture?width=600&height=600")
 //        cell.imageView.frame = CGRectMake(10,10,150,230)
-        cell.imageView.sd_setImageWithURL(picURL)
-        cell.imageView.layer.masksToBounds = false
-        cell.imageView.layer.cornerRadius = 4
+        cell.eventImageView.sd_setImageWithURL(picURL)
+        cell.eventImageView.layer.masksToBounds = true
+        cell.eventImageView.layer.cornerRadius = 4
+        cell.eventView.layer.masksToBounds = false
+        cell.eventView.layer.shadowOpacity = 0.3
+        cell.eventView.layer.shadowRadius = 1.0
+        cell.eventView.layer.shadowOffset = CGSize(width: 2, height: 2)
         cell.eventLabel.text = event["name"] as? String
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! EventCollectionViewCell
-        cell.imageView.alpha = 0.5
-        
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.wall = Wall()
         self.wall?.currentUser = self.currentUser
         let selectedEvent = self.currentUser?.events?[indexPath.row] as! NSDictionary
@@ -93,25 +92,9 @@ class EventsViewController: UIViewController, UICollectionViewDataSource, UIColl
                 self.wallViewController?.wallUserArray = self.wallUserArray
                 self.wallViewController?.wallCollection.reloadData()
                 MBProgressHUD.hideHUDForView(self.wallViewController?.view, animated: true)
-                cell.imageView.alpha = 1
             }
         }
-
     }
-//    
-//    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-//        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! EventCollectionViewCell
-//        cell.imageView.alpha = 1
-//    }
-    
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        return CGSize(width: 240, height: 60)
-//    }
-    
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-//        return sectionInsets
-//    }
-//    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "eventsToWall" {
