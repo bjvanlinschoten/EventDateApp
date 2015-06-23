@@ -270,16 +270,24 @@
 			name = "External libraries";
 			sourceTree = "<group>";
 		};
+		EBBEE3451B3A144D0018473D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		EBD6256C1B1E4D9100FBC064 = {
 			isa = PBXGroup;
 			children = (
-				EBE1FDDD1B35CCCB00A5E606 /* LNNotificationsUIAssets.xcassets */,
-				EBE1FDD61B35CC9E00A5E606 /* LNNotificationsUI.xcodeproj */,
 				EBD625771B1E4D9100FBC064 /* Pala */,
 				EBD6258D1B1E4D9200FBC064 /* PalaTests */,
 				EBD625761B1E4D9100FBC064 /* Products */,
 				EBD625A01B1E512B00FBC064 /* Frameworks */,
 				326D8869D23B922D9A81C10E /* Pods */,
+				EBE1FDDD1B35CCCB00A5E606 /* LNNotificationsUIAssets.xcassets */,
+				EBE1FDD61B35CC9E00A5E606 /* LNNotificationsUI.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -298,12 +306,12 @@
 				EBD6257E1B1E4D9200FBC064 /* Main.storyboard */,
 				EBD625A11B1E592A00FBC064 /* Bridge-Header.h */,
 				EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */,
-				EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */,
+				EBBEE3451B3A144D0018473D /* Login */,
 				EBBEE33F1B39E9810018473D /* Events */,
 				EBBEE33D1B39E9670018473D /* Wall */,
 				EBBEE33E1B39E9730018473D /* Chat */,
-				EBB7938A1B2237AE004F0821 /* User.swift */,
 				EB6521571B32C622000CB29B /* Person.swift */,
+				EBB7938A1B2237AE004F0821 /* User.swift */,
 				EBD625811B1E4D9200FBC064 /* Images.xcassets */,
 				EBD625831B1E4D9200FBC064 /* LaunchScreen.xib */,
 				EBD625781B1E4D9100FBC064 /* Supporting Files */,
@@ -683,6 +691,7 @@
 			baseConfigurationReference = F97897F17D7F1028DF244EDC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -705,6 +714,7 @@
 			baseConfigurationReference = 67FD7284B7F6AF88E8DACE3A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
