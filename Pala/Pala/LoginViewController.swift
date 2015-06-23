@@ -15,21 +15,18 @@ protocol LoginViewControllerDelegate {
 
 class LoginViewController: UIViewController  {
     var currentUser: User?
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
     @IBOutlet weak var loginButton: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationController?.navigationBarHidden = true
-        self.activityIndicator?.hidden = true
         
         if let user = PFUser.currentUser() {
             println("User Logged In")
             
             self.loginButton?.hidden = true
-            self.activityIndicator?.hidden = false
-            self.activityIndicator?.startAnimating()
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             
             if !PFFacebookUtils.isLinkedWithUser(user) {
                 PFFacebookUtils.linkUserInBackground(user, withReadPermissions: nil) { (succeeded: Bool, error: NSError?) -> Void in
@@ -65,8 +62,7 @@ class LoginViewController: UIViewController  {
     
     @IBAction func fbLoginClick(sender: AnyObject) {
         self.loginButton?.hidden = true
-        self.activityIndicator?.hidden = false
-        self.activityIndicator?.startAnimating()
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "user_events", "user_birthday"]) {
             (user: PFUser?, error: NSError?) -> Void in
             if let user = user {
@@ -96,8 +92,7 @@ class LoginViewController: UIViewController  {
             }
             else {
                 self.loginButton?.hidden = false
-                self.activityIndicator?.stopAnimating()
-                self.activityIndicator?.hidden = true
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
                 println("Uh oh. The user cancelled the Facebook login.")
             }
         }
@@ -128,7 +123,8 @@ class LoginViewController: UIViewController  {
     }
     
     func nextView() {
-        
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
+
         var storyboard = UIStoryboard(name: "Main", bundle: nil)
         let wvc = storyboard.instantiateViewControllerWithIdentifier("WallViewController") as! WallCollectionViewController
         let evc = storyboard.instantiateViewControllerWithIdentifier("EventsViewController") as! EventsViewController
@@ -168,10 +164,9 @@ class LoginViewController: UIViewController  {
     }
     
     func prepareForLogout() {
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
         self.navigationController?.navigationBarHidden = true
         self.loginButton?.hidden = false
-        self.activityIndicator?.hidden = true
-        self.activityIndicator?.stopAnimating()
     }
 }
 

@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+        
         // Set-up Parse/FB
         Parse.setApplicationId("p6rBrBXuiTkbkB3S247eXHBpLismFku4KpL7h1v1", clientKey: "AdAbwID3eViabd3AME6xQv8IASrKN8vkeEGXcrsk")
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)

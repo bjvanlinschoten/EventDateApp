@@ -92,6 +92,7 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
                 self.wallViewController?.wallUserArray = self.wallUserArray
                 self.wallViewController?.wallCollection.reloadData()
                 MBProgressHUD.hideHUDForView(self.wallViewController?.view, animated: true)
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
             }
         }
     }

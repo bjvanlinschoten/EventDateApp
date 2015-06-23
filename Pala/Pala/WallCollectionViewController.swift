@@ -89,6 +89,7 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         let cell = sender.superview! as! WallCollectionViewCell
         let indexPath = self.wallCollection.indexPathForCell(cell)
         let likedUser = wallUserArray![indexPath!.row] as Person
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         self.wall.likeUser(likedUser) {(result: Bool) -> Void in
             if result == true {
                 println("MATCH!")
@@ -97,6 +98,8 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
             }
             self.wallUserArray?.removeAtIndex(indexPath!.row)
             self.wallCollection.reloadData()
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+
         }
     }
     

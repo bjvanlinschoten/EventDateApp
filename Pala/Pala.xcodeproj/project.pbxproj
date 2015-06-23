@@ -45,6 +45,9 @@
 		EBBEE32A1B38AB860018473D /* Puke.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBEE3291B38AB860018473D /* Puke.png */; };
 		EBBEE3341B38AF080018473D /* Pagoda.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBEE3331B38AF080018473D /* Pagoda.png */; };
 		EBBEE3381B38B1850018473D /* Match.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBEE3371B38B1850018473D /* Match.png */; };
+		EBBEE33B1B39E9490018473D /* FacebookLoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBEE33A1B39E9490018473D /* FacebookLoginButton.png */; };
+		EBBEE3421B39EB610018473D /* PalaWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBEE3411B39EB610018473D /* PalaWhite.png */; };
+		EBBEE3441B39F1660018473D /* FacebookLogoutButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBEE3431B39F1660018473D /* FacebookLogoutButton.png */; };
 		EBCE210D1B36DCE300407E85 /* CalendarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE210C1B36DCE300407E85 /* CalendarIcon.png */; };
 		EBCE210F1B36DD5F00407E85 /* ChatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE210E1B36DD5F00407E85 /* ChatIcon.png */; };
 		EBCE21121B36F1C200407E85 /* PalaIconStart.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE21111B36F1C200407E85 /* PalaIconStart.png */; };
@@ -136,6 +139,9 @@
 		EBBEE3291B38AB860018473D /* Puke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Puke.png; path = ../Puke.png; sourceTree = "<group>"; };
 		EBBEE3331B38AF080018473D /* Pagoda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pagoda.png; path = ../Pagoda.png; sourceTree = SOURCE_ROOT; };
 		EBBEE3371B38B1850018473D /* Match.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Match.png; path = ../Match.png; sourceTree = SOURCE_ROOT; };
+		EBBEE33A1B39E9490018473D /* FacebookLoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FacebookLoginButton.png; path = ../../../../FacebookLoginButton.png; sourceTree = "<group>"; };
+		EBBEE3411B39EB610018473D /* PalaWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PalaWhite.png; path = ../../PalaWhite.png; sourceTree = "<group>"; };
+		EBBEE3431B39F1660018473D /* FacebookLogoutButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FacebookLogoutButton.png; path = ../../../../FacebookLogoutButton.png; sourceTree = "<group>"; };
 		EBCE210C1B36DCE300407E85 /* CalendarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarIcon.png; sourceTree = "<group>"; };
 		EBCE210E1B36DD5F00407E85 /* ChatIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChatIcon.png; sourceTree = "<group>"; };
 		EBCE21111B36F1C200407E85 /* PalaIconStart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PalaIconStart.png; sourceTree = "<group>"; };
@@ -206,6 +212,64 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		EBBEE33C1B39E9520018473D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EBBEE3411B39EB610018473D /* PalaWhite.png */,
+				EBBEE3431B39F1660018473D /* FacebookLogoutButton.png */,
+				EBBEE33A1B39E9490018473D /* FacebookLoginButton.png */,
+				EBBEE3371B38B1850018473D /* Match.png */,
+				EBBEE3331B38AF080018473D /* Pagoda.png */,
+				EBBEE3291B38AB860018473D /* Puke.png */,
+				EBBEE3251B38A63C0018473D /* PalaOrange.png */,
+				EBBEE3231B38A5C70018473D /* Pala.png */,
+				EBCE21111B36F1C200407E85 /* PalaIconStart.png */,
+				EBCE210E1B36DD5F00407E85 /* ChatIcon.png */,
+				EBCE210C1B36DCE300407E85 /* CalendarIcon.png */,
+				EBE1FDBA1B35B4E100A5E606 /* DeleteIcon.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		EBBEE33D1B39E9670018473D /* Wall */ = {
+			isa = PBXGroup;
+			children = (
+				EB39FD0C1B276CEC00AB036C /* WallCollectionViewController.swift */,
+				EB39FD101B2AD17200AB036C /* WallCollectionViewCell.swift */,
+				EB39FD0E1B2992D200AB036C /* Wall.swift */,
+			);
+			name = Wall;
+			sourceTree = "<group>";
+		};
+		EBBEE33E1B39E9730018473D /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				EB8EAEE01B2F1FDD00BAFFAD /* ChatsTableViewController.swift */,
+				EB6521551B32C244000CB29B /* PrivateChatViewController.swift */,
+				EB8FD61A1B3426B80092E883 /* Chat.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
+		EBBEE33F1B39E9810018473D /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				EBB7938C1B2488FF004F0821 /* EventsViewController.swift */,
+				EBCE21131B3710E500407E85 /* EventsTableViewCell.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		EBBEE3401B39E98A0018473D /* External libraries */ = {
+			isa = PBXGroup;
+			children = (
+				EBBEE3211B389C510018473D /* SwiftColors.swift */,
+				EB8EAEE81B2F737D00BAFFAD /* LGSimpleChat.swift */,
+				EBB793881B2203FC004F0821 /* SlideMenuController.swift */,
+			);
+			name = "External libraries";
+			sourceTree = "<group>";
+		};
 		EBD6256C1B1E4D9100FBC064 = {
 			isa = PBXGroup;
 			children = (
@@ -235,14 +299,9 @@
 				EBD625A11B1E592A00FBC064 /* Bridge-Header.h */,
 				EBD6257A1B1E4D9100FBC064 /* AppDelegate.swift */,
 				EBD6257C1B1E4D9100FBC064 /* LoginViewController.swift */,
-				EBB7938C1B2488FF004F0821 /* EventsViewController.swift */,
-				EBCE21131B3710E500407E85 /* EventsTableViewCell.swift */,
-				EB39FD0C1B276CEC00AB036C /* WallCollectionViewController.swift */,
-				EB39FD101B2AD17200AB036C /* WallCollectionViewCell.swift */,
-				EB8EAEE01B2F1FDD00BAFFAD /* ChatsTableViewController.swift */,
-				EB6521551B32C244000CB29B /* PrivateChatViewController.swift */,
-				EB8FD61A1B3426B80092E883 /* Chat.swift */,
-				EB39FD0E1B2992D200AB036C /* Wall.swift */,
+				EBBEE33F1B39E9810018473D /* Events */,
+				EBBEE33D1B39E9670018473D /* Wall */,
+				EBBEE33E1B39E9730018473D /* Chat */,
 				EBB7938A1B2237AE004F0821 /* User.swift */,
 				EB6521571B32C622000CB29B /* Person.swift */,
 				EBD625811B1E4D9200FBC064 /* Images.xcassets */,
@@ -255,18 +314,8 @@
 		EBD625781B1E4D9100FBC064 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EBBEE3211B389C510018473D /* SwiftColors.swift */,
-				EB8EAEE81B2F737D00BAFFAD /* LGSimpleChat.swift */,
-				EBB793881B2203FC004F0821 /* SlideMenuController.swift */,
-				EBBEE3371B38B1850018473D /* Match.png */,
-				EBBEE3331B38AF080018473D /* Pagoda.png */,
-				EBBEE3291B38AB860018473D /* Puke.png */,
-				EBBEE3251B38A63C0018473D /* PalaOrange.png */,
-				EBBEE3231B38A5C70018473D /* Pala.png */,
-				EBCE21111B36F1C200407E85 /* PalaIconStart.png */,
-				EBCE210E1B36DD5F00407E85 /* ChatIcon.png */,
-				EBCE210C1B36DCE300407E85 /* CalendarIcon.png */,
-				EBE1FDBA1B35B4E100A5E606 /* DeleteIcon.png */,
+				EBBEE3401B39E98A0018473D /* External libraries */,
+				EBBEE33C1B39E9520018473D /* Images */,
 				EBD625791B1E4D9100FBC064 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -431,13 +480,16 @@
 				EBBEE3381B38B1850018473D /* Match.png in Resources */,
 				EBCE21121B36F1C200407E85 /* PalaIconStart.png in Resources */,
 				EBD625801B1E4D9200FBC064 /* Main.storyboard in Resources */,
+				EBBEE3421B39EB610018473D /* PalaWhite.png in Resources */,
 				EBCE210D1B36DCE300407E85 /* CalendarIcon.png in Resources */,
 				EBE1FDBB1B35B4E100A5E606 /* DeleteIcon.png in Resources */,
 				EBD625851B1E4D9200FBC064 /* LaunchScreen.xib in Resources */,
 				EBCE210F1B36DD5F00407E85 /* ChatIcon.png in Resources */,
+				EBBEE3441B39F1660018473D /* FacebookLogoutButton.png in Resources */,
 				EBBEE3341B38AF080018473D /* Pagoda.png in Resources */,
 				EBD625821B1E4D9200FBC064 /* Images.xcassets in Resources */,
 				EBBEE3261B38A63C0018473D /* PalaOrange.png in Resources */,
+				EBBEE33B1B39E9490018473D /* FacebookLoginButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
