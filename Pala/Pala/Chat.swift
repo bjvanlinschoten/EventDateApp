@@ -15,6 +15,23 @@ class Chat: NSObject {
     var chat: Chat?
 
     
+    func getMatches(completion: ((array: [Person]) -> Void)!) {
+        var matchesArray: [Person] = []
+        if let matches = PFUser.currentUser()!.valueForKey("matches") as? NSArray {
+            var query = PFUser.query()
+            query?.whereKey("objectId", containedIn: matches as [AnyObject])
+            query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
+                if let array = objects as? [PFUser] {
+                    for item in array {
+                        let person = Person(objectId: item.objectId!, facebookId: item.valueForKey("facebookId") as! String, name: item.valueForKey("name") as! String, birthday: item.valueForKey("birthday") as! String)
+                        matchesArray.append(person)
+                    }
+                }
+                completion(array: matchesArray)
+            }
+        }
+    }
+    
     func getOldMessages() -> [LGChatMessage] {
         
         var oldMessages: [LGChatMessage] = []
@@ -39,7 +56,7 @@ class Chat: NSObject {
                     for msg in array {
                         let msgDict = msg.message as! NSDictionary
                         let lgMsg = LGChatMessage(content: msgDict["message"] as! String, sentBy: .Opponent, timeStamp: nil)
-                        if let data = defaults.objectForKey(self.currentUser!.parseUser.objectId!) as? NSData {
+                        if let data = defaults.objectForKey(PFUser.currentUser()!.objectId!) as? NSData {
                             var dataDict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSMutableDictionary
                             var oldMessages: [LGChatMessage] = []
                             if dataDict[msgDict["senderId"] as! String] != nil {
@@ -49,7 +66,7 @@ class Chat: NSObject {
                             dataDict.setValue(oldMessages, forKey: msgDict["senderId"] as! String)
                             let saveObject = dataDict
                             let saveObjectData = NSKeyedArchiver.archivedDataWithRootObject(saveObject)
-                            defaults.setObject(saveObjectData, forKey: self.currentUser!.parseUser.objectId!)
+                            defaults.setObject(saveObjectData, forKey: PFUser.currentUser()!.objectId!)
                             defaults.setObject(NSDate(), forKey: "lastSaveDate")
                         }
                     }
@@ -66,7 +83,7 @@ class Chat: NSObject {
                             let lgMsg = LGChatMessage(content: msgDict["message"] as! String, sentBy: .Opponent, timeStamp: nil)
                             var oldMessages: [LGChatMessage] = []
                             var dataDict: NSMutableDictionary = NSMutableDictionary()
-                            if let data = defaults.objectForKey(self.currentUser!.parseUser.objectId!) as? NSData {
+                            if let data = defaults.objectForKey(PFUser.currentUser()!.objectId!) as? NSData {
                                 dataDict = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSMutableDictionary
                                 if dataDict[msgDict["senderId"] as! String] != nil {
                                     oldMessages = dataDict[msgDict["senderId"] as! String] as! [LGChatMessage]
@@ -76,7 +93,7 @@ class Chat: NSObject {
                             dataDict.setObject(oldMessages, forKey: msgDict["senderId"] as! String)
                             let saveObject = dataDict
                             let saveObjectData = NSKeyedArchiver.archivedDataWithRootObject(saveObject)
-                            defaults.setObject(saveObjectData, forKey: self.currentUser!.parseUser.objectId!)
+                            defaults.setObject(saveObjectData, forKey: PFUser.currentUser()!.objectId!)
                             defaults.setObject(NSDate(), forKey: "lastSaveDate")
                         }
                     }

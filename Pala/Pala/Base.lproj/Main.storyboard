@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select an event!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8O0-dV-ZZ9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select an event!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8O0-dV-ZZ9">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <color key="textColor" red="0.14901960784313725" green="0.53333333333333333" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
@@ -122,6 +122,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="8O0-dV-ZZ9" secondAttribute="centerY" id="5Ei-ke-thS"/>
                             <constraint firstItem="9xY-GH-rNx" firstAttribute="top" secondItem="peD-4v-rZX" secondAttribute="bottom" id="7lP-F9-HKT">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -137,6 +138,8 @@
                             <constraint firstAttribute="centerY" secondItem="8O0-dV-ZZ9" secondAttribute="centerY" constant="75" id="gWy-ZM-eL7">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="8O0-dV-ZZ9" firstAttribute="leading" secondItem="jf7-hf-eRq" secondAttribute="leadingMargin" constant="47" id="lI3-HE-fnP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8O0-dV-ZZ9" secondAttribute="trailing" constant="46" id="mYZ-ad-sFY"/>
                             <constraint firstItem="9xY-GH-rNx" firstAttribute="width" secondItem="jf7-hf-eRq" secondAttribute="width" id="rek-BR-26p"/>
                         </constraints>
                         <variation key="default">
@@ -144,11 +147,14 @@
                                 <exclude reference="8O0-dV-ZZ9"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Onu-UU-Coq"/>
-                                <exclude reference="gWy-ZM-eL7"/>
                                 <exclude reference="7lP-F9-HKT"/>
                                 <exclude reference="ewd-IH-N7u"/>
                                 <exclude reference="rek-BR-26p"/>
+                                <exclude reference="5Ei-ke-thS"/>
+                                <exclude reference="Onu-UU-Coq"/>
+                                <exclude reference="gWy-ZM-eL7"/>
+                                <exclude reference="lI3-HE-fnP"/>
+                                <exclude reference="mYZ-ad-sFY"/>
                                 <exclude reference="XGJ-3P-qzO"/>
                             </mask>
                         </variation>
@@ -157,11 +163,14 @@
                                 <include reference="8O0-dV-ZZ9"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Onu-UU-Coq"/>
-                                <include reference="gWy-ZM-eL7"/>
                                 <include reference="7lP-F9-HKT"/>
                                 <include reference="ewd-IH-N7u"/>
                                 <include reference="rek-BR-26p"/>
+                                <include reference="5Ei-ke-thS"/>
+                                <exclude reference="Onu-UU-Coq"/>
+                                <exclude reference="gWy-ZM-eL7"/>
+                                <include reference="lI3-HE-fnP"/>
+                                <include reference="mYZ-ad-sFY"/>
                                 <include reference="XGJ-3P-qzO"/>
                             </mask>
                         </variation>
@@ -171,7 +180,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="selectEventLabel" destination="8O0-dV-ZZ9" id="Slg-d1-ZoA"/>
+                        <outlet property="centerLabel" destination="8O0-dV-ZZ9" id="stI-Gf-e1B"/>
                         <outlet property="wallCollection" destination="9xY-GH-rNx" id="9C0-zq-U33"/>
                         <segue destination="rer-vR-7Me" kind="show" identifier="toPrivateChatSegue" id="9EX-ga-Ym2"/>
                     </connections>

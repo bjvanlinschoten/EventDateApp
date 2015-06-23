@@ -15,11 +15,10 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
     var currentUser: User?
     let wall: Wall = Wall()
     let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
-    var selectedEvents: [String]?
     var selectedUser: Person?
     
     @IBOutlet var wallCollection: UICollectionView!
-    @IBOutlet var selectEventLabel: UILabel!
+    @IBOutlet var centerLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +33,7 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         
         self.automaticallyAdjustsScrollViewInsets = false
         self.wallCollection.hidden = true
-        self.selectEventLabel.hidden = false
+        self.centerLabel.hidden = false
         self.wall.currentUser = self.currentUser
     }
 
@@ -92,16 +91,12 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         self.wall.likeUser(likedUser) {(result: Bool) -> Void in
             if result == true {
-                println("MATCH!")
                 let matchAlert: UIAlertView = UIAlertView(title: "New match!", message: "It's a match! Go meet up!", delegate: self, cancelButtonTitle: "Nice!")
                 matchAlert.show()
             } else {
-                println("No match :(")
             }
-            self.wallUserArray?.removeAtIndex(indexPath!.row)
-            self.wallCollection.reloadData()
+            self.removeUserFromWall(indexPath!)
             MBProgressHUD.hideHUDForView(self.view, animated: true)
-
         }
     }
     
@@ -109,8 +104,17 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         let cell = sender.superview! as! WallCollectionViewCell
         let indexPath = self.wallCollection.indexPathForCell(cell)
         let dislikedUser = wallUserArray![indexPath!.row] as Person
-        self.wallUserArray?.removeAtIndex(indexPath!.row)
         self.wall.dislikeUser(dislikedUser.objectId)
+        self.removeUserFromWall(indexPath!)
+    }
+    
+    func removeUserFromWall(indexPath: NSIndexPath) {
+        self.wallUserArray?.removeAtIndex(indexPath.row)
+        if self.wallUserArray! == [] {
+            self.centerLabel.text = "No more users left!"
+            self.centerLabel.hidden = false
+            self.wallCollection.hidden = true
+        }
         self.wallCollection.reloadData()
     }
 

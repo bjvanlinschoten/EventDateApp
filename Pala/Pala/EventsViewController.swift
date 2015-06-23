@@ -88,14 +88,18 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
         let selectedEvent = self.currentUser?.events?[indexPath.row] as! NSDictionary
         let selectedEventId = selectedEvent["id"] as! String
         MBProgressHUD.showHUDAddedTo(self.wallViewController?.view, animated: true)
-        self.wallViewController?.wallCollection.hidden = false
-        self.wallViewController?.selectEventLabel.hidden = true
         self.closeLeft()
         self.currentUser?.parseUser.fetchInBackgroundWithBlock() { (object: PFObject?, error: NSError?) -> Void in
             self.wall?.getUsersToShow(selectedEventId, selectedGender: self.genderSelect.selectedSegmentIndex) { (userArray: [Person]) -> Void in
-                self.wallUserArray = userArray as [Person]
-                self.wallViewController?.wallUserArray = self.wallUserArray
-                self.wallViewController?.wallCollection.reloadData()
+                if userArray != [] {
+                    self.wallUserArray = userArray as [Person]
+                    self.wallViewController?.wallCollection.hidden = false
+                    self.wallViewController?.centerLabel.hidden = true
+                    self.wallViewController?.wallUserArray = self.wallUserArray
+                    self.wallViewController?.wallCollection.reloadData()
+                } else {
+                    self.wallViewController?.centerLabel.text = "You've either (dis)liked everyone already or you're the only one going!"
+                }
                 MBProgressHUD.hideHUDForView(self.wallViewController?.view, animated: true)
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
             }

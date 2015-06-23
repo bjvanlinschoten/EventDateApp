@@ -20,27 +20,20 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        
-        self.matches = []
-        if let matches = self.currentUser!.parseUser.valueForKey("matches") as? NSArray {
-            var query = PFUser.query()
-            query?.whereKey("objectId", containedIn: matches as [AnyObject])
-            query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-                
-                if let array = objects as? [PFUser] {
-                    for item in array {
-                        let person = Person(objectId: item.objectId!, facebookId: item.valueForKey("facebookId") as! String, name: item.valueForKey("name") as! String, birthday: item.valueForKey("birthday") as! String)
-                        self.matches?.append(person)
-                    }
-                }
-                
-                self.tableView.reloadData()
-                
-            }
+        let chat = Chat()
+        chat.getMatches() { (matchesArray: [Person]) -> Void in
+            self.matches = matchesArray
+            self.tableView.reloadData()
         }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
+        let chat = Chat()
+        chat.getMatches() { (matchesArray: [Person]) -> Void in
+            self.matches = matchesArray
+            self.tableView.reloadData()
+        }
         self.slideMenuController()!.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
