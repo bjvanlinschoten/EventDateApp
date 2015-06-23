@@ -17,6 +17,7 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var genderSelect: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,10 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
         if let id = self.currentUser?.parseUser.valueForKey("facebookId") as? NSString {
             let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(id)/picture?width=600&height=600")
             self.profilePicture.sd_setImageWithURL(picURL)
+            self.profilePicture.layer.masksToBounds = false
+            self.profilePicture.layer.shadowOpacity = 0.3
+            self.profilePicture.layer.shadowRadius = 1.0
+            self.profilePicture.layer.shadowOffset = CGSize(width: 2, height: 2)
 //            self.profilePicture.layer.cornerRadius = self.profilePicture.frame.width / 2
             if let age = self.currentUser?.getUserAge() as NSInteger! {
                 if let name = self.currentUser?.parseUser.valueForKey("name") as? String {
@@ -87,7 +92,7 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
         self.wallViewController?.selectEventLabel.hidden = true
         self.closeLeft()
         self.currentUser?.parseUser.fetchInBackgroundWithBlock() { (object: PFObject?, error: NSError?) -> Void in
-            self.wall?.getUsersToShow(selectedEventId) { (userArray: [Person]) -> Void in
+            self.wall?.getUsersToShow(selectedEventId, selectedGender: self.genderSelect.selectedSegmentIndex) { (userArray: [Person]) -> Void in
                 self.wallUserArray = userArray as [Person]
                 self.wallViewController?.wallUserArray = self.wallUserArray
                 self.wallViewController?.wallCollection.reloadData()

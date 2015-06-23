@@ -93,6 +93,8 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         self.wall.likeUser(likedUser) {(result: Bool) -> Void in
             if result == true {
                 println("MATCH!")
+                let matchAlert: UIAlertView = UIAlertView(title: "New match!", message: "It's a match! Go meet up!", delegate: self, cancelButtonTitle: "Nice!")
+                matchAlert.show()
             } else {
                 println("No match :(")
             }

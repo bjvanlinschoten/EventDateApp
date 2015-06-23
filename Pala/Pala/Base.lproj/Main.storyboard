@@ -342,6 +342,7 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="0.95686274510000002" green="0.46274509800000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="1" height="1"/>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 </variation>
@@ -387,7 +388,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLi-fu-d56">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                             <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <size key="shadowOffset" width="1" height="1"/>
@@ -523,13 +524,13 @@
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="518-hN-JX6" secondAttribute="centerX" id="9gf-i6-NNN"/>
                             <constraint firstItem="518-hN-JX6" firstAttribute="top" secondItem="gMd-zr-EXO" secondAttribute="bottom" constant="20" id="9vg-CG-2xF">
-                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="15"/>
                             </constraint>
                             <constraint firstItem="JIl-Uo-Kz6" firstAttribute="leading" secondItem="Vec-hL-mFC" secondAttribute="leadingMargin" constant="100" id="Aso-Rh-nAi"/>
                             <constraint firstAttribute="centerX" secondItem="gMd-zr-EXO" secondAttribute="centerX" id="EQH-Ze-1Hf"/>
                             <constraint firstItem="JIl-Uo-Kz6" firstAttribute="bottom" secondItem="518-hN-JX6" secondAttribute="bottom" constant="82" id="EoH-uf-ITa"/>
                             <constraint firstItem="JIl-Uo-Kz6" firstAttribute="top" secondItem="518-hN-JX6" secondAttribute="bottom" constant="47" id="IPQ-tq-F8B">
-                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="15"/>
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="JIl-Uo-Kz6" secondAttribute="trailing" constant="100" id="MDj-WG-H90"/>
                             <constraint firstAttribute="centerX" secondItem="JIl-Uo-Kz6" secondAttribute="centerX" id="Ms5-Bl-s55"/>
@@ -549,7 +550,9 @@
                             <constraint firstItem="r0G-0D-0eN" firstAttribute="top" secondItem="NVz-Sd-N8p" secondAttribute="bottom" constant="10" id="wgk-PS-J0a">
                                 <variation key="heightClass=regular-widthClass=compact" constant="10"/>
                             </constraint>
-                            <constraint firstItem="NVz-Sd-N8p" firstAttribute="top" secondItem="JIl-Uo-Kz6" secondAttribute="bottom" constant="10" id="ykM-9Q-2rs"/>
+                            <constraint firstItem="NVz-Sd-N8p" firstAttribute="top" secondItem="JIl-Uo-Kz6" secondAttribute="bottom" constant="10" id="ykM-9Q-2rs">
+                                <variation key="heightClass=regular-widthClass=compact" constant="15"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -614,6 +617,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="dCi-Ph-nPm"/>
                     <connections>
+                        <outlet property="genderSelect" destination="NVz-Sd-N8p" id="faM-bW-UyQ"/>
                         <outlet property="nameLabel" destination="518-hN-JX6" id="bYt-zK-ljN"/>
                         <outlet property="profilePicture" destination="gMd-zr-EXO" id="4oZ-Ug-gqN"/>
                     </connections>

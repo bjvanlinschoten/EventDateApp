@@ -12,14 +12,14 @@ class Wall: NSObject {
    
     var currentUser: User?
     
-    func getUsersToShow(selectedEventId: String, completion: ((wallUserArray: [Person]) -> Void)!) {
+    func getUsersToShow(selectedEventId: String, selectedGender: NSInteger, completion: ((wallUserArray: [Person]) -> Void)!) {
         
             
         let currentUserObjectId = self.currentUser?.parseUser.objectId!
         
-        let userGender = self.currentUser?.parseUser.valueForKey("gender") as! NSString
+        
         var gender: String
-        if userGender == "male" {
+        if selectedGender == 1 {
             gender = "female"
         } else {
             gender = "male"

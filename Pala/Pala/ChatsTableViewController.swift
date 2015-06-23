@@ -41,7 +41,7 @@ class ChatsTableViewController: UITableViewController, UITableViewDataSource, UI
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.slideMenuController()!.navigationController?.navigationBarHidden = true
+        self.slideMenuController()!.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
