@@ -101,8 +101,8 @@ class LGChatMessageCell : UITableViewCell {
     // MARK: Global MessageCell Appearance Modifier
     
     struct Appearance {
-        static var opponentColor = UIColor(red: 0.142954, green: 0.60323, blue: 0.862548, alpha: 0.88)
-        static var userColor = UIColor(red: 0.14726, green: 0.838161, blue: 0.533935, alpha: 1)
+        static var opponentColor = UIColor(hexString: "009999")
+        static var userColor = UIColor(hexString: "FF7400")
         static var font: UIFont = UIFont.systemFontOfSize(17.0)
     }
     
@@ -210,7 +210,7 @@ class LGChatMessageCell : UITableViewCell {
         case .Opponent:
             self.textView.center.x = targetX
             self.textView.center.y = halfTextViewHeight
-            self.textView.layer.borderColor = Appearance.opponentColor.CGColor
+            self.textView.layer.borderColor = Appearance.opponentColor!.CGColor
             
             if self.opponentImageView.image != nil {
                 self.opponentImageView.hidden = false
@@ -221,7 +221,7 @@ class LGChatMessageCell : UITableViewCell {
             self.opponentImageView.hidden = true
             self.textView.center.x = CGRectGetWidth(self.bounds) - targetX
             self.textView.center.y = halfTextViewHeight
-            self.textView.layer.borderColor = Appearance.userColor.CGColor
+            self.textView.layer.borderColor = Appearance.userColor!.CGColor
         }
     }
 }

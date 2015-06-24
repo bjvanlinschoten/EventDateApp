@@ -136,10 +136,11 @@ class LoginViewController: UIViewController  {
         
         let wnvc: UINavigationController = UINavigationController(rootViewController: wvc)
         let cnvc: UINavigationController = UINavigationController(rootViewController: cvc)
+        let envc: UINavigationController = UINavigationController(rootViewController: evc)
         evc.wallViewController = wvc
         cvc.wallViewController = wvc
         
-        let slideMenuController = SlideMenuController(mainViewController: wnvc, leftMenuViewController: evc, rightMenuViewController: cnvc)
+        let slideMenuController = SlideMenuController(mainViewController: wnvc, leftMenuViewController: envc, rightMenuViewController: cnvc)
         let slideNvc: UINavigationController = UINavigationController(rootViewController: slideMenuController)
         
         slideNvc.navigationBarHidden = true

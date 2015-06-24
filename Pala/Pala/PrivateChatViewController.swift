@@ -32,6 +32,7 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
         self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FF7400", alpha: 1)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.prefersStatusBarHidden()
         
         self.title = self.otherUser!.name
 
@@ -81,6 +82,9 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
         return true
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return false
+    }
     
 
 }

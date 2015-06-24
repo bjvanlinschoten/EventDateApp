@@ -14,16 +14,29 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
     var wall: Wall?
     var currentUser: User?
     var wallViewController: WallCollectionViewController?
+    var refreshControl: UIRefreshControl!
     
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var genderSelect: UISegmentedControl!
+    @IBOutlet var eventsTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        // Pull to refresh
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refreshEventsTable", forControlEvents: UIControlEvents.ValueChanged)
+        self.eventsTable.addSubview(self.refreshControl)
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FF7400")
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        self.title = "Menu"
         
         if let id = self.currentUser?.parseUser.valueForKey("facebookId") as? NSString {
             let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(id)/picture?width=600&height=600")
@@ -93,14 +106,16 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
             self.wall?.getUsersToShow(selectedEventId, selectedGender: self.genderSelect.selectedSegmentIndex) { (userArray: [Person]) -> Void in
                 if userArray != [] {
                     self.wallUserArray = userArray as [Person]
-                    self.wallViewController?.wallCollection.hidden = false
                     self.wallViewController?.centerLabel.hidden = true
                     self.wallViewController?.wallUserArray = self.wallUserArray
                     self.wallViewController?.wallCollection.reloadData()
-//                    self.slideMenuController()!.navigationController?.navigationItem.title = selectedEvent["name"] as? String
                 } else {
                     self.wallViewController?.centerLabel.text = "You've either (dis)liked everyone already or you're the only one going!"
                 }
+                self.wallViewController?.wallCollection.hidden = false
+                self.wallViewController?.selectedGender = self.genderSelect.selectedSegmentIndex
+                self.wallViewController?.selectedEvent = selectedEventId
+                self.wallViewController?.title = selectedEvent["name"] as? String
                 MBProgressHUD.hideHUDForView(self.wallViewController?.view, animated: true)
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
             }
@@ -118,4 +133,10 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
 
+    func refreshEventsTable() {
+        self.currentUser?.getUserEvents() { () -> Void in
+            self.eventsTable.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+    }
 }

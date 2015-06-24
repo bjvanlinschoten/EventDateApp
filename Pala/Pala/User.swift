@@ -13,7 +13,7 @@ class User: NSObject {
     let parseUser: PFUser
     var matches: [Person]?
     var facebookId: NSString
-    var events: NSMutableArray?
+    var events: NSArray?
     var personObject: Person?
     
     init (parseUser: PFUser) {
@@ -60,14 +60,17 @@ class User: NSObject {
         eventsRequest.startWithCompletionHandler{(connection: FBSDKGraphRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
             if let result = result as? NSDictionary {
                 if let events = result.valueForKey("data") as? NSMutableArray {
+                    let dateDescriptor = NSSortDescriptor(key: "start_time", ascending: true)
+                    let sortDescriptors = NSArray(object: dateDescriptor)
+                    let sortedEventArray = events.sortedArrayUsingDescriptors(sortDescriptors as [AnyObject]) as NSArray
                     var eventIdArray: NSMutableArray = []
-                    for event in events {
+                    for event in sortedEventArray {
                         let event = event as! NSDictionary
                         eventIdArray.addObject(event["id"] as! String)
                         self.parseUser.saveInBackground()
                     }
-                    self.parseUser.addUniqueObjectsFromArray(eventIdArray as [AnyObject], forKey: "events")
-                    self.events = events as NSMutableArray
+                    self.parseUser.setObject(eventIdArray as [AnyObject], forKey: "events")
+                    self.events = sortedEventArray
                 }
             }
             completion()

@@ -35,6 +35,7 @@ class ChatsTableViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FF7400")
         let chat = Chat()
         chat.getMatches() { (matchesArray: [Person]?) -> Void in
             if matchesArray != nil {
@@ -76,6 +77,20 @@ class ChatsTableViewController: UIViewController, UITableViewDataSource, UITable
         cell.profilePicture!.sd_setImageWithURL(picURL)
         cell.profilePicture!.layer.masksToBounds = true
         cell.profilePicture!.layer.cornerRadius = 26
+        
+        var query = PFUser.query()
+        query?.getObjectInBackgroundWithId(person.objectId) { (object: PFObject?, error: NSError?) -> Void in
+            if let user = object as? PFUser {
+                let otherUserEvents = user["events"] as! NSArray
+                for event in self.currentUser!.events! {
+                    if otherUserEvents.containsObject(event["id"] as! String) {
+                        cell.commonEventsLabel.text = event["name"] as? String
+                        break
+                    }
+                }
+            }
+        }
+        
         
         cell.cellView.layer.masksToBounds = false
         cell.cellView.layer.shadowOpacity = 0.3

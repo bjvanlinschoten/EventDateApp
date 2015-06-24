@@ -15,7 +15,10 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
     var currentUser: User?
     let wall: Wall = Wall()
     let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
-    var selectedUser: Person?
+    var selectedEvent: String?
+    var selectedGender: NSInteger?
+    
+    var refreshControl: UIRefreshControl!
     
     @IBOutlet var wallCollection: UICollectionView!
     @IBOutlet var centerLabel: UILabel!
@@ -30,6 +33,14 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         self.addRightBarButtonWithImage(UIImage(named: "Match.png")!)
         self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FF7400", alpha: 1)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        // Pull to refresh
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refreshWallCollectionView", forControlEvents: UIControlEvents.ValueChanged)
+        self.wallCollection.addSubview(self.refreshControl)
+        self.wallCollection.alwaysBounceVertical = true
         
         self.automaticallyAdjustsScrollViewInsets = false
         self.wallCollection.hidden = true
@@ -117,6 +128,20 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         }
         self.wallCollection.reloadData()
     }
-
+    
+    func refreshWallCollectionView() {
+        self.wall.getUsersToShow(self.selectedEvent!, selectedGender: self.selectedGender!) { (userArray: [Person]) -> Void in
+            if userArray != [] {
+                self.wallUserArray = userArray as [Person]
+                self.wallCollection.hidden = false
+                self.centerLabel.hidden = true
+                self.wallCollection.reloadData()
+            } else {
+                self.centerLabel.hidden = false
+                self.centerLabel.text = "You've either (dis)liked everyone already or you're the only one going!"
+            }
+            self.refreshControl.endRefreshing()
+        }
+    }
 
 }
