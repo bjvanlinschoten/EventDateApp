@@ -118,5 +118,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
             PFPush.handlePush(userInfo)
         }
     }
-    
 }

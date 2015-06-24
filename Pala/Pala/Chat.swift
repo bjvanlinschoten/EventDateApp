@@ -15,7 +15,7 @@ class Chat: NSObject {
     var chat: Chat?
 
     
-    func getMatches(completion: ((array: [Person]) -> Void)!) {
+    func getMatches(completion: ((array: [Person]?) -> Void)!) {
         var matchesArray: [Person] = []
         if let matches = PFUser.currentUser()!.valueForKey("matches") as? NSArray {
             var query = PFUser.query()

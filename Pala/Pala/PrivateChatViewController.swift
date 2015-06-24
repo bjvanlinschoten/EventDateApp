@@ -29,7 +29,12 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
         self.chat.otherUser = self.otherUser
         self.chat.otherUserChannel = self.otherUserChannel
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FF7400", alpha: 1)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
+        self.title = self.otherUser!.name
+
         self.messages = self.chat.getOldMessages()
         
         // Set other user profile picture
@@ -44,7 +49,6 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
         // Listen for new messages
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addMessageWithNotification:", name: otherUser!.objectId, object: nil)
         
-        self.title = self.otherUser!.name
         self.delegate = self
         
     }

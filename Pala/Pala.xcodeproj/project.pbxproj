@@ -18,6 +18,7 @@
 		EB8EAEE11B2F1FDD00BAFFAD /* ChatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8EAEE01B2F1FDD00BAFFAD /* ChatsTableViewController.swift */; };
 		EB8EAEE91B2F737D00BAFFAD /* LGSimpleChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8EAEE81B2F737D00BAFFAD /* LGSimpleChat.swift */; };
 		EB8FD61B1B3426B80092E883 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FD61A1B3426B80092E883 /* Chat.swift */; };
+		EBA385821B3AA4BF00C1FFC4 /* ChatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA385811B3AA4BF00C1FFC4 /* ChatsTableViewCell.swift */; };
 		EBB793511B20C156004F0821 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB7934E1B20C156004F0821 /* Bolts.framework */; };
 		EBB793521B20C156004F0821 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB7934F1B20C156004F0821 /* FBSDKCoreKit.framework */; };
 		EBB793531B20C156004F0821 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBB793501B20C156004F0821 /* FBSDKLoginKit.framework */; };
@@ -112,6 +113,7 @@
 		EB8EAEE01B2F1FDD00BAFFAD /* ChatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsTableViewController.swift; sourceTree = "<group>"; };
 		EB8EAEE81B2F737D00BAFFAD /* LGSimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSimpleChat.swift; sourceTree = "<group>"; };
 		EB8FD61A1B3426B80092E883 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		EBA385811B3AA4BF00C1FFC4 /* ChatsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsTableViewCell.swift; sourceTree = "<group>"; };
 		EBB7934E1B20C156004F0821 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../../Documents/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
 		EBB7934F1B20C156004F0821 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		EBB793501B20C156004F0821 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				EB8EAEE01B2F1FDD00BAFFAD /* ChatsTableViewController.swift */,
+				EBA385811B3AA4BF00C1FFC4 /* ChatsTableViewCell.swift */,
 				EB6521551B32C244000CB29B /* PrivateChatViewController.swift */,
 				EB8FD61A1B3426B80092E883 /* Chat.swift */,
 			);
@@ -557,6 +560,7 @@
 				EB39FD0D1B276CEC00AB036C /* WallCollectionViewController.swift in Sources */,
 				EB8EAEE91B2F737D00BAFFAD /* LGSimpleChat.swift in Sources */,
 				EB6521581B32C622000CB29B /* Person.swift in Sources */,
+				EBA385821B3AA4BF00C1FFC4 /* ChatsTableViewCell.swift in Sources */,
 				EBB793891B2203FC004F0821 /* SlideMenuController.swift in Sources */,
 				EBD6257B1B1E4D9100FBC064 /* AppDelegate.swift in Sources */,
 				EB39FD111B2AD17200AB036C /* WallCollectionViewCell.swift in Sources */,

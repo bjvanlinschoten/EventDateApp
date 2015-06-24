@@ -97,6 +97,7 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
                     self.wallViewController?.centerLabel.hidden = true
                     self.wallViewController?.wallUserArray = self.wallUserArray
                     self.wallViewController?.wallCollection.reloadData()
+//                    self.slideMenuController()!.navigationController?.navigationItem.title = selectedEvent["name"] as? String
                 } else {
                     self.wallViewController?.centerLabel.text = "You've either (dis)liked everyone already or you're the only one going!"
                 }

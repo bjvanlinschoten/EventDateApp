@@ -21,6 +21,7 @@ class LoginViewController: UIViewController  {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationController?.navigationBarHidden = true
+        self.view.backgroundColor = UIColor(hexString: "FF7400")
         
         if let user = PFUser.currentUser() {
             println("User Logged In")
@@ -133,16 +134,17 @@ class LoginViewController: UIViewController  {
         evc.currentUser = self.currentUser
         cvc.currentUser = self.currentUser
         
-        let nvc: UINavigationController = UINavigationController(rootViewController: wvc)
-        
+        let wnvc: UINavigationController = UINavigationController(rootViewController: wvc)
+        let cnvc: UINavigationController = UINavigationController(rootViewController: cvc)
         evc.wallViewController = wvc
         cvc.wallViewController = wvc
         
-        let slideMenuController = SlideMenuController(mainViewController: nvc, leftMenuViewController: evc, rightMenuViewController: cvc)
+        let slideMenuController = SlideMenuController(mainViewController: wnvc, leftMenuViewController: evc, rightMenuViewController: cnvc)
         let slideNvc: UINavigationController = UINavigationController(rootViewController: slideMenuController)
+        
         slideNvc.navigationBarHidden = true
         slideNvc.automaticallyAdjustsScrollViewInsets = false
-        nvc.automaticallyAdjustsScrollViewInsets = false
+        wnvc.automaticallyAdjustsScrollViewInsets = false
         
         self.presentViewController(slideNvc, animated: false) { () -> Void in
             println("success")
