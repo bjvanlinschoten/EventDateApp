@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
 
     var window: UIWindow?
     var chat: Chat?
+    var isInChat: Bool?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -45,6 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         
         // Setup notification UI
         LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("pala_app_identifier", name: "Pala", icon: UIImage(named: "DeleteIcon.png"), defaultSettings: LNNotificationDefaultAppSettings)
+        
+        // Listen if app is in chat, then disable push
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "isUserInChat", name: "Chat", object: nil)
         
 //        // TESTING: Clear NSUserDefaults
 //        let appDomain = NSBundle.mainBundle().bundleIdentifier as String!
@@ -109,13 +113,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         if state == UIApplicationState.Active {
             let aps = userInfo["aps"] as! NSDictionary
             let message = aps["alert"] as! String
-            if message == "New match!" {
+            if message == "New match!" || self.isInChat != true {
                 PFUser.currentUser()?.fetchInBackground()
+                let notification: LNNotification = LNNotification(message: message)
+                LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "pala_app_identifier")
             }
-            let notification: LNNotification = LNNotification(message: message)
-            LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "pala_app_identifier")
         } else {
             PFPush.handlePush(userInfo)
+        }
+    }
+    
+    func isUserInChat() {
+        if self.isInChat == true {
+            self.isInChat = false
+        } else {
+            self.isInChat = true
         }
     }
 }

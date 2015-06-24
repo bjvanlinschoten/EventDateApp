@@ -53,6 +53,15 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
         self.delegate = self
         
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        // Disable push notifications through NSNotificationCenter
+        NSNotificationCenter.defaultCenter().postNotificationName("Chat", object: nil)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().postNotificationName("Chat", object: nil)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
