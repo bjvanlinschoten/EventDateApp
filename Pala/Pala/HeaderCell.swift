@@ -9,10 +9,7 @@
 import UIKit
 
 class HeaderCell: UITableViewCell {
-
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var genderSelect: UISegmentedControl!
-    
-    
 }

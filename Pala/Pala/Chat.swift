@@ -9,21 +9,36 @@
 
 class Chat: NSObject {
 
+    // Properties
     var currentUser: User?
     var otherUser: Person?
     var otherUserChannel: PNChannel?
     var chat: Chat?
-
     
+    
+    // Function to get matches
     func getMatches(completion: ((array: [Person]?) -> Void)!) {
         var matchesArray: [Person] = []
-        if let matches = PFUser.currentUser()!.valueForKey("matches") as? NSArray {
+        if let matches = self.currentUser?.parseUser["matches"] as? NSArray {
+            
+            // Query all users contained in user's matches array
             var query = PFUser.query()
             query?.whereKey("objectId", containedIn: matches as [AnyObject])
             query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
                 if let array = objects as? [PFUser] {
                     for item in array {
-                        let person = Person(objectId: item.objectId!, facebookId: item.valueForKey("facebookId") as! String, name: item.valueForKey("name") as! String, birthday: item.valueForKey("birthday") as! String)
+                        
+                        // Create person object for the other user to minimize queries
+                        let person = Person(objectId: item.objectId!, facebookId: item["facebookId"] as! String, name: item["name"] as! String, birthday: item["birthday"] as! String)
+                        
+                        // Find earliest common event between the users
+                        let otherUserEvents = item["events"] as! NSArray
+                        for event in self.currentUser!.parseUser["events"] as! NSArray {
+                            if otherUserEvents.containsObject(event["id"] as! String) {
+                                person.commonEvent = event["name"] as? String
+                                break
+                            }
+                        }
                         matchesArray.append(person)
                     }
                 }
@@ -32,8 +47,8 @@ class Chat: NSObject {
         }
     }
     
+    // Get old messages of the chat with this user out of NSUserDefaults
     func getOldMessages() -> [LGChatMessage] {
-        
         var oldMessages: [LGChatMessage] = []
         let defaults = NSUserDefaults.standardUserDefaults()
         if let data = defaults.objectForKey(PFUser.currentUser()!.objectId!) as? NSData {
@@ -45,14 +60,18 @@ class Chat: NSObject {
         return oldMessages
     }
     
+    // Load all the unseen messages from the PubNub server
     func loadUnseenMessagesFromServer() {
-        
         let currentUserChannel = PNChannel.channelWithName(currentUser?.parseUser.objectId) as! PNChannel
         let defaults = NSUserDefaults.standardUserDefaults()
+        
+        // If there was an earlier save, get all messages since last save. Else get full message history.
         if let lastSaveDate = defaults.objectForKey("lastSaveDate") as? NSDate {
             let date = PNDate(date: lastSaveDate)
             PubNub.requestHistoryForChannel(currentUserChannel, from: date, to: PNDate(date: NSDate()), limit: 100, includingTimeToken: true) { (array: [AnyObject]!, channel: PNChannel!, startDate: PNDate!, endDate: PNDate!, error: NSError!) -> Void in
                 if let array = array as? [PNMessage] {
+                    
+                    // For all PNMessages, make LGChatMessages and save to NSUserdefaults
                     for msg in array {
                         let msgDict = msg.message as! NSDictionary
                         let lgMsg = LGChatMessage(content: msgDict["message"] as! String, sentBy: .Opponent, timeStamp: nil)
@@ -78,6 +97,8 @@ class Chat: NSObject {
                     println(error)
                 } else {
                     if let array = array as? [PNMessage] {
+                        
+                        // For all PNMessages, make LGChatMessages and send to NSUserdefaults
                         for msg in array {
                             let msgDict = msg.message as! NSDictionary
                             let lgMsg = LGChatMessage(content: msgDict["message"] as! String, sentBy: .Opponent, timeStamp: nil)
@@ -119,9 +140,12 @@ class Chat: NSObject {
         }
     }
     
+    
+    // Save message to user defaults
     func saveMessageToUserDefaults(msg: LGChatMessage, otherUserId: String){
-        var oldMessages: [LGChatMessage] = []
         
+        // Get and unarchive old messages from userdefaults
+        var oldMessages: [LGChatMessage] = []
         let defaults = NSUserDefaults.standardUserDefaults()
         var dataDict: NSMutableDictionary = NSMutableDictionary()
         if let data = defaults.objectForKey(PFUser.currentUser()!.objectId!) as? NSData {
@@ -130,6 +154,8 @@ class Chat: NSObject {
                 oldMessages = dataDict[otherUserId] as! [LGChatMessage]
             }
         }
+        
+        // Add new sent or received message to user defaults
         oldMessages.append(msg)
         dataDict.setObject(oldMessages, forKey: otherUserId)
         let saveObject = dataDict

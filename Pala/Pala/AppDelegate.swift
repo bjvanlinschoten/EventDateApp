@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        // Status bar white text
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         
         // Set-up Parse/FB
@@ -34,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         PubNub.setConfiguration(pnConfiguration)
         PNLogger.loggerEnabled(false)
         
-        // Setup push
+        // Setup push for iOS8 and 7
         if application.respondsToSelector("registerUserNotificationSettings:") {
             let types: UIUserNotificationType = (.Alert | .Badge | .Sound)
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
@@ -49,10 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         
         // Listen if app is in chat, then disable push
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "isUserInChat", name: "Chat", object: nil)
-        
-//        // TESTING: Clear NSUserDefaults
-//        let appDomain = NSBundle.mainBundle().bundleIdentifier as String!
-//        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
         
         return true
     }
@@ -71,17 +68,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     // MARK: PubNubDelegate
     
     func pubnubClient(client: PubNub!, didReceiveMessage message: PNMessage!) {
+        
+        // Get content from message
         let msgDict = message.message as! NSDictionary
         let msg = LGChatMessage(content: msgDict["message"] as! String, sentBy: .Opponent)
         let otherUserId = msgDict["senderId"] as! String
+        
+        // Save the received message
         self.chat!.saveMessageToUserDefaults(msg, otherUserId: otherUserId)
+        
+        // Post notification that message from this sender has been received
         NSNotificationCenter.defaultCenter().postNotificationName(msgDict["senderId"] as! String, object: self, userInfo: ["message": msg])
     }
     
     func pubnubClient(client: PubNub!, didSendMessage message: PNMessage!) {
+        
+        // Get message content
         let msgDict = message.message as! NSDictionary
         let msg = LGChatMessage(content: msgDict["message"] as! String, sentBy: .User)
         let otherUserId = message.channel.name
+        
+        // Save the sent message
         self.chat!.saveMessageToUserDefaults(msg, otherUserId: otherUserId)
     }
     
@@ -92,13 +99,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     // MARK: Push notification methods
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-    
-        println("didRegisterForRemoteNotificationsWithDeviceToken")
-    
+        
+        // Register installation with Parse, to send PushNotif to
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackgroundWithBlock { (succeeded, e) -> Void in
-    
         }
     }
     
@@ -107,12 +112,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        println("didReceiveRemoteNotification")
-        let state: UIApplicationState = application.applicationState
-//        PFPush.handlePush(userInfo)
-        if state == UIApplicationState.Active {
+        
+        // If application is active, show notifications on top of screen. Else let Parse handle the push.
+        if application.applicationState == UIApplicationState.Active {
             let aps = userInfo["aps"] as! NSDictionary
             let message = aps["alert"] as! String
+            
+            // make sure that the user doesn't get an alert when he is in chat with the person he received a msg from
             if message == "New match!" || self.isInChat != true {
                 PFUser.currentUser()?.fetchInBackground()
                 let notification: LNNotification = LNNotification(message: message)
@@ -123,6 +129,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
         }
     }
     
+    
+    // Track if user is in cha
     func isUserInChat() {
         if self.isInChat == true {
             self.isInChat = false

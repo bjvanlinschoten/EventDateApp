@@ -139,11 +139,11 @@
 		EBBEE3211B389C510018473D /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftColors.swift; sourceTree = "<group>"; };
 		EBBEE3231B38A5C70018473D /* Pala.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pala.png; sourceTree = "<group>"; };
 		EBBEE3251B38A63C0018473D /* PalaOrange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PalaOrange.png; sourceTree = "<group>"; };
-		EBBEE3291B38AB860018473D /* Puke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Puke.png; path = ../Puke.png; sourceTree = "<group>"; };
-		EBBEE3331B38AF080018473D /* Pagoda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pagoda.png; path = ../Pagoda.png; sourceTree = SOURCE_ROOT; };
-		EBBEE3371B38B1850018473D /* Match.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Match.png; path = ../Match.png; sourceTree = SOURCE_ROOT; };
+		EBBEE3291B38AB860018473D /* Puke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Puke.png; path = ../Images/Puke.png; sourceTree = "<group>"; };
+		EBBEE3331B38AF080018473D /* Pagoda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Pagoda.png; path = Images/Pagoda.png; sourceTree = SOURCE_ROOT; };
+		EBBEE3371B38B1850018473D /* Match.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Match.png; path = Images/Match.png; sourceTree = SOURCE_ROOT; };
 		EBBEE33A1B39E9490018473D /* FacebookLoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FacebookLoginButton.png; path = ../../../../FacebookLoginButton.png; sourceTree = "<group>"; };
-		EBBEE3411B39EB610018473D /* PalaWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PalaWhite.png; path = ../../PalaWhite.png; sourceTree = "<group>"; };
+		EBBEE3411B39EB610018473D /* PalaWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PalaWhite.png; path = ../Images/PalaWhite.png; sourceTree = "<group>"; };
 		EBBEE3431B39F1660018473D /* FacebookLogoutButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FacebookLogoutButton.png; path = ../../../../FacebookLogoutButton.png; sourceTree = "<group>"; };
 		EBC4C7E41B3C0D55002EC38C /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		EBCE210C1B36DCE300407E85 /* CalendarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarIcon.png; sourceTree = "<group>"; };

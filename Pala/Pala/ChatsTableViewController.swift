@@ -9,7 +9,8 @@
 import UIKit
 
 class ChatsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
+    // Properties
     var currentUser: User?
     var chatController: PrivateChatViewController!
     var matches: [Person]?
@@ -20,22 +21,17 @@ class ChatsTableViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Navigation bar appearance
         self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FF7400")
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.title = "Chats"
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-//        let chat = Chat()
-//        chat.getMatches() { (matchesArray: [Person]?) -> Void in
-//            self.matches = matchesArray
-//            self.chatsTable.reloadData()
-//        }
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FF7400")
+        
+        // Reload matches when view will appear
         let chat = Chat()
         chat.getMatches() { (matchesArray: [Person]?) -> Void in
             if matchesArray != nil {
@@ -43,6 +39,8 @@ class ChatsTableViewController: UIViewController, UITableViewDataSource, UITable
                 self.chatsTable.reloadData()
             }
         }
+        
+        // Hide navigationbar of slidemenu animated
         self.slideMenuController()!.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
@@ -54,12 +52,10 @@ class ChatsTableViewController: UIViewController, UITableViewDataSource, UITable
     // MARK: - Table view data source
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // Return the number of sections.
         return 1
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of rows in the section.
         if self.matches != nil {
             return self.matches!.count
         } else {
@@ -70,35 +66,30 @@ class ChatsTableViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("chatCell", forIndexPath: indexPath) as! ChatsTableViewCell
-
         let person = matches![indexPath.row] as Person
+        
+        // Set label to name and age of other user
         cell.nameLabel.text = "\(person.name) (\(person.getPersonAge()))"
+        
+        // set picture of the other user
         let picURL = NSURL(string: "https://graph.facebook.com/\(person.facebookId)/picture?width=54&height=54")
         cell.profilePicture!.sd_setImageWithURL(picURL)
         cell.profilePicture!.layer.masksToBounds = true
         cell.profilePicture!.layer.cornerRadius = 26
         
-        var query = PFUser.query()
-        query?.getObjectInBackgroundWithId(person.objectId) { (object: PFObject?, error: NSError?) -> Void in
-            if let user = object as? PFUser {
-                let otherUserEvents = user["events"] as! NSArray
-                for event in self.currentUser!.events! {
-                    if otherUserEvents.containsObject(event["id"] as! String) {
-                        cell.commonEventsLabel.text = event["name"] as? String
-                        break
-                    }
-                }
-            }
-        }
+        // Set label to show earliest common event
+        cell.commonEventsLabel!.text = person.commonEvent
         
-        
+        // Set drop shadow of cell
         cell.cellView.layer.masksToBounds = false
         cell.cellView.layer.shadowOpacity = 0.3
         cell.cellView.layer.shadowRadius = 1.0
         cell.cellView.layer.shadowOffset = CGSize(width: 2, height: 2)
+        
         return cell
     }
     
+    // Go into private chat with selected user
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.chatController = PrivateChatViewController()
         self.chatController.otherUser = self.matches![indexPath.row] as Person

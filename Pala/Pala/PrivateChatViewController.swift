@@ -10,6 +10,7 @@ import UIKit
 
 class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
     
+    // Properties
     var currentUser: User?
     var otherUser: Person?
     var otherUserChannel: PNChannel?
@@ -17,8 +18,6 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        // Do any additional setup after loading the view.
         
         // Channel of other user
         self.otherUserChannel = PNChannel.channelWithName(self.otherUser!.objectId) as? PNChannel
@@ -28,14 +27,15 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
         self.chat.currentUser = self.currentUser
         self.chat.otherUser = self.otherUser
         self.chat.otherUserChannel = self.otherUserChannel
+        
+        // Appearance of navbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.barTintColor = UIColor(hexString: "FF7400", alpha: 1)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.prefersStatusBarHidden()
-        
         self.title = self.otherUser!.name
 
+        // Get old messages
         self.messages = self.chat.getOldMessages()
         
         // Set other user profile picture
@@ -55,23 +55,20 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        // Disable push notifications through NSNotificationCenter
+        // Notify appdelegate that user is in chat
         NSNotificationCenter.defaultCenter().postNotificationName("Chat", object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
+        // Notify appdelegate that user is out of chat
         NSNotificationCenter.defaultCenter().postNotificationName("Chat", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillDisappear(animated: Bool) {
-//        self.chat.saveMessages(self.messages)
-    }
-    
+    // Add newly received message
     func addMessageWithNotification(notification: NSNotification) {
         let message = notification.userInfo!["message"] as! LGChatMessage
         self.addNewMessage(message)
@@ -90,10 +87,4 @@ class PrivateChatViewController: LGChatController, LGChatControllerDelegate {
         */
         return true
     }
-    
-    override func prefersStatusBarHidden() -> Bool {
-        return false
-    }
-    
-
 }

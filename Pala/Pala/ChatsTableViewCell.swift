@@ -9,7 +9,6 @@
 import UIKit
 
 class ChatsTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var commonEventsLabel: UILabel!

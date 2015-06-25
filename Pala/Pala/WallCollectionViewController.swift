@@ -8,14 +8,13 @@
 
 import UIKit
 
-let reuseIdentifier = "wallCell"
-
 class WallCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    // Properties
     var wallUserArray: [Person]?
     var currentUser: User?
-    let wall: Wall = Wall()
+    var wall: Wall?
     let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
-    var selectedEvent: String?
     var selectedGender: NSInteger?
     
     var refreshControl: UIRefreshControl!
@@ -42,10 +41,28 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         self.wallCollection.addSubview(self.refreshControl)
         self.wallCollection.alwaysBounceVertical = true
         
+        // appearance
         self.automaticallyAdjustsScrollViewInsets = false
         self.wallCollection.hidden = true
         self.centerLabel.hidden = false
-        self.wall.currentUser = self.currentUser
+    }
+    
+    // Reload collection view when Wall will appear from Event selection
+    func appearsFromEventSelect() {
+        if let selectedEventId = self.wall?.selectedEvent["id"] as? String {
+            self.wall!.getUsersToShow(selectedEventId, selectedGender: self.wall!.selectedGender!) { (userArray: [Person]) -> Void in
+                if userArray != [] {
+                    self.wallUserArray = userArray as [Person]
+                    self.centerLabel.hidden = true
+                    self.wallCollection.reloadData()
+                } else {
+                    self.centerLabel.text = "You've either (dis)liked everyone already or you're the only one going!"
+                }
+                self.wallCollection.hidden = false
+                self.title = self.wall?.selectedEvent["name"] as? String
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,18 +89,23 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
     
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! WallCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("wallCell", forIndexPath: indexPath) as! WallCollectionViewCell
         
-        // Configure the cell
+        // Person shown in the cell
         let person = wallUserArray![indexPath.row] as Person
+        
+        // Set picture
         let picURL: NSURL! = NSURL(string: "https://graph.facebook.com/\(person.facebookId)/picture?width=600&height=600")
         cell.imageView.frame = CGRectMake(10,10,150,230)
         cell.imageView.sd_setImageWithURL(picURL)
         cell.nameLabel.text = "\(person.name) (\(person.getPersonAge()))"
+        
+        // Set drop shadow
         cell.layer.masksToBounds = false
         cell.layer.shadowOpacity = 0.3
         cell.layer.shadowRadius = 1.0
         cell.layer.shadowOffset = CGSize(width: 2, height: 2)
+        
         return cell
     }
     
@@ -95,30 +117,33 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         return sectionInsets
     }
     
+    
+    // Liking a user
     @IBAction func likeUser(sender: UIButton){
         let cell = sender.superview! as! WallCollectionViewCell
         let indexPath = self.wallCollection.indexPathForCell(cell)
         let likedUser = wallUserArray![indexPath!.row] as Person
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        self.wall.likeUser(likedUser) {(result: Bool) -> Void in
+        self.wall!.likeUser(likedUser) {(result: Bool) -> Void in
             if result == true {
                 let matchAlert: UIAlertView = UIAlertView(title: "New match!", message: "It's a match! Go meet up!", delegate: self, cancelButtonTitle: "Nice!")
                 matchAlert.show()
-            } else {
             }
             self.removeUserFromWall(indexPath!)
             MBProgressHUD.hideHUDForView(self.view, animated: true)
         }
     }
     
+    // Disliking a user
     @IBAction func dislikeUser(sender: UIButton){
         let cell = sender.superview! as! WallCollectionViewCell
         let indexPath = self.wallCollection.indexPathForCell(cell)
         let dislikedUser = wallUserArray![indexPath!.row] as Person
-        self.wall.dislikeUser(dislikedUser.objectId)
+        self.wall!.dislikeUser(dislikedUser.objectId)
         self.removeUserFromWall(indexPath!)
     }
     
+    // Remove user from wall after (dis)liking
     func removeUserFromWall(indexPath: NSIndexPath) {
         self.wallUserArray?.removeAtIndex(indexPath.row)
         if self.wallUserArray! == [] {
@@ -129,9 +154,10 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         self.wallCollection.reloadData()
     }
     
+    // Pull to refresh voor wall collectionview
     func refreshWallCollectionView() {
         PFUser.currentUser()?.fetch()
-        self.wall.getUsersToShow(self.selectedEvent!, selectedGender: self.selectedGender!) { (userArray: [Person]) -> Void in
+        self.wall!.getUsersToShow(self.wall!.selectedEvent!["id"] as! String, selectedGender: self.selectedGender!) { (userArray: [Person]) -> Void in
             if userArray != [] {
                 self.wallUserArray = userArray as [Person]
                 self.wallCollection.hidden = false
