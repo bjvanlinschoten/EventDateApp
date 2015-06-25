@@ -13,8 +13,10 @@ Nowadays, apps like Tinder and Happn are immensely popular. However, the perfect
 * Settings: Select gender of users you want to see. 
 
 # Screenshots
-<img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/SelectEvent.png" width="250">
-<img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/MeetPeople.jpg" width="250">
+<img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/EventsScreen.png" width="250">
+<img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/WallScreen.png" width="250">
+<img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/ChatsScreen.png" width="250">
+
 
 
 # Data sets/APIs
