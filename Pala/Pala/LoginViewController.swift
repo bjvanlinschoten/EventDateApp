@@ -139,9 +139,10 @@ class LoginViewController: UIViewController  {
         let envc: UINavigationController = UINavigationController(rootViewController: evc)
         evc.wallViewController = wvc
         cvc.wallViewController = wvc
-        
+            
         let slideMenuController = SlideMenuController(mainViewController: wnvc, leftMenuViewController: envc, rightMenuViewController: cnvc)
         let slideNvc: UINavigationController = UINavigationController(rootViewController: slideMenuController)
+        
         
         slideNvc.navigationBarHidden = true
         slideNvc.automaticallyAdjustsScrollViewInsets = false

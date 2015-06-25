@@ -49,6 +49,7 @@
 		EBBEE33B1B39E9490018473D /* FacebookLoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBEE33A1B39E9490018473D /* FacebookLoginButton.png */; };
 		EBBEE3421B39EB610018473D /* PalaWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBEE3411B39EB610018473D /* PalaWhite.png */; };
 		EBBEE3441B39F1660018473D /* FacebookLogoutButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EBBEE3431B39F1660018473D /* FacebookLogoutButton.png */; };
+		EBC4C7E51B3C0D55002EC38C /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC4C7E41B3C0D55002EC38C /* HeaderCell.swift */; };
 		EBCE210D1B36DCE300407E85 /* CalendarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE210C1B36DCE300407E85 /* CalendarIcon.png */; };
 		EBCE210F1B36DD5F00407E85 /* ChatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE210E1B36DD5F00407E85 /* ChatIcon.png */; };
 		EBCE21121B36F1C200407E85 /* PalaIconStart.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCE21111B36F1C200407E85 /* PalaIconStart.png */; };
@@ -144,6 +145,7 @@
 		EBBEE33A1B39E9490018473D /* FacebookLoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FacebookLoginButton.png; path = ../../../../FacebookLoginButton.png; sourceTree = "<group>"; };
 		EBBEE3411B39EB610018473D /* PalaWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PalaWhite.png; path = ../../PalaWhite.png; sourceTree = "<group>"; };
 		EBBEE3431B39F1660018473D /* FacebookLogoutButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FacebookLogoutButton.png; path = ../../../../FacebookLogoutButton.png; sourceTree = "<group>"; };
+		EBC4C7E41B3C0D55002EC38C /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		EBCE210C1B36DCE300407E85 /* CalendarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarIcon.png; sourceTree = "<group>"; };
 		EBCE210E1B36DD5F00407E85 /* ChatIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChatIcon.png; sourceTree = "<group>"; };
 		EBCE21111B36F1C200407E85 /* PalaIconStart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PalaIconStart.png; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			children = (
 				EBB7938C1B2488FF004F0821 /* EventsViewController.swift */,
 				EBCE21131B3710E500407E85 /* EventsTableViewCell.swift */,
+				EBC4C7E41B3C0D55002EC38C /* HeaderCell.swift */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				EB39FD111B2AD17200AB036C /* WallCollectionViewCell.swift in Sources */,
 				EBB7938D1B2488FF004F0821 /* EventsViewController.swift in Sources */,
 				EB8EAEE11B2F1FDD00BAFFAD /* ChatsTableViewController.swift in Sources */,
+				EBC4C7E51B3C0D55002EC38C /* HeaderCell.swift in Sources */,
 				EBBEE3221B389C510018473D /* SwiftColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

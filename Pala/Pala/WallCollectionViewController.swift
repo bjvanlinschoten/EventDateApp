@@ -130,6 +130,7 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
     }
     
     func refreshWallCollectionView() {
+        PFUser.currentUser()?.fetch()
         self.wall.getUsersToShow(self.selectedEvent!, selectedGender: self.selectedGender!) { (userArray: [Person]) -> Void in
             if userArray != [] {
                 self.wallUserArray = userArray as [Person]
@@ -137,6 +138,8 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
                 self.centerLabel.hidden = true
                 self.wallCollection.reloadData()
             } else {
+                self.wallUserArray = []
+                self.wallCollection.hidden = true
                 self.centerLabel.hidden = false
                 self.centerLabel.text = "You've either (dis)liked everyone already or you're the only one going!"
             }

@@ -30,6 +30,7 @@ class Wall: NSObject {
         query?.whereKey("gender", equalTo: gender)
         query?.whereKey("events", equalTo: selectedEventId)
         query?.whereKey("matches", notEqualTo: currentUserObjectId!)
+        query?.whereKey("objectId", notEqualTo: currentUserObjectId!)
         
         let likedUsers = self.currentUser?.parseUser.valueForKey("likedUsers") as? NSMutableArray
         let dislikedUsers = self.currentUser?.parseUser.valueForKey("dislikedUsers") as? NSArray
