@@ -18,6 +18,7 @@ Nowadays, apps like Tinder and Happn are immensely popular. However, the perfect
 * MBProgressHUD by Jonathan George
 * SwiftColors by thii
 * SDWebImage by Olivier Poitrey
+* LNNotificationsUI by Leo Natan
 
 Copyright Boris van Linschoten (2015)
 
