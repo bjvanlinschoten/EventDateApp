@@ -68,6 +68,8 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
             self.wallViewController?.wall = self.wall!
             self.wallViewController?.appearsFromEventSelect()
             self.closeLeft()
+        } else {
+            self.wall!.selectedGender = sender.selectedSegmentIndex
         }
     }
 
@@ -109,7 +111,9 @@ class EventsViewController: UIViewController, UITableViewDataSource, UITableView
             
             // Set label with name and age
             if let age = self.currentUser?.getUserAge() as NSInteger! {
-                cell.nameLabel.text = "\(self.currentUser?.name) (\(age))"
+                if let name = self.currentUser?.parseUser.valueForKey("name") as? String {
+                    cell.nameLabel.text = "\(name) (\(age))"
+                }
             }
             
             // Get initial gender value

@@ -12,8 +12,7 @@ class User: NSObject {
     
     // Properties
     let parseUser: PFUser
-    var events: NSMutableArray?
-    var name: String?
+    var events: NSArray?
     
     init (parseUser: PFUser) {
         self.parseUser = parseUser
@@ -41,7 +40,6 @@ class User: NSObject {
             if let resultDict = result as? NSDictionary {
                 self.parseUser.setValue(resultDict["id"], forKey: "facebookId")
                 self.parseUser.setValue(resultDict["first_name"], forKey: "name")
-                self.name = resultDict["first_name"] as? String
                 self.parseUser.setValue(resultDict["gender"], forKey:"gender")
                 self.parseUser.setValue(resultDict["birthday"], forKey: "birthday")
                 self.parseUser.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
@@ -69,13 +67,14 @@ class User: NSObject {
                     let sortedEventArray = events.sortedArrayUsingDescriptors(sortDescriptors as [AnyObject]) as NSArray
                     var eventIdArray: NSMutableArray = []
                     
+                    self.events = sortedEventArray
+                    
                     // Save events to PArse
                     for event in sortedEventArray {
                         let event = event as! NSDictionary
                         eventIdArray.addObject(event["id"] as! String)
                         self.parseUser.saveInBackground()
                     }
-                    self.events = eventIdArray
                     self.parseUser.setObject(eventIdArray as [AnyObject], forKey: "events")
                 }
             }

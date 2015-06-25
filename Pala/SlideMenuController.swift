@@ -16,7 +16,7 @@ struct SlideMenuOptions {
     static var shadowRadius: CGFloat = 0.0
     static var shadowOffset: CGSize = CGSizeMake(0,0)
     static var panFromBezel: Bool = true
-    static var animationDuration: CGFloat = 0.4
+    static var animationDuration: CGFloat = 0.2
     static var rightViewWidth: CGFloat = 270.0
     static var rightBezelWidth: CGFloat = 16.0
     static var rightPanFromBezel: Bool = true

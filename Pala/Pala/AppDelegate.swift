@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PNDelegate {
     var chat: Chat?
     var isInChat: Bool?
     
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // Status bar white text
