@@ -45,9 +45,13 @@ The Chat class handles all the chat data handling. The most important methods to
 # Design decisions
 
 **Wall**  
-I wanted to be able to show multiple users at once instead of presenting the users one by one. I want users to like someone that stands out to them, in stead of having to 'rate' every user. With this in mind I made the pictures as big as possible, to enable the user to make a decision on the Wall view only, instead of having to click on each profile. 
+I wanted to be able to show multiple users at once instead of presenting the users one by one. I want users to like someone that stands out to them, in stead of having to 'rate' every user. With this in mind I made the pictures as big as possible, to enable the user to make a decision on the Wall view only.
 
-**One picture**
+**Current event -> all events**
+Originally I wanted to make it so that users could use the app only **on the day of the event**. However, as this would mean that either people would need to be smartphoning at the event or the timeframe to use the app for that event would become pretty small, I've chosen to enable the user to use the app with **all** their future events. 
+
+
+
 
 
 
