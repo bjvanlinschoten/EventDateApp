@@ -10,8 +10,7 @@ Pala is linked to your Facebook account. After logging in you select the (facebo
 
 # Technical overview
 
-
-## View controllers and flow
+### View controllers and flow
 
 The app's view is controlled by five viewcontrollers. These viewcontrollers control everything that has to do with the view, user interaction and data presentation.   
   The first controller that will be loaded is the LoginViewController. Here is checked if the user is already logged in. If not, a very basic starting screen is shown with a Facebook login button, after which he will log in with his native Facebook app or through the Facebook website.  
@@ -19,11 +18,37 @@ The app's view is controlled by five viewcontrollers. These viewcontrollers cont
   The leftmost view is controlled by the EventsViewController. Here the user sees his profile, selects gender preference, logs out and most importantly selects an event.  
   The rightmost view is where the magic happens: the ChatsTableViewController. Here the user sees all his matches in a tableview. When he selects a user he is redirected to a view controlled by a PrivateChatController. Here the two lovebirds-to-be can privately chat with eachother to meet up!
 
-## Classes
+### Parse
+
+Parse is used for the app's database. Every user has a unique Parse user (PFUser) object that is linked to his Facebook. Along with the user's basic profile information, the Parse user object has the following properties:
+- likedUsers: an array of objectIDs of all users the user has liked.  
+- dislikedUsers: same as above, but array of disliked users
+- matches: an array of objectIDs of users the user has a match with
+- events: an array of eventIDs of the events the user is attending
+
+### PubNub
+
+PubNub is used for the chat functionality. PubNub makes sending messages between users easy. Simply put: each user has his own channel and can push messages to another user's channel. The channel is linked to the user through their objectID in Parse. 
+
+## Classes and their most important methods
 
 The data handling is done in three classes: the User, Chat and Wall class.
 
-The User class represents the app user and here are all methods defined that have to do with the User. 
+The User class represents the app user and here are all methods defined that have to do with the User. The two most important methods are **getUserEvents** and **populateNewUserWithFacebookData**. The former queries facebook for the events the user is attending. The latter is called when a user signs in for the first time and makes sure that the user's Parse object (PFUser) is filled with his profile info.
+
+The Wall class handles everything that has to do with the data presentation and interaction on the Wall. The three important methods that are defined here are **getUsersToShow**, **likeUser** and **dislikeUser**.  
+**getUsersToShow** queries Parse for the correct users to show on the wall. That is, show all users that are the preferred gender, that attend the selected event, that are not in the user's "liked-/dislikedUsers" or "matches" array.  
+The other two methods handle the (dis)liking of another user. When User A likes User B, there is checked if User B has User A in his likedUsers. If so, both A and B get a notification that they have a new match, the other's objectID is removed from likedUsers and added to matches. If not, User B's objectID is simply added to User A's likedUsers. Disliking a user is simply adding the other user to your 'dislikedUsers' array, so that they will not show up on the Wall anymore.
+
+The Chat class handles all the chat data handling. The most important methods to discuss here are **saveMessageToUserDefaults** and **loadUnseenMessagesFromServer**. The chat history is kept in NSUserdefaults. When a message is sent or received while the app is active, the message is directly saved to the userdefaults with **saveMessageToUserDefaults**. However, when the app is inactive this is not possible. Here the **loadUnseenMessagesFromServer** method comes in. This method queries PubNub for all messages since the time of the last saved message (saved in userdefaults as "lastSaveDate") and stores them in NSUserdefaults.
+
+# Design decisions
+
+**Wall**  
+I wanted to be able to show multiple users at once instead of presenting the users one by one. I want users to like someone that stands out to them, in stead of having to 'rate' every user. With this in mind I made the pictures as big as possible, to enable the user to make a decision on the Wall view only, instead of having to click on each profile. 
+
+**One picture**
+
 
 
 
