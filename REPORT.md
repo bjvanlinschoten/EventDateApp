@@ -30,6 +30,12 @@ Parse is used for the app's database. Every user has a unique Parse user (PFUser
 
 PubNub is used for the chat functionality. PubNub makes sending messages between users easy. Simply put: each user has his own channel and can push messages to another user's channel. The channel is linked to the user through their objectID in Parse. 
 
+### Parse Cloud code
+
+Parse Cloud Code is used to match users and send push notifications. With Cloud Code you can run Javascript code in the Parse clode rather than on the iOS device itself.  
+Cloud Code is needed for the matching of users because the current user does not have the authorization to edit another user from his/her device. In Cloud Code the "masterkey" is used to make this possible. This is needed to make sure both users have the other user in their "matches" array.  
+In Cloud Code it is easy to send push notifications to a specific user, for example when there is a new match or a message received. This is done by specifying a query, after which the push notification is sent to all users (or in this case, one) that the query returns.
+
 ## Classes and their most important methods
 
 The data handling is done in three classes: the User, Chat and Wall class.
@@ -47,7 +53,7 @@ The Chat class handles all the chat data handling. The most important methods to
 **Wall**  
 I wanted to be able to show multiple users at once instead of presenting the users one by one. I want users to like someone that stands out to them, in stead of having to 'rate' every user. With this in mind I made the pictures as big as possible, to enable the user to make a decision on the Wall view only.
 
-**Current event -> all events**
+**Current event -> all events**  
 Originally I wanted to make it so that users could use the app only **on the day of the event**. However, as this would mean that either people would need to be smartphoning at the event or the timeframe to use the app for that event would become pretty small, I've chosen to enable the user to use the app with **all** their future events. 
 
 
