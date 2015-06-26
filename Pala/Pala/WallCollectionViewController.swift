@@ -100,6 +100,10 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
         cell.imageView.sd_setImageWithURL(picURL)
         cell.nameLabel.text = "\(person.name) (\(person.getPersonAge()))"
         
+        // Set images on buttons
+        cell.dislikeButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.likeButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+
         // Set drop shadow
         cell.layer.masksToBounds = false
         cell.layer.shadowOpacity = 0.3
@@ -156,21 +160,22 @@ class WallCollectionViewController: UIViewController, UICollectionViewDataSource
     
     // Pull to refresh voor wall collectionview
     func refreshWallCollectionView() {
-        PFUser.currentUser()?.fetch()
-        self.wall!.getUsersToShow(self.wall!.selectedEvent!["id"] as! String, selectedGender: self.selectedGender!) { (userArray: [Person]) -> Void in
-            if userArray != [] {
-                self.wallUserArray = userArray as [Person]
-                self.wallCollection.hidden = false
-                self.centerLabel.hidden = true
-                self.wallCollection.reloadData()
-            } else {
-                self.wallUserArray = []
-                self.wallCollection.hidden = true
-                self.centerLabel.hidden = false
-                self.centerLabel.text = "You've either (dis)liked everyone already or you're the only one going!"
+        self.currentUser?.parseUser.fetchInBackgroundWithBlock({ (object: PFObject?, error: NSError?) -> Void in
+            self.wall!.getUsersToShow(self.wall!.selectedEvent!["id"] as! String, selectedGender: self.wall!.selectedGender!) { (userArray: [Person]) -> Void in
+                if userArray != [] {
+                    self.wallUserArray = userArray as [Person]
+                    self.wallCollection.hidden = false
+                    self.centerLabel.hidden = true
+                    self.wallCollection.reloadData()
+                } else {
+                    self.wallUserArray = []
+                    self.wallCollection.hidden = true
+                    self.centerLabel.hidden = false
+                    self.centerLabel.text = "You've either (dis)liked everyone already or you're the only one going!"
+                }
+                self.refreshControl.endRefreshing()
             }
-            self.refreshControl.endRefreshing()
-        }
+        })
     }
 
 }

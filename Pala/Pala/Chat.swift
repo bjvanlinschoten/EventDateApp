@@ -15,38 +15,6 @@ class Chat: NSObject {
     var otherUserChannel: PNChannel?
     var chat: Chat?
     
-    
-    // Function to get matches
-    func getMatches(completion: ((array: [Person]?) -> Void)!) {
-        var matchesArray: [Person] = []
-        if let matches = self.currentUser?.parseUser["matches"] as? NSArray {
-            
-            // Query all users contained in user's matches array
-            var query = PFUser.query()
-            query?.whereKey("objectId", containedIn: matches as [AnyObject])
-            query?.findObjectsInBackgroundWithBlock{(objects: [AnyObject]?, error: NSError?) -> Void in
-                if let array = objects as? [PFUser] {
-                    for item in array {
-                        
-                        // Create person object for the other user to minimize queries
-                        let person = Person(objectId: item.objectId!, facebookId: item["facebookId"] as! String, name: item["name"] as! String, birthday: item["birthday"] as! String)
-                        
-                        // Find earliest common event between the users
-                        let otherUserEvents = item["events"] as! NSArray
-                        for event in self.currentUser!.parseUser["events"] as! NSArray {
-                            if otherUserEvents.containsObject(event["id"] as! String) {
-                                person.commonEvent = event["name"] as? String
-                                break
-                            }
-                        }
-                        matchesArray.append(person)
-                    }
-                }
-                completion(array: matchesArray)
-            }
-        }
-    }
-    
     // Get old messages of the chat with this user out of NSUserDefaults
     func getOldMessages() -> [LGChatMessage] {
         var oldMessages: [LGChatMessage] = []

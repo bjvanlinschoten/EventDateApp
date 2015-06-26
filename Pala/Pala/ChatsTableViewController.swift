@@ -31,14 +31,15 @@ class ChatsTableViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewWillAppear(animated: Bool) {
         
-        // Reload matches when view will appear
-        let chat = Chat()
-        chat.getMatches() { (matchesArray: [Person]?) -> Void in
-            if matchesArray != nil {
-                self.matches = matchesArray
-                self.chatsTable.reloadData()
+        self.currentUser?.parseUser.fetchInBackgroundWithBlock({ (object: PFObject?, error: NSError?) -> Void in
+            // Reload matches when view will appear
+            self.currentUser!.getMatches() { (matchesArray: [Person]?) -> Void in
+                if matchesArray != nil {
+                    self.matches = matchesArray
+                    self.chatsTable.reloadData()
+                }
             }
-        }
+        })
         
         // Hide navigationbar of slidemenu animated
         self.slideMenuController()!.navigationController?.setNavigationBarHidden(true, animated: true)

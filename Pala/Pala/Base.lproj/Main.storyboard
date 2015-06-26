@@ -53,29 +53,29 @@
                                                         <rect key="frame" x="8" y="222" width="152" height="30"/>
                                                     </variation>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-kr-3XD">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXY-pd-CTm">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                                    <state key="normal" backgroundImage="Puke.png">
-                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="30" y="253" width="24" height="24"/>
-                                                    </variation>
-                                                    <connections>
-                                                        <action selector="dislikeUser:" destination="O8h-Mc-k0o" eventType="touchUpInside" id="dXr-Lh-BKc"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXY-pd-CTm">
-                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                                    <state key="normal" backgroundImage="PalaOrange.png">
+                                                    <state key="normal" image="PalaOrange.png">
                                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="106" y="253" width="24" height="24"/>
+                                                        <rect key="frame" x="80" y="254" width="80" height="26"/>
                                                     </variation>
                                                     <connections>
                                                         <action selector="likeUser:" destination="O8h-Mc-k0o" eventType="touchUpInside" id="8gI-OR-cqa"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-kr-3XD">
+                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <state key="normal" image="Puke.png">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="0.0" y="254" width="80" height="26"/>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="dislikeUser:" destination="O8h-Mc-k0o" eventType="touchUpInside" id="dXr-Lh-BKc"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -87,20 +87,22 @@
                                             <mask key="subviews">
                                                 <exclude reference="qix-QG-5IO"/>
                                                 <exclude reference="B6E-Mr-He8"/>
-                                                <exclude reference="2Qb-kr-3XD"/>
                                                 <exclude reference="vXY-pd-CTm"/>
+                                                <exclude reference="2Qb-kr-3XD"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="subviews">
                                                 <include reference="qix-QG-5IO"/>
                                                 <include reference="B6E-Mr-He8"/>
-                                                <include reference="2Qb-kr-3XD"/>
                                                 <include reference="vXY-pd-CTm"/>
+                                                <include reference="2Qb-kr-3XD"/>
                                             </mask>
                                         </variation>
                                         <connections>
+                                            <outlet property="dislikeButton" destination="2Qb-kr-3XD" id="9pL-9o-MZ8"/>
                                             <outlet property="imageView" destination="qix-QG-5IO" id="hF1-KT-6ny"/>
+                                            <outlet property="likeButton" destination="vXY-pd-CTm" id="bwm-2x-yIR"/>
                                             <outlet property="nameLabel" destination="B6E-Mr-He8" id="Xzc-Ee-6eA"/>
                                         </connections>
                                     </collectionViewCell>
@@ -233,7 +235,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lucas (34)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrI-qO-6UN">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                                 <rect key="frame" x="74" y="20" width="234" height="20"/>
@@ -242,7 +244,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOY-jp-a76">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                                 <rect key="frame" x="74" y="44" width="234" height="20"/>
@@ -577,7 +579,8 @@
                                                                     <exclude reference="Ptt-Xr-Pqv"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="68" y="10" width="168" height="168"/>
                                                                 <mask key="constraints">
                                                                     <include reference="IV9-kD-WLN"/>
                                                                     <include reference="Ptt-Xr-Pqv"/>
@@ -591,8 +594,9 @@
                                                             <nil key="highlightedColor"/>
                                                             <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             <size key="shadowOffset" width="1" height="1"/>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <rect key="frame" x="72" y="150" width="168" height="21"/>
                                                             </variation>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIl-Uo-Kz6">
@@ -611,7 +615,8 @@
                                                                     <exclude reference="t7s-Ir-Q6O"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=compact">
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="68" y="188" width="168" height="35"/>
                                                                 <mask key="constraints">
                                                                     <include reference="gUt-r2-SDO"/>
                                                                     <include reference="t7s-Ir-Q6O"/>
@@ -629,6 +634,9 @@
                                                                 <segment title="Girls"/>
                                                             </segments>
                                                             <color key="tintColor" red="0.14901960780000001" green="0.53333333329999999" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="68" y="233" width="168" height="29"/>
+                                                            </variation>
                                                             <connections>
                                                                 <action selector="genderSelectChange:" destination="7bL-dC-msV" eventType="valueChanged" id="hCs-Yn-4Zt"/>
                                                             </connections>
@@ -691,7 +699,8 @@
                                                             <exclude reference="opU-Rb-P0g"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="8" width="304" height="280"/>
                                                         <mask key="subviews">
                                                             <include reference="gMd-zr-EXO"/>
                                                             <include reference="518-hN-JX6"/>
@@ -763,6 +772,9 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GFm-iJ-1YN">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="0.0" y="0.0" width="304" height="80"/>
+                                                            </variation>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JdS-Jn-WIQ">
                                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -771,6 +783,9 @@
                                                             <nil key="highlightedColor"/>
                                                             <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <size key="shadowOffset" width="1" height="1"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="4" y="54" width="296" height="22"/>
+                                                            </variation>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
@@ -799,7 +814,8 @@
                                                             <exclude reference="Y6e-Dh-bOa"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="10" width="304" height="80"/>
                                                         <mask key="subviews">
                                                             <include reference="GFm-iJ-1YN"/>
                                                             <include reference="JdS-Jn-WIQ"/>
