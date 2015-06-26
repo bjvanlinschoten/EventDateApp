@@ -7,7 +7,7 @@ Nowadays, apps like Tinder and Happn are immensely popular. However, the perfect
 # Screenshots
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/EventsScreen.png" width="220">
 <img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/WallScreen.png" width="220">
-<img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/ChatsScreen.png" width="220">
+<img src="https://github.com/bjvanlinschoten/EventDateApp/blob/master/docs/ChatsScreen.png" width="220">  
 (NOTE: these are not actual users of the app)
 
 # APIs/Frameworks/Sources
