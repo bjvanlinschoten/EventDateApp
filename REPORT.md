@@ -56,7 +56,8 @@ I wanted to be able to show multiple users at once instead of presenting the use
 **Current event -> all events**  
 Originally I wanted to make it so that users could use the app only **on the day of the event**. However, as this would mean that either people would need to be smartphoning at the event or the timeframe to use the app for that event would become pretty small, I've chosen to enable the user to use the app with **all** their future events. 
 
-
+**Hamburger Menu**
+I've decided to go with a hamburger menu, to get as much information in as little room as possible, while still being really clear where you can find what. This also makes the Wall the center, most important view in the app, as I want it to be. 
 
 
 
